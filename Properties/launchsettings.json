@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "FlashCards (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "FlashCards (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
