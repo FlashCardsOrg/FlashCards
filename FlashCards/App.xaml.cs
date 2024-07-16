@@ -46,6 +46,9 @@ public partial class App : Application
     {
         InitializeComponent();
 
+        // Set the default language
+        Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-us";
+
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).

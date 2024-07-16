@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>Flash Cards</value>
+    <value>Karteikarten</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>Flash Cards App Description</value>
+    <value>Karteikarten App Beschreibung</value>
     <comment>TODO</comment>
   </data>
   <data name="Shell_Study.Content" xml:space="preserve">
-    <value>Study</value>
+    <value>Abfragen</value>
   </data>
   <data name="Shell_Create.Content" xml:space="preserve">
-    <value>Create</value>
+    <value>Erstellen</value>
   </data>
   <data name="Shell_Progress.Content" xml:space="preserve">
-    <value>Progress</value>
+    <value>Lernfortschritt</value>
   </data>
   <data name="Settings_Appearance_Behavior.Text" xml:space="preserve">
-    <value>Appearance &amp; Behavior</value>
+    <value>Aussehen &amp; Verhalten</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>Hell</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>Dunkel</value>
   </data>
   <data name="Settings_Theme_System.Content" xml:space="preserve">
-    <value>Use system setting</value>
+    <value>Systemeinstellungen verwenden</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About</value>
+    <value>Über diese App</value>
   </data>
   <data name="Settings_About_Card.Description" xml:space="preserve">
-    <value>© 2024 Bruno Bittrich. All rights reserved.</value>
+    <value>© 2024 Bruno Bittrich. Alle Rechte vorbehalten.</value>
   </data>
   <data name="Settings_Language_Card.Description" xml:space="preserve">
-    <value>Select which language to use</value>
+    <value>Wähle die Sprache aus</value>
   </data>
   <data name="Settings_Language_Card.Header" xml:space="preserve">
-    <value>Language</value>
+    <value>Sprache</value>
   </data>
   <data name="Settings_Language_English.Content" xml:space="preserve">
-    <value>English</value>
+    <value>Englisch</value>
   </data>
   <data name="Settings_Language_German.Content" xml:space="preserve">
-    <value>German</value>
+    <value>Deutsch</value>
   </data>
   <data name="Settings_Theme_Card.Description" xml:space="preserve">
-    <value>Select which app theme to display</value>
+    <value>Wähle das App Design aus</value>
   </data>
   <data name="Settings_Theme_Card.Header" xml:space="preserve">
-    <value>App Theme</value>
+    <value>App Design</value>
   </data>
 </root>

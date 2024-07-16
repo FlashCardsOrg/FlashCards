@@ -8,11 +8,22 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
     </Style>
 
+    <Style
+        x:Key="SectionTitleStyle"
+        BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+        TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="Margin" Value="1,30,0,6"/>
+        </Style.Setters>
+    </Style>
+
     <Style x:Key="BodyTextStyle" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
+
+    <x:Double x:Key="SettingsCardSpacing">4</x:Double>
 
 </ResourceDictionary>
