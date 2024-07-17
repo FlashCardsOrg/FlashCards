@@ -149,7 +149,7 @@
     <value>Über diese App</value>
   </data>
   <data name="Settings_About_Card.Description" xml:space="preserve">
-    <value>© 2024 Bruno Bittrich. Alle Rechte vorbehalten.</value>
+    <value>© 2024 DarkSoul. Alle Rechte vorbehalten.</value>
   </data>
   <data name="Settings_Language_Card.Description" xml:space="preserve">
     <value>Wähle die Sprache aus</value>
@@ -171,5 +171,29 @@
   </data>
   <data name="Settings_Customization.Text" xml:space="preserve">
     <value>Personalisierung</value>
+  </data>
+  <data name="Settings_Box_Expander.Description" xml:space="preserve">
+    <value>Füge Kästen hinzu oder lösche diese und bearbeite deren Fälligkeit</value>
+  </data>
+  <data name="Settings_Box_Expander.Header" xml:space="preserve">
+    <value>Kästen</value>
+  </data>
+  <data name="Settings_Demotion_Card.Description" xml:space="preserve">
+    <value>Entscheide was mit Karten passiert, die nicht gewusst wurden</value>
+  </data>
+  <data name="Settings_Demotion_Card.Header" xml:space="preserve">
+    <value>Karte Falsch</value>
+  </data>
+  <data name="Settings_Demotion_First.Content" xml:space="preserve">
+    <value>Erster Kasten</value>
+  </data>
+  <data name="Settings_Demotion_One.Content" xml:space="preserve">
+    <value>Einen Kasten zurück</value>
+  </data>
+  <data name="Settings_Demotion_Two.Content" xml:space="preserve">
+    <value>Zwei Kästen zurück</value>
+  </data>
+  <data name="Settings_Box_New_Button.Content" xml:space="preserve">
+    <value>Box hinzufügen</value>
   </data>
 </root>

@@ -17,7 +17,20 @@
 
             <TextBlock x:Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsExpander/>
+                <controls:SettingsExpander x:Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
+                    <Button x:Uid="Settings_Box_New_Button" Style="{StaticResource AccentButtonStyle}"/>
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Description="Add boxes" Header="TODO"/>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+
+                <controls:SettingsCard x:Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem x:Uid="Settings_Demotion_First"/>
+                        <ComboBoxItem x:Uid="Settings_Demotion_One"/>
+                        <ComboBoxItem x:Uid="Settings_Demotion_Two"/>
+                    </ComboBox>
+                </controls:SettingsCard>
             </StackPanel>
 
             <TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
@@ -48,7 +61,7 @@
             </StackPanel>
 
             <!--  TODO: Remove and use SettingsCard to set Theme and Laguage instead.  -->
-            <TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
+            <!--<TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                 <RadioButton
                     x:Uid="Settings_Theme_Light"
@@ -60,6 +73,7 @@
                         <xaml:ElementTheme>Light</xaml:ElementTheme>
                     </RadioButton.CommandParameter>
                 </RadioButton>
+
                 <RadioButton
                     x:Uid="Settings_Theme_Dark"
                     Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -70,6 +84,7 @@
                         <xaml:ElementTheme>Dark</xaml:ElementTheme>
                     </RadioButton.CommandParameter>
                 </RadioButton>
+
                 <RadioButton
                     x:Uid="Settings_Theme_System"
                     Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -80,7 +95,7 @@
                         <xaml:ElementTheme>Default</xaml:ElementTheme>
                     </RadioButton.CommandParameter>
                 </RadioButton>
-            </StackPanel>
+            </StackPanel>-->
 
         </StackPanel>
     </Grid>

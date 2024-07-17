@@ -149,7 +149,7 @@
     <value>About</value>
   </data>
   <data name="Settings_About_Card.Description" xml:space="preserve">
-    <value>© 2024 Bruno Bittrich. All rights reserved.</value>
+    <value>© 2024 DarkSoul. All rights reserved.</value>
   </data>
   <data name="Settings_Language_Card.Description" xml:space="preserve">
     <value>Select which language to use</value>
@@ -171,5 +171,29 @@
   </data>
   <data name="Settings_Customization.Text" xml:space="preserve">
     <value>Customization</value>
+  </data>
+  <data name="Settings_Box_Expander.Description" xml:space="preserve">
+    <value>Add or remove boxes and change their due duration</value>
+  </data>
+  <data name="Settings_Box_Expander.Header" xml:space="preserve">
+    <value>Boxes</value>
+  </data>
+  <data name="Settings_Demotion_Card.Description" xml:space="preserve">
+    <value>Define where a card should be placed after getting it wrong</value>
+  </data>
+  <data name="Settings_Demotion_Card.Header" xml:space="preserve">
+    <value>Card Demotion</value>
+  </data>
+  <data name="Settings_Demotion_First.Content" xml:space="preserve">
+    <value>First box</value>
+  </data>
+  <data name="Settings_Demotion_One.Content" xml:space="preserve">
+    <value>One box up</value>
+  </data>
+  <data name="Settings_Demotion_Two.Content" xml:space="preserve">
+    <value>Two boxes up</value>
+  </data>
+  <data name="Settings_Box_New_Button.Content" xml:space="preserve">
+    <value>Add box</value>
   </data>
 </root>
