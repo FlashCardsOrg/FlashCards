@@ -169,4 +169,7 @@
   <data name="Settings_Theme_Card.Header" xml:space="preserve">
     <value>App Design</value>
   </data>
+  <data name="Settings_Customization.Text" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
 </root>

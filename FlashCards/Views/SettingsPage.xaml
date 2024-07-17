@@ -15,6 +15,11 @@
     <Grid>
         <StackPanel x:Name="ContentArea">
 
+            <TextBlock x:Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
+            <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
+                <controls:SettingsExpander/>
+            </StackPanel>
+
             <TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                 <controls:SettingsCard x:Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">

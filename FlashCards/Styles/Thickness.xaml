@@ -31,4 +31,6 @@
 
     <Thickness x:Key="SettingsPageHyperlinkButtonMargin">-12,4,0,0</Thickness>
 
+    <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+
 </ResourceDictionary>
