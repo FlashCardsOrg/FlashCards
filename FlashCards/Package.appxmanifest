@@ -12,14 +12,14 @@
 
   <Identity
     Name="88e28aa8-800e-40e9-9a9b-93fe2d5fedce"
-    Publisher="CN=Bruno"
+    Publisher="CN=DarkSoul"
     Version="1.0.0.0" />
     
   <mp:PhoneIdentity PhoneProductId="88e28aa8-800e-40e9-9a9b-93fe2d5fedce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     
   <Properties>
     <DisplayName>FlashCards</DisplayName>
-    <PublisherDisplayName>Bruno</PublisherDisplayName>
+    <PublisherDisplayName>DarkSoul</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -29,7 +29,7 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="x-generate"/>
+	  <Resource Language="x-generate"/>
   </Resources>
 
   <Applications>
