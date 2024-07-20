@@ -8,52 +8,53 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:xaml="using:Microsoft.UI.Xaml"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:l="using:WinUI3Localizer">
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     </Page.Resources>
     <Grid>
         <StackPanel x:Name="ContentArea">
 
-            <TextBlock x:Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
+            <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsExpander x:Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
-                    <Button x:Uid="Settings_Box_New_Button" Style="{StaticResource AccentButtonStyle}"/>
+                <controls:SettingsExpander l:Uids.Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
+                    <Button l:Uids.Uid="Settings_Box_New_Button" Style="{StaticResource AccentButtonStyle}"/>
                     <controls:SettingsExpander.Items>
                         <controls:SettingsCard Description="Add boxes" Header="TODO"/>
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
 
-                <controls:SettingsCard x:Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
+                <controls:SettingsCard l:Uids.Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
                     <ComboBox SelectedIndex="0">
-                        <ComboBoxItem x:Uid="Settings_Demotion_First"/>
-                        <ComboBoxItem x:Uid="Settings_Demotion_One"/>
-                        <ComboBoxItem x:Uid="Settings_Demotion_Two"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_First"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_One"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two"/>
                     </ComboBox>
                 </controls:SettingsCard>
             </StackPanel>
 
-            <TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
+            <TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsCard x:Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
+                <controls:SettingsCard l:Uids.Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
                     <ComboBox SelectedIndex="2">
-                        <ComboBoxItem x:Uid="Settings_Theme_Light"/>
-                        <ComboBoxItem x:Uid="Settings_Theme_Dark"/>
-                        <ComboBoxItem x:Uid="Settings_Theme_System"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Light"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Dark"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_System"/>
                     </ComboBox>
 
                 </controls:SettingsCard>
-                <controls:SettingsCard x:Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
+                <controls:SettingsCard l:Uids.Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
                     <ComboBox SelectedIndex="0">
-                        <ComboBoxItem x:Uid="Settings_Language_English"/>
-                        <ComboBoxItem x:Uid="Settings_Language_German"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Language_English"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Language_German"/>
                     </ComboBox>
                 </controls:SettingsCard>
             </StackPanel>
 
-            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SectionTitleStyle}"/>
+            <TextBlock l:Uids.Uid="Settings_About" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsCard x:Uid="Settings_About_Card" Header="{x:Bind ViewModel.VersionDescription, Mode=OneWay}">
+                <controls:SettingsCard l:Uids.Uid="Settings_About_Card" Header="{x:Bind ViewModel.VersionDescription, Mode=OneWay}">
                     <controls:SettingsCard.HeaderIcon>
                         <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/StoreLogo.png"/>
                     </controls:SettingsCard.HeaderIcon>
@@ -61,10 +62,10 @@
             </StackPanel>
 
             <!--  TODO: Remove and use SettingsCard to set Theme and Laguage instead.  -->
-            <!--<TextBlock x:Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
+            <!--<TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                 <RadioButton
-                    x:Uid="Settings_Theme_Light"
+                    l:Uids.Uid="Settings_Theme_Light"
                     Command="{x:Bind ViewModel.SwitchThemeCommand}"
                     FontSize="15"
                     GroupName="AppTheme"
@@ -75,7 +76,7 @@
                 </RadioButton>
 
                 <RadioButton
-                    x:Uid="Settings_Theme_Dark"
+                    l:Uids.Uid="Settings_Theme_Dark"
                     Command="{x:Bind ViewModel.SwitchThemeCommand}"
                     FontSize="15"
                     GroupName="AppTheme"
@@ -86,7 +87,7 @@
                 </RadioButton>
 
                 <RadioButton
-                    x:Uid="Settings_Theme_System"
+                    l:Uids.Uid="Settings_Theme_System"
                     Command="{x:Bind ViewModel.SwitchThemeCommand}"
                     FontSize="15"
                     GroupName="AppTheme"
