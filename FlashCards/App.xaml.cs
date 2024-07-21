@@ -122,6 +122,7 @@ public partial class App : Application
             .AddStringResourcesFolderForLanguageDictionaries(stringsFolder.Path)
             .SetOptions(options =>
             {
+                // TODO: Load the default language from settings
                 options.DefaultLanguage = "en-us";
             })
             .Build();

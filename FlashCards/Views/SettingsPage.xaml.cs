@@ -25,5 +25,6 @@ public sealed partial class SettingsPage : Page
         }
 
         WinUI3Localizer.Localizer.Get().SetLanguage(selectedLanguage);
+        // TODO: Save selected language in settings
     }
 }

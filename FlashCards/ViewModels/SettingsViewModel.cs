@@ -33,6 +33,7 @@ public partial class SettingsViewModel : ObservableRecipient
 
     public SettingsViewModel(IThemeSelectorService themeSelectorService)
     {
+        // TODO: Move Localization to a separate service
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
