@@ -5,11 +5,11 @@
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="using:FlashCards.Helpers"
+    xmlns:l="using:WinUI3Localizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:xaml="using:Microsoft.UI.Xaml"
-    mc:Ignorable="d"
-    xmlns:l="using:WinUI3Localizer">
+    mc:Ignorable="d">
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     </Page.Resources>
@@ -45,7 +45,10 @@
 
                 </controls:SettingsCard>
                 <controls:SettingsCard l:Uids.Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                    <ComboBox SelectedIndex="0" SelectionChanged="Language_ComboBox_SelectionChanged">
+                    <ComboBox
+                        SelectedValue="{x:Bind ViewModel.SelectedLanguageTag}"
+                        SelectedValuePath="Tag"
+                        SelectionChanged="Language_ComboBox_SelectionChanged">
                         <ComboBoxItem l:Uids.Uid="Settings_Language_English" Tag="en-us"/>
                         <ComboBoxItem l:Uids.Uid="Settings_Language_German" Tag="de-de"/>
                     </ComboBox>

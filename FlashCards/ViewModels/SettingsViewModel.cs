@@ -23,6 +23,9 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty]
     private string _versionDescription;
 
+    [ObservableProperty]
+    private string _selectedLanguageTag;
+
     public ICommand SwitchThemeCommand
     {
         get;
@@ -33,6 +36,7 @@ public partial class SettingsViewModel : ObservableRecipient
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
+        _selectedLanguageTag = GetSelectedLanguageTag();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -43,6 +47,11 @@ public partial class SettingsViewModel : ObservableRecipient
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+    }
+
+    private static string GetSelectedLanguageTag()
+    {
+        return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
     }
 
     private static string GetVersionDescription()
