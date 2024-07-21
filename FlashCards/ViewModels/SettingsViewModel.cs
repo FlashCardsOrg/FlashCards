@@ -60,6 +60,7 @@ public partial class SettingsViewModel : ObservableRecipient
             version = Assembly.GetExecutingAssembly().GetName().Version!;
         }
 
-        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}";
+        var appDisplayName = WinUI3Localizer.Localizer.Get().GetLocalizedString("AppDisplayName");
+        return $"{appDisplayName} - {version.Major}.{version.Minor}.{version.Build}";
     }
 }

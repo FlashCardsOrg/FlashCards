@@ -16,4 +16,14 @@ public sealed partial class SettingsPage : Page
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
     }
+
+    private void Language_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (((sender as ComboBox)?.SelectedItem as ComboBoxItem)?.Tag is not string selectedLanguage)
+        {
+            return;
+        }
+
+        WinUI3Localizer.Localizer.Get().SetLanguage(selectedLanguage);
+    }
 }

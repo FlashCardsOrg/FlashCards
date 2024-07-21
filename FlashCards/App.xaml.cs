@@ -48,9 +48,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        // Set the default language
-        Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-us";
-
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -102,30 +99,30 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-
+        await InitializeLocalizer();
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 
-    private async Task InitializeLocalizer()
+    private static async Task InitializeLocalizer()
     {
 
         // Initialize a "Strings" folder in the "LocalFolder" for the packaged app.
         StorageFolder localFolder = ApplicationData.Current.LocalFolder;
         StorageFolder stringsFolder = await localFolder.CreateFolderAsync(
-          "Strings",
-           CreationCollisionOption.OpenIfExists);
+            "Strings",
+            CreationCollisionOption.OpenIfExists
+        );
 
         // Create string resources file from app resources if doesn't exists.
         var resourceFileName = "Resources.resw";
-        await CreateStringResourceFileIfNotExists(stringsFolder, "en-US", resourceFileName);
-        await CreateStringResourceFileIfNotExists(stringsFolder, "es-ES", resourceFileName);
-        await CreateStringResourceFileIfNotExists(stringsFolder, "ja", resourceFileName);
+        await CreateStringResourceFileIfNotExists(stringsFolder, "en-us", resourceFileName);
+        await CreateStringResourceFileIfNotExists(stringsFolder, "de-de", resourceFileName);
 
         ILocalizer localizer = await new LocalizerBuilder()
             .AddStringResourcesFolderForLanguageDictionaries(stringsFolder.Path)
             .SetOptions(options =>
             {
-                options.DefaultLanguage = "en-US";
+                options.DefaultLanguage = "en-us";
             })
             .Build();
     }

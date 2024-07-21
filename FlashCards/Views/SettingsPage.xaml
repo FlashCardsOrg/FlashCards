@@ -45,9 +45,9 @@
 
                 </controls:SettingsCard>
                 <controls:SettingsCard l:Uids.Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                    <ComboBox SelectedIndex="0">
-                        <ComboBoxItem l:Uids.Uid="Settings_Language_English"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Language_German"/>
+                    <ComboBox SelectedIndex="0" SelectionChanged="Language_ComboBox_SelectionChanged">
+                        <ComboBoxItem l:Uids.Uid="Settings_Language_English" Tag="en-us"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Language_German" Tag="de-de"/>
                     </ComboBox>
                 </controls:SettingsCard>
             </StackPanel>
