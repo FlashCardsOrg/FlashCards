@@ -24,7 +24,8 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        WinUI3Localizer.Localizer.Get().SetLanguage(selectedLanguage);
         // TODO: Save selected language in settings
+        WinUI3Localizer.Localizer.Get().SetLanguage(selectedLanguage);
+        // TODO: Update TitleBar
     }
 }
