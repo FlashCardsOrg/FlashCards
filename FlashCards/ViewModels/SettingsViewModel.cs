@@ -8,7 +8,7 @@ using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 
 using Microsoft.UI.Xaml;
-
+using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel;
 
 namespace FlashCards.ViewModels;
@@ -23,6 +23,9 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty]
     private string _versionDescription;
 
+    [ObservableProperty]
+    private string _selectedLanguageTag;
+
     public ICommand SwitchThemeCommand
     {
         get;
@@ -33,6 +36,7 @@ public partial class SettingsViewModel : ObservableRecipient
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
+        _selectedLanguageTag = GetSelectedLanguageTag();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -43,6 +47,11 @@ public partial class SettingsViewModel : ObservableRecipient
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+    }
+
+    private static string GetSelectedLanguageTag()
+    {
+        return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
     }
 
     private static string GetVersionDescription()
@@ -60,6 +69,7 @@ public partial class SettingsViewModel : ObservableRecipient
             version = Assembly.GetExecutingAssembly().GetName().Version!;
         }
 
-        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}";
+        var appDisplayName = WinUI3Localizer.Localizer.Get().GetLocalizedString("AppDisplayName");
+        return $"{appDisplayName} - {version.Major}.{version.Minor}.{version.Build}";
     }
 }
