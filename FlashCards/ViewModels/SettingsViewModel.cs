@@ -8,7 +8,7 @@ using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 
 using Microsoft.UI.Xaml;
-
+using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel;
 
 namespace FlashCards.ViewModels;
@@ -33,7 +33,6 @@ public partial class SettingsViewModel : ObservableRecipient
 
     public SettingsViewModel(IThemeSelectorService themeSelectorService)
     {
-        // TODO: Move Localization to a separate service
         _themeSelectorService = themeSelectorService;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();

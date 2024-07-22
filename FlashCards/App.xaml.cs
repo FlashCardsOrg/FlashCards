@@ -59,6 +59,7 @@ public partial class App : Application
             // Other Activation Handlers
 
             // Services
+            services.AddSingleton<ILocalizationService, LocalizationService>();
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
@@ -122,8 +123,8 @@ public partial class App : Application
             .AddStringResourcesFolderForLanguageDictionaries(stringsFolder.Path)
             .SetOptions(options =>
             {
-                // TODO: Load the default language from settings
-                options.DefaultLanguage = "en-us";
+                ILocalizationService localizationService = App.GetService<ILocalizationService>();
+                options.DefaultLanguage = localizationService.SelectedLanguageTag;
             })
             .Build();
     }
