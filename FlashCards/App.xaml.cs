@@ -102,6 +102,9 @@ public partial class App : Application
         base.OnLaunched(args);
         await InitializeLocalizer();
         await App.GetService<IActivationService>().ActivateAsync(args);
+        // Temporarily set the primary language override to the selected language tag.
+        // TODO: Remove when fixed.
+        Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = App.GetService<ILocalizationService>().SelectedLanguageTag;
     }
 
     private static async Task InitializeLocalizer()
