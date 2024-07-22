@@ -37,10 +37,13 @@
             <TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
             <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                 <controls:SettingsCard l:Uids.Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
-                    <ComboBox SelectedIndex="2">
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Light"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Dark"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_System"/>
+                    <ComboBox
+                        SelectedValue="{x:Bind ViewModel.SelectedTheme}"
+                        SelectedValuePath="Tag"
+                        SelectionChanged="Theme_ComboBox_SelectionChanged">
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Light" Tag="Light"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Dark" Tag="Dark"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Theme_System" Tag="Default"/>
                     </ComboBox>
 
                 </controls:SettingsCard>
@@ -63,43 +66,6 @@
                     </controls:SettingsCard.HeaderIcon>
                 </controls:SettingsCard>
             </StackPanel>
-
-            <!--  TODO: Remove and use SettingsCard to set Theme and Laguage instead.  -->
-            <!--<TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
-            <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <RadioButton
-                    l:Uids.Uid="Settings_Theme_Light"
-                    Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                    FontSize="15"
-                    GroupName="AppTheme"
-                    IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}">
-                    <RadioButton.CommandParameter>
-                        <xaml:ElementTheme>Light</xaml:ElementTheme>
-                    </RadioButton.CommandParameter>
-                </RadioButton>
-
-                <RadioButton
-                    l:Uids.Uid="Settings_Theme_Dark"
-                    Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                    FontSize="15"
-                    GroupName="AppTheme"
-                    IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}">
-                    <RadioButton.CommandParameter>
-                        <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                    </RadioButton.CommandParameter>
-                </RadioButton>
-
-                <RadioButton
-                    l:Uids.Uid="Settings_Theme_System"
-                    Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                    FontSize="15"
-                    GroupName="AppTheme"
-                    IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}">
-                    <RadioButton.CommandParameter>
-                        <xaml:ElementTheme>Default</xaml:ElementTheme>
-                    </RadioButton.CommandParameter>
-                </RadioButton>
-            </StackPanel>-->
 
         </StackPanel>
     </Grid>

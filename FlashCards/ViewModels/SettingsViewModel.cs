@@ -8,7 +8,6 @@ using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel;
 
 namespace FlashCards.ViewModels;
@@ -18,35 +17,20 @@ public partial class SettingsViewModel : ObservableRecipient
     private readonly IThemeSelectorService _themeSelectorService;
 
     [ObservableProperty]
-    private ElementTheme _elementTheme;
+    private string _versionDescription;
 
     [ObservableProperty]
-    private string _versionDescription;
+    private string _selectedTheme;
 
     [ObservableProperty]
     private string _selectedLanguageTag;
 
-    public ICommand SwitchThemeCommand
-    {
-        get;
-    }
-
     public SettingsViewModel(IThemeSelectorService themeSelectorService)
     {
         _themeSelectorService = themeSelectorService;
-        _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
+        _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
-
-        SwitchThemeCommand = new RelayCommand<ElementTheme>(
-            async (param) =>
-            {
-                if (ElementTheme != param)
-                {
-                    ElementTheme = param;
-                    await _themeSelectorService.SetThemeAsync(param);
-                }
-            });
     }
 
     private static string GetSelectedLanguageTag()
