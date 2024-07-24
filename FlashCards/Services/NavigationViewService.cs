@@ -3,8 +3,9 @@
 using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 using FlashCards.ViewModels;
-
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinUI3Localizer;
 
 namespace FlashCards.Services;
 
@@ -30,6 +31,7 @@ public class NavigationViewService : INavigationViewService
     public void Initialize(NavigationView navigationView)
     {
         _navigationView = navigationView;
+        _navigationView.Loaded += OnLoaded;
         _navigationView.BackRequested += OnBackRequested;
         _navigationView.ItemInvoked += OnItemInvoked;
     }
@@ -51,6 +53,16 @@ public class NavigationViewService : INavigationViewService
         }
 
         return null;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if ((sender as NavigationView)?.SettingsItem is not NavigationViewItem settingsItem)
+        {
+            return;
+        }
+
+        Uids.SetUid(settingsItem, "NavigationView_Settings");
     }
 
     private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => _navigationService.GoBack();

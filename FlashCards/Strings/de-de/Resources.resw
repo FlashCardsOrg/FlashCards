@@ -196,4 +196,7 @@
   <data name="Settings_Box_New_Button.Content" xml:space="preserve">
     <value>Box hinzufügen</value>
   </data>
+  <data name="NavigationView_Settings.Content" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
 </root>
