@@ -14,59 +14,61 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     </Page.Resources>
     <Grid>
-        <StackPanel x:Name="ContentArea">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
+            <StackPanel x:Name="ContentArea">
 
-            <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
-            <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsExpander l:Uids.Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
-                    <Button l:Uids.Uid="Settings_Box_New_Button" Style="{StaticResource AccentButtonStyle}"/>
-                    <controls:SettingsExpander.Items>
-                        <controls:SettingsCard Description="Add boxes" Header="TODO"/>
-                    </controls:SettingsExpander.Items>
-                </controls:SettingsExpander>
+                <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
+                <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
+                    <controls:SettingsExpander l:Uids.Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
+                        <Button l:Uids.Uid="Settings_Box_New_Button" Style="{StaticResource AccentButtonStyle}"/>
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard Description="Add boxes" Header="TODO"/>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
 
-                <controls:SettingsCard l:Uids.Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
-                    <ComboBox SelectedIndex="0">
-                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_First"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_One"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two"/>
-                    </ComboBox>
-                </controls:SettingsCard>
+                    <controls:SettingsCard l:Uids.Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
+                        <ComboBox SelectedIndex="0">
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_First"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_One"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two"/>
+                        </ComboBox>
+                    </controls:SettingsCard>
+                </StackPanel>
+
+                <TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
+                <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
+                    <controls:SettingsCard l:Uids.Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
+                        <ComboBox
+                            SelectedValue="{x:Bind ViewModel.SelectedTheme}"
+                            SelectedValuePath="Tag"
+                            SelectionChanged="Theme_ComboBox_SelectionChanged">
+                            <ComboBoxItem l:Uids.Uid="Settings_Theme_Light" Tag="Light"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Theme_Dark" Tag="Dark"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Theme_System" Tag="Default"/>
+                        </ComboBox>
+
+                    </controls:SettingsCard>
+                    <controls:SettingsCard l:Uids.Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
+                        <ComboBox
+                            SelectedValue="{x:Bind ViewModel.SelectedLanguageTag}"
+                            SelectedValuePath="Tag"
+                            SelectionChanged="Language_ComboBox_SelectionChanged">
+                            <ComboBoxItem l:Uids.Uid="Settings_Language_English" Tag="en-us"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Language_German" Tag="de-de"/>
+                        </ComboBox>
+                    </controls:SettingsCard>
+                </StackPanel>
+
+                <TextBlock l:Uids.Uid="Settings_About" Style="{ThemeResource SectionTitleStyle}"/>
+                <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
+                    <controls:SettingsCard l:Uids.Uid="Settings_About_Card" Header="{x:Bind ViewModel.VersionDescription, Mode=OneWay}">
+                        <controls:SettingsCard.HeaderIcon>
+                            <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/WindowIcon.ico"/>
+                        </controls:SettingsCard.HeaderIcon>
+                    </controls:SettingsCard>
+                </StackPanel>
+
             </StackPanel>
-
-            <TextBlock l:Uids.Uid="Settings_Appearance_Behavior" Style="{ThemeResource SectionTitleStyle}"/>
-            <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsCard l:Uids.Uid="Settings_Theme_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
-                    <ComboBox
-                        SelectedValue="{x:Bind ViewModel.SelectedTheme}"
-                        SelectedValuePath="Tag"
-                        SelectionChanged="Theme_ComboBox_SelectionChanged">
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Light" Tag="Light"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_Dark" Tag="Dark"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Theme_System" Tag="Default"/>
-                    </ComboBox>
-
-                </controls:SettingsCard>
-                <controls:SettingsCard l:Uids.Uid="Settings_Language_Card" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                    <ComboBox
-                        SelectedValue="{x:Bind ViewModel.SelectedLanguageTag}"
-                        SelectedValuePath="Tag"
-                        SelectionChanged="Language_ComboBox_SelectionChanged">
-                        <ComboBoxItem l:Uids.Uid="Settings_Language_English" Tag="en-us"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Language_German" Tag="de-de"/>
-                    </ComboBox>
-                </controls:SettingsCard>
-            </StackPanel>
-
-            <TextBlock l:Uids.Uid="Settings_About" Style="{ThemeResource SectionTitleStyle}"/>
-            <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                <controls:SettingsCard l:Uids.Uid="Settings_About_Card" Header="{x:Bind ViewModel.VersionDescription, Mode=OneWay}">
-                    <controls:SettingsCard.HeaderIcon>
-                        <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/WindowIcon.ico"/>
-                    </controls:SettingsCard.HeaderIcon>
-                </controls:SettingsCard>
-            </StackPanel>
-
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
