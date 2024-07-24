@@ -102,7 +102,6 @@ public partial class App : Application
         base.OnLaunched(args);
         await InitializeLocalizer();
         await App.GetService<IActivationService>().ActivateAsync(args);
-        Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-us";
     }
 
     private static async Task InitializeLocalizer()
@@ -117,8 +116,8 @@ public partial class App : Application
 
         // Create string resources file from app resources if doesn't exists.
         var resourceFileName = "Resources.resw";
-        await CreateStringResourceFileIfNotExists(stringsFolder, "en-us", resourceFileName);
-        await CreateStringResourceFileIfNotExists(stringsFolder, "de-de", resourceFileName);
+        await MakeSureStringResourceFileExists(stringsFolder, "en-us", resourceFileName);
+        await MakeSureStringResourceFileExists(stringsFolder, "de-de", resourceFileName);
 
         ILocalizer localizer = await new LocalizerBuilder()
             .AddStringResourcesFolderForLanguageDictionaries(stringsFolder.Path)
@@ -130,18 +129,31 @@ public partial class App : Application
             .Build();
     }
 
-    private static async Task CreateStringResourceFileIfNotExists(StorageFolder stringsFolder, string language, string resourceFileName)
+    private static async Task MakeSureStringResourceFileExists(StorageFolder stringsFolder, string language, string resourceFileName)
     {
         StorageFolder languageFolder = await stringsFolder.CreateFolderAsync(
-            language,
+            desiredName: language,
             CreationCollisionOption.OpenIfExists);
 
-        if (await languageFolder.TryGetItemAsync(resourceFileName) is null)
+        var appResourceFilePath = Path.Combine(stringsFolder.Name, language, resourceFileName);
+        StorageFile appResourceFile = await LoadStringResourcesFileFromAppResource(appResourceFilePath);
+
+        IStorageItem? localResourceFile = await languageFolder.TryGetItemAsync(resourceFileName);
+
+        if (localResourceFile is null || await ResourceFileWasModifed(appResourceFile, localResourceFile))
         {
-            var resourceFilePath = Path.Combine(stringsFolder.Name, language, resourceFileName);
-            StorageFile resourceFile = await LoadStringResourcesFileFromAppResource(resourceFilePath);
-            _ = await resourceFile.CopyAsync(languageFolder);
+            _ = await appResourceFile.CopyAsync(
+                destinationFolder: languageFolder,
+                desiredNewName: appResourceFile.Name,
+                option: NameCollisionOption.ReplaceExisting);
         }
+    }
+
+    private static async Task<bool> ResourceFileWasModifed(IStorageItem appResourceFile, IStorageItem localResourceFile)
+    {
+        DateTimeOffset appResourceFile_DateModified = (await appResourceFile.GetBasicPropertiesAsync()).DateModified;
+        DateTimeOffset localResourceFile_DateModified = (await localResourceFile.GetBasicPropertiesAsync()).DateModified;
+        return (appResourceFile_DateModified > localResourceFile_DateModified);
     }
 
     private static async Task<StorageFile> LoadStringResourcesFileFromAppResource(string filePath)

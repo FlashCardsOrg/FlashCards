@@ -36,7 +36,7 @@ public class LocalizationService : ILocalizationService
     public async Task SetRequestedLanguageAsync(string selectedLanguageTag)
     {
         await WinUI3Localizer.Localizer.Get().SetLanguage(selectedLanguageTag);
-        // TODO: Update TitleBar, SettingsPage Title and NavigationView Text, SettingsPage ComboBoxes
+        // TODO: Update TitleBar and ComboBoxes on SettingsPage
 
         await Task.CompletedTask;
     }
