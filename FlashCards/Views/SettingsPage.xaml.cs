@@ -1,5 +1,4 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Services;
 using FlashCards.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -17,6 +16,7 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
+        
     }
 
     private void Language_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
