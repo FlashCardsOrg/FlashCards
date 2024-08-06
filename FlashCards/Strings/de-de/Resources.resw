@@ -173,10 +173,10 @@
     <value>Personalisierung</value>
   </data>
   <data name="Settings_Box_Expander.Description" xml:space="preserve">
-    <value>Füge Kästen hinzu oder lösche diese und bearbeite deren Fälligkeit</value>
+    <value>Füge Fächer hinzu oder lösche diese und bearbeite deren Fälligkeit</value>
   </data>
   <data name="Settings_Box_Expander.Header" xml:space="preserve">
-    <value>Kästen</value>
+    <value>Fächer</value>
   </data>
   <data name="Settings_Demotion_Card.Description" xml:space="preserve">
     <value>Entscheide was mit Karten passiert, die nicht gewusst wurden</value>
@@ -185,16 +185,16 @@
     <value>Karte Falsch</value>
   </data>
   <data name="Settings_Demotion_First.Content" xml:space="preserve">
-    <value>Erster Kasten</value>
+    <value>Erstes Fach</value>
   </data>
   <data name="Settings_Demotion_One.Content" xml:space="preserve">
-    <value>Einen Kasten zurück</value>
+    <value>Ein Fach zurück</value>
   </data>
   <data name="Settings_Demotion_Two.Content" xml:space="preserve">
-    <value>Zwei Kästen zurück</value>
+    <value>Zwei Fächer zurück</value>
   </data>
   <data name="Settings_Box_New_Button.Content" xml:space="preserve">
-    <value>Box hinzufügen</value>
+    <value>Fach hinzufügen</value>
   </data>
   <data name="NavigationView_Settings.Content" xml:space="preserve">
     <value>Einstellungen</value>
