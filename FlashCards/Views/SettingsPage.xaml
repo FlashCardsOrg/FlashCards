@@ -54,6 +54,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -82,6 +87,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -110,6 +120,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -138,6 +153,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -166,6 +186,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -194,6 +219,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -222,6 +252,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -250,6 +285,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
@@ -278,6 +318,11 @@
                                     </ComboBox>
                                     <Button Style="{ThemeResource MoreButton}">
                                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Delete Box"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
                                     </Button>
                                 </StackPanel>
                             </controls:SettingsCard>
