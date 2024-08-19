@@ -15,8 +15,7 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         ViewModel = App.GetService<SettingsViewModel>();
-        InitializeComponent();
-        
+        InitializeComponent();        
     }
 
     private void Language_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
