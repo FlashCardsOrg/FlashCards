@@ -19,29 +19,30 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
         <DataTemplate x:Key="Box_SettingsCard_Template" x:DataType="vm:Box">
             <controls:SettingsCard Header="{x:Bind BoxName}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
+                    <TextBlock VerticalAlignment="Center" l:Uids.Uid="Settings_Box_SettingsCard_Due"/>
                     <ComboBox SelectedIndex="{x:Bind SelectedIndex}">
-                        <ComboBoxItem Content="1 Day"/>
-                        <ComboBoxItem Content="2 Days"/>
-                        <ComboBoxItem Content="3 Days"/>
-                        <ComboBoxItem Content="4 Days"/>
-                        <ComboBoxItem Content="5 Days"/>
-                        <ComboBoxItem Content="6 Days"/>
-                        <ComboBoxItem Content="1 Week"/>
-                        <ComboBoxItem Content="2 Weeks"/>
-                        <ComboBoxItem Content="3 Weeks"/>
-                        <ComboBoxItem Content="4 Weeks"/>
-                        <ComboBoxItem Content="1 Month"/>
-                        <ComboBoxItem Content="2 Months"/>
-                        <ComboBoxItem Content="3 Months"/>
-                        <ComboBoxItem Content="6 Months"/>
-                        <ComboBoxItem Content="1 Year"/>
-                        <ComboBoxItem Content="2 Years"/>
-                        <ComboBoxItem Content="3 Years"/>
-                        <ComboBoxItem Content="Never"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_5d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_never"/>
                     </ComboBox>
                     <Button Style="{ThemeResource MoreButton}">
                         <FontIcon FontSize="16" Glyph="&#xE712;"/>

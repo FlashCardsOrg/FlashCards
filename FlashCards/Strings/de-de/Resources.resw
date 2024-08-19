@@ -199,4 +199,61 @@
   <data name="NavigationView_Settings.Content" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="Settings_Box_SettingsCard_Due.Text" xml:space="preserve">
+    <value>Fällig nach</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1d.Content" xml:space="preserve">
+    <value>1 Tag</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1m.Content" xml:space="preserve">
+    <value>1 Monat</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1w.Content" xml:space="preserve">
+    <value>1 Woche</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1y.Content" xml:space="preserve">
+    <value>1 Jahr</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2d.Content" xml:space="preserve">
+    <value>2 Tage</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2m.Content" xml:space="preserve">
+    <value>2 Monaten</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2w.Content" xml:space="preserve">
+    <value>2 Wochen</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2y.Content" xml:space="preserve">
+    <value>2 Jahren</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3d.Content" xml:space="preserve">
+    <value>3 Tage</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3m.Content" xml:space="preserve">
+    <value>3 Monaten</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3w.Content" xml:space="preserve">
+    <value>3 Wochen</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3y.Content" xml:space="preserve">
+    <value>3 Jahren</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_4d.Content" xml:space="preserve">
+    <value>4 Tage</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_4w.Content" xml:space="preserve">
+    <value>4 Wochen</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_5d.Content" xml:space="preserve">
+    <value>5 Tage</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_6d.Content" xml:space="preserve">
+    <value>6 Tage</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_6m.Content" xml:space="preserve">
+    <value>6 Monaten</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_never.Content" xml:space="preserve">
+    <value>Niemals</value>
+  </data>
 </root>
