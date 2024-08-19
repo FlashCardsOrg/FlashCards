@@ -8,6 +8,7 @@
     xmlns:l="using:WinUI3Localizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:vm="FlashCards.ViewModels"
     xmlns:xaml="using:Microsoft.UI.Xaml"
     mc:Ignorable="d">
     <Page.Resources>
@@ -18,7 +19,7 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <DataTemplate x:Key="Box_SettingsCard_Template" x:DataType="{x:Bind ViewModel.Box}">
+        <DataTemplate x:Key="Box_SettingsCard_Template" x:DataType="vm:Box">
             <controls:SettingsCard Header="{x:Bind BoxName}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <TextBlock VerticalAlignment="Center" Text="Due after"/>
