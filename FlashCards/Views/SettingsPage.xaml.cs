@@ -43,4 +43,10 @@ public sealed partial class SettingsPage : Page
         IThemeSelectorService themeSelectorService = App.GetService<IThemeSelectorService>();
         themeSelectorService.SetThemeAsync(selectedTheme);
     }
+
+    private void New_Box_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        // TODO: Create a new box
+        // TODO: Add box to db
+    }
 }

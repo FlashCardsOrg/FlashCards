@@ -63,7 +63,7 @@
                 <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
                 <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                     <controls:SettingsExpander l:Uids.Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
-                        <Button l:Uids.Uid="Settings_Box_New_Button"/>
+                        <Button l:Uids.Uid="Settings_Box_New_Button" Click="New_Box_Button_Clicked"/>
                         <controls:SettingsExpander.Items>
                             <ItemsRepeater ItemTemplate="{StaticResource Box_SettingsCard_Template}" ItemsSource="{x:Bind ViewModel.Boxes}"/>
                         </controls:SettingsExpander.Items>
