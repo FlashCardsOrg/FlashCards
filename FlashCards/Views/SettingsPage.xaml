@@ -8,6 +8,7 @@
     xmlns:l="using:WinUI3Localizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:vm="using:FlashCards.ViewModels"
     xmlns:xaml="using:Microsoft.UI.Xaml"
     mc:Ignorable="d">
     <Page.Resources>
@@ -18,314 +19,57 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
+        <DataTemplate x:Key="Box_SettingsCard_Template" x:DataType="vm:Box">
+            <controls:SettingsCard Header="{x:Bind BoxName}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock VerticalAlignment="Center" l:Uids.Uid="Settings_Box_SettingsCard_Due"/>
+                    <ComboBox SelectedIndex="{x:Bind SelectedIndex}">
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1d" Tag="1d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2d" Tag="2d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3d" Tag="3d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4d" Tag="4d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_5d" Tag="5d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6d" Tag="6d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1w" Tag="1w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2w" Tag="2w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3w" Tag="3w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4w" Tag="4w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1m" Tag="1m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2m" Tag="2m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3m" Tag="3m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6m" Tag="6m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1y" Tag="1y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2y" Tag="2y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3y" Tag="3y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_never" Tag="never"/>
+                    </ComboBox>
+
+                    <Button Style="{ThemeResource MoreButton}">
+                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Click="DeleteBox_Button_Clicked" Text="Delete Box"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </controls:SettingsCard>
+        </DataTemplate>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="ContentArea">
         <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
-            <StackPanel x:Name="ContentArea">
+            <StackPanel>
 
                 <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
                 <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
-                    <controls:SettingsExpander l:Uids.Uid="Settings_Box_Expander" HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
-                        <Button l:Uids.Uid="Settings_Box_New_Button"/>
-                        <!--  TODO: Generate boxes dynamically  -->
+                    <controls:SettingsExpander
+                        x:Name="Settings_Box_Expander"
+                        l:Uids.Uid="Settings_Box_Expander"
+                        HeaderIcon="{ui:FontIcon Glyph=&#xE7B8;}">
+                        <Button l:Uids.Uid="Settings_Box_AddBox_Button" Click="AddBox_Button_Clicked"/>
                         <controls:SettingsExpander.Items>
-                            <controls:SettingsCard Header="Box 1">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="0">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 2">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="2">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 3">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="6">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 4">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="7">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 5">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="10">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 6">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="12">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 7">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="13">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 8">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="14">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
-                            <controls:SettingsCard Header="Box 9">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <TextBlock VerticalAlignment="Center" Text="Due after"/>
-                                    <ComboBox SelectedIndex="16">
-                                        <ComboBoxItem Content="1 Day"/>
-                                        <ComboBoxItem Content="2 Days"/>
-                                        <ComboBoxItem Content="3 Days"/>
-                                        <ComboBoxItem Content="4 Days"/>
-                                        <ComboBoxItem Content="5 Days"/>
-                                        <ComboBoxItem Content="6 Days"/>
-                                        <ComboBoxItem Content="1 Week"/>
-                                        <ComboBoxItem Content="2 Weeks"/>
-                                        <ComboBoxItem Content="3 Weeks"/>
-                                        <ComboBoxItem Content="4 Weeks"/>
-                                        <ComboBoxItem Content="1 Month"/>
-                                        <ComboBoxItem Content="2 Months"/>
-                                        <ComboBoxItem Content="3 Months"/>
-                                        <ComboBoxItem Content="6 Months"/>
-                                        <ComboBoxItem Content="1 Year"/>
-                                        <ComboBoxItem Content="2 Years"/>
-                                        <ComboBoxItem Content="3 Years"/>
-                                        <ComboBoxItem Content="Never"/>
-                                    </ComboBox>
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem Text="Delete Box"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
-                                </StackPanel>
-                            </controls:SettingsCard>
+                            <ItemsRepeater ItemTemplate="{StaticResource Box_SettingsCard_Template}" ItemsSource="{x:Bind ViewModel.Boxes}"/>
                         </controls:SettingsExpander.Items>
                     </controls:SettingsExpander>
 

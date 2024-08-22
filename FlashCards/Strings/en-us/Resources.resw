@@ -193,10 +193,76 @@
   <data name="Settings_Demotion_Two.Content" xml:space="preserve">
     <value>Two boxes up</value>
   </data>
-  <data name="Settings_Box_New_Button.Content" xml:space="preserve">
+  <data name="Settings_Box_AddBox_Button.Content" xml:space="preserve">
     <value>Add box</value>
   </data>
   <data name="NavigationView_Settings.Content" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due.Text" xml:space="preserve">
+    <value>Due after</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1d.Content" xml:space="preserve">
+    <value>1 Day</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1m.Content" xml:space="preserve">
+    <value>1 Month</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1w.Content" xml:space="preserve">
+    <value>1 Week</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_1y.Content" xml:space="preserve">
+    <value>1 Year</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2d.Content" xml:space="preserve">
+    <value>2 Days</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2m.Content" xml:space="preserve">
+    <value>2 Months</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2w.Content" xml:space="preserve">
+    <value>2 Weeks</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_2y.Content" xml:space="preserve">
+    <value>2 Years</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3d.Content" xml:space="preserve">
+    <value>3 Days</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3m.Content" xml:space="preserve">
+    <value>3 Months</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3w.Content" xml:space="preserve">
+    <value>3 Weeks</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_3y.Content" xml:space="preserve">
+    <value>3 Years</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_4d.Content" xml:space="preserve">
+    <value>4 Days</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_4w.Content" xml:space="preserve">
+    <value>4 Weeks</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_5d.Content" xml:space="preserve">
+    <value>5 Days</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_6d.Content" xml:space="preserve">
+    <value>6 Days</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_6m.Content" xml:space="preserve">
+    <value>6 Months</value>
+  </data>
+  <data name="Settings_Box_SettingsCard_Due_ComboBox_never.Content" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="Settings_Box_DeleteBox_Button.Text" xml:space="preserve">
+    <value>Delete box</value>
+  </data>
+  <data name="Create_SelectorBar_Front.Text" xml:space="preserve">
+    <value>Front</value>
+  </data>
+  <data name="Create_SelectorBar_Back.Text" xml:space="preserve">
+    <value>Back</value>
   </data>
 </root>

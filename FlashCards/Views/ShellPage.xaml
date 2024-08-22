@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="using:FlashCards.Helpers"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:l="using:WinUI3Localizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Loaded="OnLoaded"
-    xmlns:l="using:WinUI3Localizer">
+    Loaded="OnLoaded">
 
     <Grid>
         <Grid
@@ -40,17 +40,17 @@
             IsSettingsVisible="True"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
             <NavigationView.MenuItems>
-                <NavigationViewItem l:Uids.Uid="Shell_Study" helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.StudyViewModel">
+                <NavigationViewItem helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.StudyViewModel" l:Uids.Uid="Shell_Study">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE82D;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem l:Uids.Uid="Shell_Create" helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.CreateViewModel">
+                <NavigationViewItem helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.CreateViewModel" l:Uids.Uid="Shell_Create">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xECC8;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem l:Uids.Uid="Shell_Progress" helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.ProgressViewModel">
+                <NavigationViewItem helpers:NavigationHelper.NavigateTo="FlashCards.ViewModels.ProgressViewModel" l:Uids.Uid="Shell_Progress">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BE;"/>
                     </NavigationViewItem.Icon>
