@@ -259,4 +259,10 @@
   <data name="Settings_Box_DeleteBox_Button.Text" xml:space="preserve">
     <value>Fach löschen</value>
   </data>
+  <data name="Create_SelectorBar_Front.Text" xml:space="preserve">
+    <value>Vorderseite</value>
+  </data>
+  <data name="Create_SelectorBar_Back.Text" xml:space="preserve">
+    <value>Rückseite</value>
+  </data>
 </root>

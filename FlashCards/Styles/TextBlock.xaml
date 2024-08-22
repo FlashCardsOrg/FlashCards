@@ -18,4 +18,11 @@
         </Style.Setters>
     </Style>
 
+    <Style x:Key="SubtitleSelectorBarItemStyle" TargetType="SelectorBarItem">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="{StaticResource SubtitleTextBlockFontSize}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style.Setters>
+    </Style>
+
 </ResourceDictionary>

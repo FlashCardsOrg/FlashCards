@@ -259,4 +259,10 @@
   <data name="Settings_Box_DeleteBox_Button.Text" xml:space="preserve">
     <value>Delete box</value>
   </data>
+  <data name="Create_SelectorBar_Front.Text" xml:space="preserve">
+    <value>Front</value>
+  </data>
+  <data name="Create_SelectorBar_Back.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
 </root>
