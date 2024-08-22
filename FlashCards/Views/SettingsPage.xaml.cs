@@ -50,4 +50,10 @@ public sealed partial class SettingsPage : Page
         ViewModel.AddBox();
         // TODO: Add box to db
     }
+
+    private void DeleteBox_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        // TODO: Delete Box from ViewModel
+        // TODO: Delete Box from db
+    }
 }

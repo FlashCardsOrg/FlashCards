@@ -256,4 +256,7 @@
   <data name="Settings_Box_SettingsCard_Due_ComboBox_never.Content" xml:space="preserve">
     <value>Niemals</value>
   </data>
+  <data name="Settings_Box_DeleteBox_Button.Text" xml:space="preserve">
+    <value>Fach löschen</value>
+  </data>
 </root>
