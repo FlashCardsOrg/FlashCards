@@ -57,9 +57,9 @@
             </controls:SettingsCard>
         </DataTemplate>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="ContentArea">
         <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
-            <StackPanel x:Name="ContentArea">
+            <StackPanel>
 
                 <TextBlock l:Uids.Uid="Settings_Customization" Style="{ThemeResource UpperSectionTitleStyle}"/>
                 <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
