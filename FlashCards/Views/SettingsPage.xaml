@@ -25,25 +25,26 @@
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <TextBlock VerticalAlignment="Center" l:Uids.Uid="Settings_Box_SettingsCard_Due"/>
                     <ComboBox SelectedIndex="{x:Bind SelectedIndex}">
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_5d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6d"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1w"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2w"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3w"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4w"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1m"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2m"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3m"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6m"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1y"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2y"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3y"/>
-                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_never"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1d" Tag="1d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2d" Tag="2d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3d" Tag="3d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4d" Tag="4d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_5d" Tag="5d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6d" Tag="6d"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1w" Tag="1w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2w" Tag="2w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3w" Tag="3w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_4w" Tag="4w"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1m" Tag="1m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2m" Tag="2m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3m" Tag="3m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_6m" Tag="6m"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1y" Tag="1y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_2y" Tag="2y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_3y" Tag="3y"/>
+                        <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_never" Tag="never"/>
                     </ComboBox>
+
                     <Button Style="{ThemeResource MoreButton}">
                         <FontIcon FontSize="16" Glyph="&#xE712;"/>
                         <Button.Flyout>
