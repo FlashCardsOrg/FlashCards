@@ -22,7 +22,7 @@
 
         <DataTemplate x:Key="Box_SettingsCard_Template" x:DataType="vm:Box">
             <controls:SettingsCard Header="{x:Bind BoxName}">
-                <StackPanel Orientation="Horizontal" Spacing="8">
+                <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
                     <TextBlock VerticalAlignment="Center" l:Uids.Uid="Settings_Box_SettingsCard_Due"/>
                     <ComboBox SelectedIndex="{x:Bind SelectedIndex}">
                         <ComboBoxItem l:Uids.Uid="Settings_Box_SettingsCard_Due_ComboBox_1d" Tag="1d"/>
@@ -46,7 +46,7 @@
                     </ComboBox>
 
                     <Button Style="{ThemeResource MoreButton}">
-                        <FontIcon FontSize="16" Glyph="&#xE712;"/>
+                        <FontIcon FontSize="{StaticResource MediumFontSize}" Glyph="&#xE712;"/>
                         <Button.Flyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem Click="DeleteBox_Button_Clicked" Text="Delete Box"/>
@@ -75,6 +75,7 @@
 
                     <controls:SettingsCard l:Uids.Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
                         <ComboBox SelectedIndex="0">
+                            <!--  Save Demotion to local settings storage  -->
                             <ComboBoxItem l:Uids.Uid="Settings_Demotion_First"/>
                             <ComboBoxItem l:Uids.Uid="Settings_Demotion_One"/>
                             <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two"/>
