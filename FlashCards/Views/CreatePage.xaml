@@ -15,5 +15,34 @@
                 Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
             <SelectorBarItem l:Uids.Uid="Create_SelectorBar_Back" Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
         </SelectorBar>
+        <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
+            <DropDownButton Content="Fach: Mathe">
+                <DropDownButton.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Text="Mathe"/>
+                        <MenuFlyoutItem Text="Deutsch"/>
+                        <MenuFlyoutItem Text="Englisch"/>
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+            <DropDownButton Content="Semester: 1">
+                <DropDownButton.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Text="1. Semester"/>
+                        <MenuFlyoutItem Text="2. Semester"/>
+                        <MenuFlyoutItem Text="3. Semester"/>
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+            <DropDownButton Content="Tags auswählen">
+                <DropDownButton.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem Text="Mein Tag 1"/>
+                        <MenuFlyoutItem Text="Mein Tag 2"/>
+                        <MenuFlyoutItem Text="Mein Tag 3"/>
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+        </StackPanel>
     </Grid>
 </Page>
