@@ -61,11 +61,16 @@ public partial class SettingsViewModel : ObservableRecipient
 
     private static ObservableCollection<Box> GetBoxes()
     {
-        ObservableCollection<Box> boxes = new ObservableCollection<Box>();
-        boxes.Add(new Box("MyBox 1", 0));
-        boxes.Add(new Box("MyBox 2", 1));
+        // TODO: Load Boxes from DB instead
+        ObservableCollection<Box> boxes = [new Box("MyBox 1", 0), new Box("MyBox 2", 1)];
         return boxes;
 
+    }
+
+    internal void AddBox()
+    {
+        // TODO: Use proper name and selected index for new box
+        Boxes.Add(new Box("New Box", 0));
     }
 }
 

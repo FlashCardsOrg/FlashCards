@@ -193,7 +193,7 @@
   <data name="Settings_Demotion_Two.Content" xml:space="preserve">
     <value>Zwei Fächer zurück</value>
   </data>
-  <data name="Settings_Box_New_Button.Content" xml:space="preserve">
+  <data name="Settings_Box_AddBox_Button.Content" xml:space="preserve">
     <value>Fach hinzufügen</value>
   </data>
   <data name="NavigationView_Settings.Content" xml:space="preserve">

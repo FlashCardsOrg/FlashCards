@@ -44,9 +44,10 @@ public sealed partial class SettingsPage : Page
         themeSelectorService.SetThemeAsync(selectedTheme);
     }
 
-    private void New_Box_Button_Clicked(object sender, RoutedEventArgs e)
+    private void AddBox_Button_Clicked(object sender, RoutedEventArgs e)
     {
-        // TODO: Create a new box
+        Settings_Box_Expander.IsExpanded = true;
+        ViewModel.AddBox();
         // TODO: Add box to db
     }
 }
