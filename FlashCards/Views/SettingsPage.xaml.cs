@@ -31,7 +31,6 @@ public sealed partial class SettingsPage : Page
 
     private void Theme_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        // Split in 2 if statments and return early
         if ((sender as ComboBox)?.SelectedItem is not ComboBoxItem selectedItem)
         {
             return;
@@ -55,5 +54,16 @@ public sealed partial class SettingsPage : Page
     {
         // TODO: Delete Box from ViewModel
         // TODO: Delete Box from db
+    }
+
+    private void Demotion_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (((sender as ComboBox)?.SelectedItem as ComboBoxItem)?.Tag is not string selectedDemotionTag)
+        {
+            return;
+        }
+
+        IDemotionSettingsService demotionSettingsService = App.GetService<IDemotionSettingsService>();
+        demotionSettingsService.SetDemotionAsync(selectedDemotionTag);
     }
 }

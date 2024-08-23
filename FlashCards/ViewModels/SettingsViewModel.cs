@@ -1,12 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 
 using Windows.ApplicationModel;
+using Windows.Security.Cryptography.Core;
 
 namespace FlashCards.ViewModels;
 
@@ -24,6 +24,9 @@ public partial class SettingsViewModel : ObservableRecipient
     private string _selectedLanguageTag;
 
     [ObservableProperty]
+    private string _selectedDemotionTag;
+
+    [ObservableProperty]
     private ObservableCollection<Box> _boxes;
 
     public SettingsViewModel(IThemeSelectorService themeSelectorService)
@@ -32,6 +35,7 @@ public partial class SettingsViewModel : ObservableRecipient
         _versionDescription = GetVersionDescription();
         _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
+        _selectedDemotionTag = GetSelectedDemotionTag();
         _boxes = GetBoxes();
     }
 
@@ -57,6 +61,12 @@ public partial class SettingsViewModel : ObservableRecipient
 
         var appDisplayName = WinUI3Localizer.Localizer.Get().GetLocalizedString("AppDisplayName");
         return $"{appDisplayName} - {version.Major}.{version.Minor}.{version.Build}";
+    }
+
+    private static string GetSelectedDemotionTag()
+    {
+        IDemotionSettingsService demotionSettingsService = App.GetService<IDemotionSettingsService>();
+        return demotionSettingsService.SelectedDemotionTag;
     }
 
     private static ObservableCollection<Box> GetBoxes()
