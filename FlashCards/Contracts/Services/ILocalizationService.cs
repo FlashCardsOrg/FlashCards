@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml;
-
-namespace FlashCards.Contracts.Services;
+﻿namespace FlashCards.Contracts.Services;
 
 public interface ILocalizationService
 {
