@@ -19,7 +19,7 @@
 
             <RelativePanel Margin="0,20,0,0">
                 <DropDownButton
-                    x:Name="Subject Selection"
+                    x:Name="Subject_Selection"
                     Margin="0,0,8,0"
                     Content="Fach: Mathe"
                     RelativePanel.AlignLeftWithPanel="True">
@@ -33,10 +33,10 @@
                 </DropDownButton>
 
                 <DropDownButton
-                    x:Name="Semester Selection"
+                    x:Name="Semester_Selection"
                     Margin="0,0,8,0"
                     Content="Semester: 1"
-                    RelativePanel.RightOf="Subject Selection">
+                    RelativePanel.RightOf="Subject_Selection">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem Text="1. Semester"/>
@@ -47,9 +47,9 @@
                 </DropDownButton>
 
                 <DropDownButton
-                    x:Name="Tag Selection"
+                    x:Name="Tag_Selection"
                     Content="Tags auswählen"
-                    RelativePanel.RightOf="Semester Selection">
+                    RelativePanel.RightOf="Semester_Selection">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem Text="Mein Tag 1"/>
@@ -60,9 +60,9 @@
                 </DropDownButton>
 
                 <ComboBox
-                    x:Name="Font Selection"
+                    x:Name="Font_Selection"
                     Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontSize Selection"
+                    RelativePanel.LeftOf="FontSize_Selection"
                     SelectedIndex="0">
                     <ComboBox.Items>
                         <ComboBoxItem Content="Calibri"/>
@@ -71,9 +71,9 @@
                 </ComboBox>
 
                 <ComboBox
-                    x:Name="FontSize Selection"
+                    x:Name="FontSize_Selection"
                     Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontBold Button"
+                    RelativePanel.LeftOf="FontBold_Button"
                     SelectedIndex="1">
                     <ComboBox.Items>
                         <ComboBoxItem Content="10"/>
@@ -81,29 +81,29 @@
                     </ComboBox.Items>
                 </ComboBox>
 
-                <Button
-                    x:Name="FontBold Button"
+                <ToggleButton
+                    x:Name="FontBold_Button"
                     Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontUnderlined Button">
+                    RelativePanel.LeftOf="FontUnderlined_Button">
                     <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
-                </Button>
+                </ToggleButton>
 
-                <Button
-                    x:Name="FontUnderlined Button"
+                <ToggleButton
+                    x:Name="FontUnderlined_Button"
                     Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontItalic Button">
+                    RelativePanel.LeftOf="FontItalic_Button">
                     <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
-                </Button>
+                </ToggleButton>
 
-                <Button
-                    x:Name="FontItalic Button"
+                <ToggleButton
+                    x:Name="FontItalic_Button"
                     Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontColor Selection">
+                    RelativePanel.LeftOf="FontColor_Selection">
                     <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
-                </Button>
+                </ToggleButton>
 
                 <ComboBox
-                    x:Name="FontColor Selection"
+                    x:Name="FontColor_Selection"
                     RelativePanel.AlignRightWithPanel="True"
                     SelectedIndex="0">
                     <ComboBox.Items>
