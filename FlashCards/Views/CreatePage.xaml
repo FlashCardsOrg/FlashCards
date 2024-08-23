@@ -8,41 +8,136 @@
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        <SelectorBar>
-            <SelectorBarItem
-                l:Uids.Uid="Create_SelectorBar_Front"
-                IsSelected="True"
-                Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
-            <SelectorBarItem l:Uids.Uid="Create_SelectorBar_Back" Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
-        </SelectorBar>
-        <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
-            <DropDownButton Content="Fach: Mathe">
-                <DropDownButton.Flyout>
-                    <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem Text="Mathe"/>
-                        <MenuFlyoutItem Text="Deutsch"/>
-                        <MenuFlyoutItem Text="Englisch"/>
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
-            <DropDownButton Content="Semester: 1">
-                <DropDownButton.Flyout>
-                    <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem Text="1. Semester"/>
-                        <MenuFlyoutItem Text="2. Semester"/>
-                        <MenuFlyoutItem Text="3. Semester"/>
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
-            <DropDownButton Content="Tags auswählen">
-                <DropDownButton.Flyout>
-                    <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem Text="Mein Tag 1"/>
-                        <MenuFlyoutItem Text="Mein Tag 2"/>
-                        <MenuFlyoutItem Text="Mein Tag 3"/>
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
+        <StackPanel>
+            <SelectorBar>
+                <SelectorBarItem
+                    l:Uids.Uid="Create_SelectorBar_Front"
+                    IsSelected="True"
+                    Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
+                <SelectorBarItem l:Uids.Uid="Create_SelectorBar_Back" Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
+            </SelectorBar>
+
+            <RelativePanel Margin="0,20,0,0">
+                <DropDownButton
+                    x:Name="Subject Selection"
+                    Margin="0,0,8,0"
+                    Content="Fach: Mathe"
+                    RelativePanel.AlignLeftWithPanel="True">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Text="Mathe"/>
+                            <MenuFlyoutItem Text="Deutsch"/>
+                            <MenuFlyoutItem Text="Englisch"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <DropDownButton
+                    x:Name="Semester Selection"
+                    Margin="0,0,8,0"
+                    Content="Semester: 1"
+                    RelativePanel.RightOf="Subject Selection">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Text="1. Semester"/>
+                            <MenuFlyoutItem Text="2. Semester"/>
+                            <MenuFlyoutItem Text="3. Semester"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <DropDownButton
+                    x:Name="Tag Selection"
+                    Content="Tags auswählen"
+                    RelativePanel.RightOf="Semester Selection">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Text="Mein Tag 1"/>
+                            <MenuFlyoutItem Text="Mein Tag 2"/>
+                            <MenuFlyoutItem Text="Mein Tag 3"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <ComboBox
+                    x:Name="Font Selection"
+                    Margin="0,0,8,0"
+                    RelativePanel.LeftOf="FontSize Selection"
+                    SelectedIndex="0">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Calibri"/>
+                        <ComboBoxItem Content="Arial"/>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <ComboBox
+                    x:Name="FontSize Selection"
+                    Margin="0,0,8,0"
+                    RelativePanel.LeftOf="FontBold Button"
+                    SelectedIndex="1">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="14"/>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <Button
+                    x:Name="FontBold Button"
+                    Margin="0,0,8,0"
+                    RelativePanel.LeftOf="FontUnderlined Button">
+                    <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
+                </Button>
+
+                <Button
+                    x:Name="FontUnderlined Button"
+                    Margin="0,0,8,0"
+                    RelativePanel.LeftOf="FontItalic Button">
+                    <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
+                </Button>
+
+                <Button
+                    x:Name="FontItalic Button"
+                    Margin="0,0,8,0"
+                    RelativePanel.LeftOf="FontColor Selection">
+                    <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
+                </Button>
+
+                <ComboBox
+                    x:Name="FontColor Selection"
+                    RelativePanel.AlignRightWithPanel="True"
+                    SelectedIndex="0">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Black"/>
+                        <ComboBoxItem Content="White"/>
+                    </ComboBox.Items>
+                </ComboBox>
+            </RelativePanel>
+
+            <RichEditBox Height="1050" Margin="0,12"/>
+
+            <RelativePanel>
+                <DropDownButton Content="Layout auswählen: Text" RelativePanel.AlignLeftWithPanel="True">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Text="Text"/>
+                            <MenuFlyoutItem Text="Datei"/>
+                            <MenuFlyoutItem Text="Text - Text"/>
+                            <MenuFlyoutItem Text="Datei - Datei"/>
+                            <MenuFlyoutItem Text="Text - Datei"/>
+                            <MenuFlyoutItem Text="Datei - Text"/>
+                            <MenuFlyoutItem Text="Text - Datei - Datei"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <CheckBox Content="Stichpunkte einzeln einblenden" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+                <Button
+                    Content="Speichern"
+                    IsEnabled="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Style="{StaticResource AccentButtonStyle}"/>
+            </RelativePanel>
         </StackPanel>
     </Grid>
 </Page>
