@@ -1,7 +1,4 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Helpers;
-
-using Microsoft.UI.Xaml;
 
 namespace FlashCards.Services;
 
