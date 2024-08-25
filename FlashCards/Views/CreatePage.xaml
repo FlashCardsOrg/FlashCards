@@ -9,7 +9,7 @@
 
     <Grid x:Name="ContentArea">
         <StackPanel>
-            <SelectorBar>
+            <SelectorBar Padding="0">
                 <SelectorBarItem
                     l:Uids.Uid="Create_SelectorBar_Front"
                     IsSelected="True"
