@@ -18,99 +18,80 @@
             </SelectorBar>
 
             <RelativePanel Margin="0,20,0,0">
-                <DropDownButton
-                    x:Name="Subject_Selection"
-                    Margin="0,0,8,0"
-                    Content="Fach: Mathe"
-                    RelativePanel.AlignLeftWithPanel="True">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="Mathe"/>
-                            <MenuFlyoutItem Text="Deutsch"/>
-                            <MenuFlyoutItem Text="Englisch"/>
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+                <StackPanel
+                    x:Name="Left_Controls"
+                    Orientation="Horizontal"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Spacing="{StaticResource UIControlSpacing}">
+                    <DropDownButton Content="Fach: Mathe">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Text="Mathe"/>
+                                <MenuFlyoutItem Text="Deutsch"/>
+                                <MenuFlyoutItem Text="Englisch"/>
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
 
-                <DropDownButton
-                    x:Name="Semester_Selection"
-                    Margin="0,0,8,0"
-                    Content="Semester: 1"
-                    RelativePanel.RightOf="Subject_Selection">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="1. Semester"/>
-                            <MenuFlyoutItem Text="2. Semester"/>
-                            <MenuFlyoutItem Text="3. Semester"/>
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+                    <DropDownButton Content="Semester: 1">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Text="1. Semester"/>
+                                <MenuFlyoutItem Text="2. Semester"/>
+                                <MenuFlyoutItem Text="3. Semester"/>
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
 
-                <DropDownButton
-                    x:Name="Tag_Selection"
-                    Content="Tags auswählen"
-                    RelativePanel.RightOf="Semester_Selection">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="Mein Tag 1"/>
-                            <MenuFlyoutItem Text="Mein Tag 2"/>
-                            <MenuFlyoutItem Text="Mein Tag 3"/>
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+                    <DropDownButton Content="Tags auswählen">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Text="Mein Tag 1"/>
+                                <MenuFlyoutItem Text="Mein Tag 2"/>
+                                <MenuFlyoutItem Text="Mein Tag 3"/>
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+                </StackPanel>
 
-                <ComboBox
-                    x:Name="Font_Selection"
-                    Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontSize_Selection"
-                    SelectedIndex="0">
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="Calibri"/>
-                        <ComboBoxItem Content="Arial"/>
-                    </ComboBox.Items>
-                </ComboBox>
-
-                <ComboBox
-                    x:Name="FontSize_Selection"
-                    Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontBold_Button"
-                    SelectedIndex="1">
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="10"/>
-                        <ComboBoxItem Content="14"/>
-                    </ComboBox.Items>
-                </ComboBox>
-
-                <ToggleButton
-                    x:Name="FontBold_Button"
-                    Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontUnderlined_Button">
-                    <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
-                </ToggleButton>
-
-                <ToggleButton
-                    x:Name="FontUnderlined_Button"
-                    Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontItalic_Button">
-                    <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
-                </ToggleButton>
-
-                <ToggleButton
-                    x:Name="FontItalic_Button"
-                    Margin="0,0,8,0"
-                    RelativePanel.LeftOf="FontColor_Selection">
-                    <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
-                </ToggleButton>
-
-                <ComboBox
-                    x:Name="FontColor_Selection"
+                <StackPanel
+                    x:Name="Right_Controls"
+                    Orientation="Horizontal"
                     RelativePanel.AlignRightWithPanel="True"
-                    SelectedIndex="0">
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="Black"/>
-                        <ComboBoxItem Content="White"/>
-                    </ComboBox.Items>
-                </ComboBox>
+                    Spacing="{StaticResource UIControlSpacing}">
+                    <ComboBox SelectedIndex="0">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Calibri"/>
+                            <ComboBoxItem Content="Arial"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+
+                    <ComboBox SelectedIndex="1">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="14"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+
+                    <ToggleButton>
+                        <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
+                    </ToggleButton>
+
+                    <ToggleButton>
+                        <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
+                    </ToggleButton>
+
+                    <ToggleButton>
+                        <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
+                    </ToggleButton>
+
+                    <ComboBox SelectedIndex="0">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Black"/>
+                            <ComboBoxItem Content="White"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
             </RelativePanel>
 
             <RichEditBox Height="1050" Margin="0,12"/>
