@@ -14,6 +14,8 @@ public partial class SettingsViewModel : ObservableRecipient
 {
     private readonly IThemeSelectorService _themeSelectorService;
 
+    private readonly IDemotionSettingsService _demotionSettingsService;
+
     [ObservableProperty]
     private string _versionDescription;
 
@@ -29,13 +31,15 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty]
     private ObservableCollection<Box> _boxes;
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService)
+    public SettingsViewModel(IThemeSelectorService themeSelectorService, IDemotionSettingsService demotionSettingsService)
     {
         _themeSelectorService = themeSelectorService;
+        _demotionSettingsService = demotionSettingsService;
         _versionDescription = GetVersionDescription();
         _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
-        _selectedDemotionTag = GetSelectedDemotionTag();
+        // TODO: Fix demotion tag not being saved after app restart
+        _selectedDemotionTag = _demotionSettingsService.SelectedDemotionTag;
         _boxes = GetBoxes();
     }
 
@@ -61,12 +65,6 @@ public partial class SettingsViewModel : ObservableRecipient
 
         var appDisplayName = WinUI3Localizer.Localizer.Get().GetLocalizedString("AppDisplayName");
         return $"{appDisplayName} - {version.Major}.{version.Minor}.{version.Build}";
-    }
-
-    private static string GetSelectedDemotionTag()
-    {
-        IDemotionSettingsService demotionSettingsService = App.GetService<IDemotionSettingsService>();
-        return demotionSettingsService.SelectedDemotionTag;
     }
 
     private static ObservableCollection<Box> GetBoxes()
