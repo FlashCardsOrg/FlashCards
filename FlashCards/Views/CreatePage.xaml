@@ -19,7 +19,6 @@
 
             <RelativePanel Margin="0,20,0,0">
                 <StackPanel
-                    x:Name="Left_Controls"
                     Orientation="Horizontal"
                     RelativePanel.AlignLeftWithPanel="True"
                     Spacing="{StaticResource UIControlSpacing}">
@@ -55,7 +54,6 @@
                 </StackPanel>
 
                 <StackPanel
-                    x:Name="Right_Controls"
                     Orientation="Horizontal"
                     RelativePanel.AlignRightWithPanel="True"
                     Spacing="{StaticResource UIControlSpacing}">
