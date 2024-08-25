@@ -74,11 +74,13 @@
                     </controls:SettingsExpander>
 
                     <controls:SettingsCard l:Uids.Uid="Settings_Demotion_Card" HeaderIcon="{ui:FontIcon Glyph=&#xE845;}">
-                        <ComboBox SelectedIndex="0">
-                            <!--  Save Demotion to local settings storage  -->
-                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_First"/>
-                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_One"/>
-                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two"/>
+                        <ComboBox
+                            SelectedValue="{x:Bind ViewModel.SelectedDemotionTag}"
+                            SelectedValuePath="Tag"
+                            SelectionChanged="Demotion_ComboBox_SelectionChanged">
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_First" Tag="First"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_One" Tag="One"/>
+                            <ComboBoxItem l:Uids.Uid="Settings_Demotion_Two" Tag="Two"/>
                         </ComboBox>
                     </controls:SettingsCard>
                 </StackPanel>

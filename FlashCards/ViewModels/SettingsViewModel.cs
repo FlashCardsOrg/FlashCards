@@ -1,18 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 
 using Windows.ApplicationModel;
+using Windows.Security.Cryptography.Core;
 
 namespace FlashCards.ViewModels;
 
 public partial class SettingsViewModel : ObservableRecipient
 {
     private readonly IThemeSelectorService _themeSelectorService;
+
+    private readonly IDemotionSettingsService _demotionSettingsService;
 
     [ObservableProperty]
     private string _versionDescription;
@@ -24,14 +26,20 @@ public partial class SettingsViewModel : ObservableRecipient
     private string _selectedLanguageTag;
 
     [ObservableProperty]
+    private string _selectedDemotionTag;
+
+    [ObservableProperty]
     private ObservableCollection<Box> _boxes;
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService)
+    public SettingsViewModel(IThemeSelectorService themeSelectorService, IDemotionSettingsService demotionSettingsService)
     {
         _themeSelectorService = themeSelectorService;
+        _demotionSettingsService = demotionSettingsService;
         _versionDescription = GetVersionDescription();
         _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
+        // TODO: Fix demotion tag not being saved after app restart
+        _selectedDemotionTag = _demotionSettingsService.SelectedDemotionTag;
         _boxes = GetBoxes();
     }
 
