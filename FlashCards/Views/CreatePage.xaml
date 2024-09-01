@@ -113,7 +113,6 @@
 
                 <Button
                     Content="Speichern"
-                    IsEnabled="True"
                     RelativePanel.AlignRightWithPanel="True"
                     Style="{StaticResource AccentButtonStyle}"/>
             </RelativePanel>
