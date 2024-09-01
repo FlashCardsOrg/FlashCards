@@ -6,5 +6,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea"/>
+    <Grid x:Name="ContentArea">
+        <StackPanel>
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Front"/>
+            <StackPanel
+                Margin="0,20,0,0"
+                Orientation="Horizontal"
+                Spacing="{StaticResource UIControlSpacing}">
+                <Button Content="Box: 1"/>
+
+                <Button Content="Subject: Anatomy"/>
+
+                <Button Content="Semester: 1. Semester"/>
+
+                <Button Content="Tags: Tag 1, Tag 2, Tag 3, ..."/>
+            </StackPanel>
+
+            <RichEditBox Height="1050" Margin="0,12"/>
+
+            <RelativePanel>
+                <StackPanel
+                    Orientation="Horizontal"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Spacing="{StaticResource UIControlSpacing}">
+                    <Button Content="Next bullet point"/>
+
+                    <Button Content="Flip"/>
+                </StackPanel>
+
+                <Button
+                    Content="Skip"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Style="{StaticResource AccentButtonStyle}"/>
+            </RelativePanel>
+        </StackPanel>
+    </Grid>
 </Page>
