@@ -9,15 +9,13 @@
 
     <Grid x:Name="ContentArea">
         <StackPanel>
-            <!--  SelectorBar currently breaks the app  -->
-            <!--  TODO: Fix SelectorBar  -->
-            <!--<SelectorBar Padding="0">
+            <SelectorBar Padding="0">
                 <SelectorBarItem
                     l:Uids.Uid="Create_SelectorBar_Front"
                     IsSelected="True"
                     Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
                 <SelectorBarItem l:Uids.Uid="Create_SelectorBar_Back" Style="{StaticResource SubtitleSelectorBarItemStyle}"/>
-            </SelectorBar>-->
+            </SelectorBar>
 
             <RelativePanel Margin="0,20,0,0">
                 <StackPanel
