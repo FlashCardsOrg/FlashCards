@@ -38,7 +38,6 @@ public partial class SettingsViewModel : ObservableRecipient
         _versionDescription = GetVersionDescription();
         _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
-        // TODO: Fix demotion tag not being saved after app restart
         _selectedDemotionTag = _demotionSettingsService.SelectedDemotionTag;
         _boxes = GetBoxes();
     }

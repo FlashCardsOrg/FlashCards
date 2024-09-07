@@ -13,14 +13,16 @@ public class ActivationService : IActivationService
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
     private readonly ILocalizationService _localizationService;
     private readonly IThemeSelectorService _themeSelectorService;
+    private readonly IDemotionSettingsService _demotionSettingsService;
     private UIElement? _shell = null;
 
-    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService, ILocalizationService localizationService)
+    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService, ILocalizationService localizationService, IDemotionSettingsService demotionSettingsService)
     {
         _defaultHandler = defaultHandler;
         _activationHandlers = activationHandlers;
         _localizationService = localizationService;
         _themeSelectorService = themeSelectorService;
+        _demotionSettingsService = demotionSettingsService;
     }
 
     public async Task ActivateAsync(object activationArgs)
@@ -64,6 +66,7 @@ public class ActivationService : IActivationService
     {
         await _localizationService.InitializeAsync().ConfigureAwait(false);
         await _themeSelectorService.InitializeAsync().ConfigureAwait(false);
+        await _demotionSettingsService.InitializeAsync().ConfigureAwait(false);
         await Task.CompletedTask;
     }
 
@@ -71,6 +74,7 @@ public class ActivationService : IActivationService
     {
         await _localizationService.SetRequestedLanguageAsync(_localizationService.SelectedLanguageTag);
         await _themeSelectorService.SetRequestedThemeAsync();
+        await _demotionSettingsService.SetDemotionAsync(_demotionSettingsService.SelectedDemotionTag);
         await Task.CompletedTask;
     }
 }
