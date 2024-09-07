@@ -18,6 +18,7 @@
         <PackageCertificateThumbprint>2E49688EFD6C4EBE945701E9AB6B05A847F3E8DD</PackageCertificateThumbprint>
         <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 	    <WindowsSdkPackageVersion>10.0.26100.41</WindowsSdkPackageVersion>
+		<StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
     </PropertyGroup> 
 
     <ItemGroup>
@@ -28,6 +29,11 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240821" />
         <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240821" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240829007" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
