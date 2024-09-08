@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(FlashCardsContext))]
-    [Migration("20240907200247_InitialCreate")]
+    [Migration("20240908074849_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,9 +41,8 @@ namespace FlashCards.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DueAfter")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DueAfter")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Number")
                         .HasColumnType("INTEGER");

@@ -18,7 +18,7 @@ namespace FlashCards.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Number = table.Column<int>(type: "INTEGER", nullable: false),
-                    DueAfter = table.Column<string>(type: "TEXT", nullable: false)
+                    DueAfter = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -38,9 +38,8 @@ namespace FlashCards.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DueAfter")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DueAfter")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Number")
                         .HasColumnType("INTEGER");
