@@ -3,13 +3,10 @@ using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using FlashCards.Contracts.Services;
-using FlashCards.Data;
 using FlashCards.DBModels;
 using FlashCards.Helpers;
 
 using Windows.ApplicationModel;
-using Windows.Security.Cryptography.Core;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FlashCards.ViewModels;
 

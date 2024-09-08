@@ -6,7 +6,6 @@ using FlashCards.Models;
 
 using Microsoft.Extensions.Options;
 
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace FlashCards.Services;

@@ -1,8 +1,6 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Data;
 using FlashCards.DBModels;
 using FlashCards.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
