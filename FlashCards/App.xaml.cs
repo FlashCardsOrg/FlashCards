@@ -152,7 +152,7 @@ public partial class App : Application
         }
     }
 
-    private static async Task<bool> ResourceFileWasModifed(IStorageItem appResourceFile, IStorageItem localResourceFile)
+    private static async Task<bool> ResourceFileWasModifed(StorageFile appResourceFile, IStorageItem localResourceFile)
     {
         DateTimeOffset appResourceFile_DateModified = (await appResourceFile.GetBasicPropertiesAsync()).DateModified;
         DateTimeOffset localResourceFile_DateModified = (await localResourceFile.GetBasicPropertiesAsync()).DateModified;
