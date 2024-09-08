@@ -62,6 +62,7 @@ public partial class App : Application
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddSingleton<IDemotionSettingsService, DemotionSettingsService>();
+            services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
@@ -85,6 +86,8 @@ public partial class App : Application
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+
+            // TODO: Fix passing DBContext to DBService
         }).
         Build();
 

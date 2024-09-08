@@ -265,4 +265,7 @@
   <data name="Create_SelectorBar_Back.Text" xml:space="preserve">
     <value>Rückseite</value>
   </data>
+  <data name="Box" xml:space="preserve">
+    <value>Fach</value>
+  </data>
 </root>

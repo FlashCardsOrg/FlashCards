@@ -3,10 +3,13 @@ using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using FlashCards.Contracts.Services;
+using FlashCards.Data;
+using FlashCards.DBModels;
 using FlashCards.Helpers;
 
 using Windows.ApplicationModel;
 using Windows.Security.Cryptography.Core;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FlashCards.ViewModels;
 
@@ -68,22 +71,20 @@ public partial class SettingsViewModel : ObservableRecipient
 
     private static ObservableCollection<Box> GetBoxes()
     {
-        // TODO: Load Boxes from DB instead
-        ObservableCollection<Box> boxes = [new Box("MyBox 1", 0), new Box("MyBox 2", 1)];
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        ObservableCollection<Box> boxes = new(databaseService.GetBoxes().Select(box => new Box(box.Number, (int)box.DueAfter)));
         return boxes;
-
     }
 
-    internal void AddBox()
+    internal void AddBox(int number, DueAfterOptions dueAfter)
     {
-        // TODO: Use proper name and selected index for new box
-        Boxes.Add(new Box("New Box", 0));
+        Boxes.Add(new Box(number, (int)dueAfter ));
     }
 }
 
-public class Box(string boxName, int selectedIndex)
+public class Box(int number, int selectedIndex)
 {
-    public string BoxName { get; set; } = boxName;
+    public string BoxName { get; set; } = $"{WinUI3Localizer.Localizer.Get().GetLocalizedString("Box")} {number}";
     public int SelectedIndex { get; set; } = selectedIndex;
 }
 
