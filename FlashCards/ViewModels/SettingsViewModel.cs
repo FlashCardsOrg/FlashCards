@@ -42,11 +42,6 @@ public partial class SettingsViewModel : ObservableRecipient
         _boxes = GetBoxes();
     }
 
-    private static string GetSelectedLanguageTag()
-    {
-        return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
-    }
-
     private static string GetVersionDescription()
     {
         Version version;
@@ -66,21 +61,36 @@ public partial class SettingsViewModel : ObservableRecipient
         return $"{appDisplayName} - {version.Major}.{version.Minor}.{version.Build}";
     }
 
+    private static string GetSelectedLanguageTag()
+    {
+        return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
+    }
+
     private static ObservableCollection<Box> GetBoxes()
     {
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        ObservableCollection<Box> boxes = new(databaseService.GetBoxes().Select(box => new Box(box.Number, (int)box.DueAfter)));
+        ObservableCollection<Box> boxes = new(databaseService.GetBoxes().Select(box => new Box(box.Id, box.Number, (int)box.DueAfter)));
         return boxes;
     }
 
-    internal void AddBox(int number, DueAfterOptions dueAfter)
+    internal void AddBox(int id, int number, DueAfterOptions dueAfter)
     {
-        Boxes.Add(new Box(number, (int)dueAfter ));
+        Boxes.Add(new Box(id, number, (int)dueAfter ));
+    }
+
+    internal void DeleteBox(int id)
+    {
+        var box = Boxes.FirstOrDefault(box => box.BoxID == id);
+        if (box != null)
+        {
+            Boxes.Remove(box);
+        }
     }
 }
 
-public class Box(int number, int selectedIndex)
+public class Box(int boxID, int number, int selectedIndex)
 {
+    public int BoxID { get; set; } = boxID;
     public string BoxName { get; set; } = $"{WinUI3Localizer.Localizer.Get().GetLocalizedString("Box")} {number}";
     public int SelectedIndex { get; set; } = selectedIndex;
 }
