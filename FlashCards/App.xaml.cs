@@ -2,6 +2,7 @@
 using FlashCards.Contracts.Services;
 using FlashCards.Core.Contracts.Services;
 using FlashCards.Core.Services;
+using FlashCards.Data;
 using FlashCards.Models;
 using FlashCards.Services;
 using FlashCards.ViewModels;
@@ -92,6 +93,12 @@ public partial class App : Application
         Build();
 
         UnhandledException += App_UnhandledException;
+
+        using (FlashCardsContext context = new())
+        {
+            context.Database.EnsureCreated();
+            context.SaveChanges();
+        };
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)

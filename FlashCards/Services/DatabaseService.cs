@@ -6,22 +6,17 @@ namespace FlashCards.Services;
 
 public class DatabaseService : IDatabaseService
 {
-    private readonly FlashCardsContext _context;
-
-    public DatabaseService(FlashCardsContext context)
-    {
-        _context = context;
-    }
-
     public void AddBox(int number, DueAfterOptions dueAfter)
     {
+        using FlashCardsContext context = new();
         Box newBox = new() { Number = number, DueAfter = dueAfter };
-        _context.Boxes.Add(newBox);
-        _context.SaveChanges();
+        context.Boxes.Add(newBox);
+        context.SaveChanges();
     }
 
     public List<Box> GetBoxes()
     {
-        return [.. _context.Boxes.OrderBy(box => box.Number)];
+        using FlashCardsContext context = new();
+        return [.. context.Boxes.OrderBy(box => box.Number)];
     }
 }
