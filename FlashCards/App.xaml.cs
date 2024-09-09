@@ -2,6 +2,7 @@
 using FlashCards.Contracts.Services;
 using FlashCards.Core.Contracts.Services;
 using FlashCards.Core.Services;
+using FlashCards.Data;
 using FlashCards.Models;
 using FlashCards.Services;
 using FlashCards.ViewModels;
@@ -62,6 +63,7 @@ public partial class App : Application
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddSingleton<IDemotionSettingsService, DemotionSettingsService>();
+            services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
@@ -85,10 +87,18 @@ public partial class App : Application
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+
+            // TODO: Fix passing DBContext to DBService
         }).
         Build();
 
         UnhandledException += App_UnhandledException;
+
+        using (FlashCardsContext context = new())
+        {
+            context.Database.EnsureCreated();
+            context.SaveChanges();
+        };
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -149,7 +159,7 @@ public partial class App : Application
         }
     }
 
-    private static async Task<bool> ResourceFileWasModifed(IStorageItem appResourceFile, IStorageItem localResourceFile)
+    private static async Task<bool> ResourceFileWasModifed(StorageFile appResourceFile, IStorageItem localResourceFile)
     {
         DateTimeOffset appResourceFile_DateModified = (await appResourceFile.GetBasicPropertiesAsync()).DateModified;
         DateTimeOffset localResourceFile_DateModified = (await localResourceFile.GetBasicPropertiesAsync()).DateModified;

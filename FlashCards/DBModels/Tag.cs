@@ -1,4 +1,5 @@
 ﻿namespace FlashCards.DBModels;
+
 public class Tag
 {
     public int Id { get; set; }

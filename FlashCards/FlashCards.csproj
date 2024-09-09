@@ -18,7 +18,6 @@
         <PackageCertificateThumbprint>2E49688EFD6C4EBE945701E9AB6B05A847F3E8DD</PackageCertificateThumbprint>
         <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 	    <WindowsSdkPackageVersion>10.0.26100.41</WindowsSdkPackageVersion>
-		<StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
     </PropertyGroup> 
 
     <ItemGroup>

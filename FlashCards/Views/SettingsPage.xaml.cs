@@ -1,4 +1,5 @@
 ﻿using FlashCards.Contracts.Services;
+using FlashCards.DBModels;
 using FlashCards.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -46,8 +47,14 @@ public sealed partial class SettingsPage : Page
     private void AddBox_Button_Clicked(object sender, RoutedEventArgs e)
     {
         Settings_Box_Expander.IsExpanded = true;
-        ViewModel.AddBox();
-        // TODO: Add box to db
+
+        int number = ViewModel.Boxes.Count + 1;
+        DueAfterOptions dueAfter = DueAfterOptions.OneDay;
+
+        ViewModel.AddBox(number, dueAfter);
+
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        databaseService.AddBox(number, dueAfter);
     }
 
     private void DeleteBox_Button_Clicked(object sender, RoutedEventArgs e)
