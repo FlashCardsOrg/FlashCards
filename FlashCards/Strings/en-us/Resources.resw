@@ -268,4 +268,28 @@
   <data name="Box" xml:space="preserve">
     <value>Box</value>
   </data>
+  <data name="Settings_Subject_Expander.Header" xml:space="preserve">
+    <value>Subjects</value>
+  </data>
+  <data name="Settings_Subject_Expander.Description" xml:space="preserve">
+    <value>Add or remove subjects and change their name</value>
+  </data>
+  <data name="Settings_Subject_AddSubject_Button.Content" xml:space="preserve">
+    <value>Add subject</value>
+  </data>
+  <data name="Settings_Subject_DeleteSubject_Button.Text" xml:space="preserve">
+    <value>Delete subject</value>
+  </data>
+  <data name="Settings_Tag_AddTag_Button.Content" xml:space="preserve">
+    <value>Add tag</value>
+  </data>
+  <data name="Settings_Tag_DeleteTag_Button.Text" xml:space="preserve">
+    <value>Delete tag</value>
+  </data>
+  <data name="Settings_Tag_Expander.Description" xml:space="preserve">
+    <value>Add or remove tags and change their name</value>
+  </data>
+  <data name="Settings_Tag_Expander.Header" xml:space="preserve">
+    <value>Tags</value>
+  </data>
 </root>

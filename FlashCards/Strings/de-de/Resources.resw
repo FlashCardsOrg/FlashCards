@@ -268,4 +268,28 @@
   <data name="Box" xml:space="preserve">
     <value>Fach</value>
   </data>
+  <data name="Settings_Subject_Expander.Header" xml:space="preserve">
+    <value>Kurse</value>
+  </data>
+  <data name="Settings_Subject_Expander.Description" xml:space="preserve">
+    <value>Füge Kurse hinzu oder lösche diese und bearbeite deren Namen</value>
+  </data>
+  <data name="Settings_Subject_AddSubject_Button.Content" xml:space="preserve">
+    <value>Kurs hinzufügen</value>
+  </data>
+  <data name="Settings_Subject_DeleteSubject_Button.Text" xml:space="preserve">
+    <value>Kurs löschen</value>
+  </data>
+  <data name="Settings_Tag_AddTag_Button.Content" xml:space="preserve">
+    <value>Tag hinzufügen</value>
+  </data>
+  <data name="Settings_Tag_DeleteTag_Button.Text" xml:space="preserve">
+    <value>Tag löschen</value>
+  </data>
+  <data name="Settings_Tag_Expander.Description" xml:space="preserve">
+    <value>Füge Tags hinzu oder lösche diese und bearbeite deren Namen</value>
+  </data>
+  <data name="Settings_Tag_Expander.Header" xml:space="preserve">
+    <value>Tags</value>
+  </data>
 </root>

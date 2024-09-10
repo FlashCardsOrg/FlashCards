@@ -88,5 +88,47 @@ public sealed partial class SettingsPage : Page
         }
     }
 
+    private void AddSubject_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        Settings_Subject_Expander.IsExpanded = true;
 
+        string name = "New Subject";
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        int id = databaseService.AddSubject(name);
+        ViewModel.AddSubject(id, name);
+    }
+
+    private void DeleteSubject_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        if ((sender as MenuFlyoutItem)?.Tag is not int id)
+        {
+            return;
+        }
+
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        databaseService.DeleteSubject(id);
+        ViewModel.DeleteSubject(id);
+    }
+
+    private void AddTag_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        Settings_Tag_Expander.IsExpanded = true;
+
+        string name = "New Tag";
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        int id = databaseService.AddTag(name);
+        ViewModel.AddTag(id, name);
+    }
+
+    private void DeleteTag_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        if ((sender as MenuFlyoutItem)?.Tag is not int id)
+        {
+            return;
+        }
+
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        databaseService.DeleteTag(id);
+        ViewModel.DeleteTag(id);
+    }
 }

@@ -6,6 +6,12 @@ namespace FlashCards.Services;
 
 public class DatabaseService : IDatabaseService
 {
+    public List<Box> GetBoxes()
+    {
+        using FlashCardsContext context = new();
+        return [.. context.Boxes.OrderBy(box => box.Number)];
+    }
+
     public int AddBox(int number, DueAfterOptions dueAfter)
     {
         using FlashCardsContext context = new();
@@ -68,9 +74,56 @@ public class DatabaseService : IDatabaseService
         context.SaveChanges();
     }
 
-    public List<Box> GetBoxes()
+    public List<Subject> GetSubjects()
     {
         using FlashCardsContext context = new();
-        return [.. context.Boxes.OrderBy(box => box.Number)];
+        return [.. context.Subjects];
+    }
+
+    public int AddSubject(string name)
+    {
+        using FlashCardsContext context = new();
+        Subject newSubject = new() { Name = name };
+        context.Subjects.Add(newSubject);
+        context.SaveChanges();
+        return newSubject.Id;
+    }
+
+    public void DeleteSubject(int id)
+    {
+        using FlashCardsContext context = new();
+        var subject = context.Subjects.Find(id);
+        if (subject is null)
+        {
+            return;
+        }
+        context.Subjects.Remove(subject);
+        context.SaveChanges();
+    }
+
+    public List<Tag> GetTags()
+    {
+        using FlashCardsContext context = new();
+        return [.. context.Tags];
+    }
+
+    public int AddTag(string name)
+    {
+        using FlashCardsContext context = new();
+        Tag newTag = new() { Name = name };
+        context.Tags.Add(newTag);
+        context.SaveChanges();
+        return newTag.Id;
+    }
+
+    public void DeleteTag(int id) {
+        using FlashCardsContext context = new();
+        var tag = context.Tags.Find(id);
+        if (tag is null)
+        {
+            return;
+        }
+        context.Tags.Remove(tag);
+        context.SaveChanges();
     }
 }
