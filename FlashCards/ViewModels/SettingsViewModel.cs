@@ -81,10 +81,12 @@ public partial class SettingsViewModel : ObservableRecipient
     internal void DeleteBox(int id)
     {
         var box = Boxes.FirstOrDefault(box => box.BoxID == id);
-        if (box != null)
+        if (box is null)
         {
-            Boxes.Remove(box);
+            return;
         }
+        int boxNumber = int.Parse(box.BoxName.Split(" ")[1]);
+        Boxes.Remove(box);
     }
 }
 

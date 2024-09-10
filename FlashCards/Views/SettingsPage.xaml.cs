@@ -76,7 +76,6 @@ public sealed partial class SettingsPage : Page
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.DeleteBox(id);
         ViewModel.DeleteBox(id);
-        // TODO: Move Cards to another Box
     }
 
     private void Due_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

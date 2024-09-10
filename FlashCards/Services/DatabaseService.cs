@@ -30,11 +30,42 @@ public class DatabaseService : IDatabaseService
     {
         using FlashCardsContext context = new();
         var box = context.Boxes.Find(id);
-        if (box is not null)
+        if (box is null)
         {
-            context.Boxes.Remove(box);
-            context.SaveChanges();
+            return;
         }
+        MoveCardsOnDelete(box.Number);
+        FixBoxNumbers(box.Number);
+        context.Boxes.Remove(box);
+        context.SaveChanges();
+    }
+
+    private static void MoveCardsOnDelete(int boxNumber)
+    {
+        int targetBoxNumber = boxNumber == 1 ? 2 : boxNumber - 1;
+        MoveCards(boxNumber, targetBoxNumber);
+    }
+
+    private static void MoveCards(int fromBoxNumber, int toBoxNumber)
+    {
+        using FlashCardsContext context = new();
+        var flashCards = context.FlashCards.Where(card => card.Box.Number == fromBoxNumber);
+        foreach (var flashCard in flashCards)
+        {
+            flashCard.Box.Number = toBoxNumber;
+        }
+        context.SaveChanges();
+    }
+
+    private static void FixBoxNumbers(int number)
+    {
+        using FlashCardsContext context = new();
+        var boxes = context.Boxes.Where(box => box.Number > number);
+        foreach (var box in boxes)
+        {
+            box.Number--;
+        }
+        context.SaveChanges();
     }
 
     public List<Box> GetBoxes()
