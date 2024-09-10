@@ -87,8 +87,6 @@ public partial class App : Application
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
-
-            // TODO: Fix passing DBContext to DBService
         }).
         Build();
 
