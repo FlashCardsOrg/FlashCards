@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
 using FlashCards.DBModels;
 using FlashCards.Helpers;
-
+using FlashCards.Services;
 using Windows.ApplicationModel;
 
 namespace FlashCards.ViewModels;
@@ -15,6 +15,8 @@ public partial class SettingsViewModel : ObservableRecipient
     private readonly IThemeSelectorService _themeSelectorService;
 
     private readonly IDemotionSettingsService _demotionSettingsService;
+
+    private readonly IDatabaseService _databaseService;
 
     [ObservableProperty]
     private string _versionDescription;
@@ -37,10 +39,11 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty]
     private ObservableCollection<Tag> _tags;
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService, IDemotionSettingsService demotionSettingsService)
+    public SettingsViewModel(IThemeSelectorService themeSelectorService, IDemotionSettingsService demotionSettingsService, IDatabaseService databaseService)
     {
         _themeSelectorService = themeSelectorService;
         _demotionSettingsService = demotionSettingsService;
+        _databaseService = databaseService;
         _versionDescription = GetVersionDescription();
         _selectedTheme = _themeSelectorService.Theme.ToString();
         _selectedLanguageTag = GetSelectedLanguageTag();
@@ -74,10 +77,9 @@ public partial class SettingsViewModel : ObservableRecipient
         return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
     }
 
-    private static ObservableCollection<Box> GetBoxes()
+    private ObservableCollection<Box> GetBoxes()
     {
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        ObservableCollection<Box> boxes = new(databaseService.GetBoxes().Select(box => new Box(box.Id, box.Number, (int)box.DueAfter)));
+        ObservableCollection<Box> boxes = new(_databaseService.GetBoxes().Select(box => new Box(box.Id, box.Number, (int)box.DueAfter)));
         return boxes;
     }
 
@@ -97,10 +99,9 @@ public partial class SettingsViewModel : ObservableRecipient
         Boxes.Remove(box);
     }
 
-    private static ObservableCollection<Subject> GetSubjects()
+    private ObservableCollection<Subject> GetSubjects()
     {
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        ObservableCollection<Subject> subjects = new(databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)));
+        ObservableCollection<Subject> subjects = new(_databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)));
         return subjects;
     }
 
@@ -119,10 +120,9 @@ public partial class SettingsViewModel : ObservableRecipient
         Subjects.Remove(subject);
     }
 
-    private static ObservableCollection<Tag> GetTags()
+    private ObservableCollection<Tag> GetTags()
     {
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        ObservableCollection<Tag> tags = new(databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)));
+        ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)));
         return tags;
     }
 
