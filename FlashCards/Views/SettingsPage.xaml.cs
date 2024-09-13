@@ -84,7 +84,7 @@ public sealed partial class SettingsPage : Page
         {
             var databaseService = App.GetService<IDatabaseService>();
             var dueAfter = (DueAfterOptions)selectedIndex;
-            databaseService.UpdateBox(boxId, dueAfter);
+            databaseService.EditBox(boxId, dueAfter);
         }
     }
 

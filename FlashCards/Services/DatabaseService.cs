@@ -21,15 +21,17 @@ public class DatabaseService : IDatabaseService
         return newBox.Id;
     }
 
-    public void UpdateBox(int id, DueAfterOptions dueAfter)
+    public void EditBox(int id, DueAfterOptions dueAfter)
     {
         using FlashCardsContext context = new();
         var box = context.Boxes.Find(id);
-        if (box is not null)
+        if (box is null)
         {
-            box.DueAfter = dueAfter;
-            context.SaveChanges();
+            return;
         }
+
+        box.DueAfter = dueAfter;
+        context.SaveChanges();
     }
 
     public void DeleteBox(int id)
@@ -40,6 +42,7 @@ public class DatabaseService : IDatabaseService
         {
             return;
         }
+
         MoveCardsOnDelete(box.Number);
         FixBoxNumbers(box.Number);
         context.Boxes.Remove(box);
@@ -89,6 +92,19 @@ public class DatabaseService : IDatabaseService
         return newSubject.Id;
     }
 
+    public void EditSubject(int id, string name)
+    {
+        using FlashCardsContext context = new();
+        var subject = context.Subjects.Find(id);
+        if (subject is null)
+        {
+            return;
+        }
+
+        subject.Name = name;
+        context.SaveChanges();
+    }
+
     public void DeleteSubject(int id)
     {
         using FlashCardsContext context = new();
@@ -97,6 +113,7 @@ public class DatabaseService : IDatabaseService
         {
             return;
         }
+
         context.Subjects.Remove(subject);
         context.SaveChanges();
     }
@@ -116,13 +133,28 @@ public class DatabaseService : IDatabaseService
         return newTag.Id;
     }
 
-    public void DeleteTag(int id) {
+    public void EditTag(int id, string name)
+    {
         using FlashCardsContext context = new();
         var tag = context.Tags.Find(id);
         if (tag is null)
         {
             return;
         }
+
+        tag.Name = name;
+        context.SaveChanges();
+    }
+
+    public void DeleteTag(int id)
+    {
+        using FlashCardsContext context = new();
+        var tag = context.Tags.Find(id);
+        if (tag is null)
+        {
+            return;
+        }
+
         context.Tags.Remove(tag);
         context.SaveChanges();
     }
