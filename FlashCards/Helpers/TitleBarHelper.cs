@@ -1,8 +1,6 @@
-﻿using System.Runtime.InteropServices;
-
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
-
+using System.Runtime.InteropServices;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 

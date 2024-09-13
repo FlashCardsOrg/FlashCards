@@ -292,4 +292,22 @@
   <data name="Settings_Tag_Expander.Header" xml:space="preserve">
     <value>Tags</value>
   </data>
+  <data name="Settings_Subject_Edit_Button.Content" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Settings_Tag_Edit_Button.Content" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Settings_Subject_EditCancel_Button.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Settings_Tag_EditCancel_Button.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Settings_Subject_EditSave_Button.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Settings_Tag_EditSave_Button.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
 </root>

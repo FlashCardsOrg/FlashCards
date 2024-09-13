@@ -1,8 +1,6 @@
-﻿using System.Text;
-
-using FlashCards.Core.Contracts.Services;
-
+﻿using FlashCards.Core.Contracts.Services;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace FlashCards.Core.Services;
 

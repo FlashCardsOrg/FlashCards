@@ -1,10 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using FlashCards.Contracts.Services;
+﻿using FlashCards.Contracts.Services;
 using FlashCards.Helpers;
 using FlashCards.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics.CodeAnalysis;
 using WinUI3Localizer;
 
 namespace FlashCards.Services;

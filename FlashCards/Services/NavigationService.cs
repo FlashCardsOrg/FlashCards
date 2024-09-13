@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using FlashCards.Contracts.Services;
+﻿using FlashCards.Contracts.Services;
 using FlashCards.Contracts.ViewModels;
 using FlashCards.Helpers;
-
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlashCards.Services;
 
