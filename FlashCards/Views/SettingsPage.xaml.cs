@@ -16,7 +16,7 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         ViewModel = App.GetService<SettingsViewModel>();
-        InitializeComponent();        
+        InitializeComponent();
     }
 
     private void Language_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -98,6 +98,44 @@ public sealed partial class SettingsPage : Page
         ViewModel.AddSubject(id, name);
     }
 
+    private void EditSubject_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        ViewModel.SetSubjectEditingState(id, true);
+    }
+
+    private void EditSubjectCancel_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        ViewModel.SetSubjectEditingState(id, false);
+    }
+
+    private void EditSubjectSave_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        // TODO: Get Name from TextBox
+        string name = "New Subject"; 
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        databaseService.EditSubject(id, name);
+        ViewModel.EditSubject(id, name);
+        ViewModel.SetSubjectEditingState(id, false);
+    }
+
     private void DeleteSubject_Button_Clicked(object sender, RoutedEventArgs e)
     {
         if ((sender as MenuFlyoutItem)?.Tag is not int id)
@@ -118,6 +156,43 @@ public sealed partial class SettingsPage : Page
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         int id = databaseService.AddTag(name);
         ViewModel.AddTag(id, name);
+    }
+
+    private void EditTag_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        ViewModel.SetTagEditingState(id, true);
+    }
+
+    private void EditTagCancel_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        ViewModel.SetTagEditingState(id, false);
+    }
+
+    private void EditTagSave_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+
+        if ((sender as Button)?.Tag is not int id)
+        {
+            return;
+        }
+
+        string name = "New Tag";
+        IDatabaseService databaseService = App.GetService<IDatabaseService>();
+        databaseService.EditTag(id, name);
+        ViewModel.EditTag(id, name);
+        ViewModel.SetTagEditingState(id, false);
     }
 
     private void DeleteTag_Button_Clicked(object sender, RoutedEventArgs e)

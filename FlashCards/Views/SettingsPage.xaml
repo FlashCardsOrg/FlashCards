@@ -86,18 +86,51 @@
                         <Button l:Uids.Uid="Settings_Subject_AddSubject_Button" Click="AddSubject_Button_Clicked"/>
                         <controls:SettingsExpander.ItemTemplate>
                             <DataTemplate x:DataType="vm:Subject">
-                                <controls:SettingsCard Header="{x:Bind SubjectName}">
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="{StaticResource MediumFontSize}" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem
-                                                    l:Uids.Uid="Settings_Subject_DeleteSubject_Button"
-                                                    Click="DeleteSubject_Button_Clicked"
+                                <controls:SettingsCard>
+                                    <controls:SettingsCard.Header>
+                                        <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">
+                                            <controls:Case Value="False">
+                                                <TextBlock Text="{x:Bind SubjectName}"/>
+                                            </controls:Case>
+                                            <controls:Case Value="True">
+                                                <TextBox Tag="{x:Bind SubjectID}" Text="{x:Bind SubjectName}"/>
+                                            </controls:Case>
+                                        </controls:SwitchPresenter>
+                                    </controls:SettingsCard.Header>
+                                    <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">
+                                        <controls:Case Value="False">
+                                            <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
+                                                <Button
+                                                    l:Uids.Uid="Settings_Subject_Edit_Button"
+                                                    Click="EditSubject_Button_Clicked"
                                                     Tag="{x:Bind SubjectID}"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
+                                                <Button Style="{ThemeResource MoreButton}">
+                                                    <FontIcon FontSize="{StaticResource MediumFontSize}" Glyph="&#xE712;"/>
+                                                    <Button.Flyout>
+                                                        <MenuFlyout>
+                                                            <MenuFlyoutItem
+                                                                l:Uids.Uid="Settings_Subject_DeleteSubject_Button"
+                                                                Click="DeleteSubject_Button_Clicked"
+                                                                Tag="{x:Bind SubjectID}"/>
+                                                        </MenuFlyout>
+                                                    </Button.Flyout>
+                                                </Button>
+                                            </StackPanel>
+                                        </controls:Case>
+                                        <controls:Case Value="True">
+                                            <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
+                                                <Button
+                                                    l:Uids.Uid="Settings_Subject_EditCancel_Button"
+                                                    Click="EditSubjectCancel_Button_Clicked"
+                                                    Tag="{x:Bind SubjectID}"/>
+                                                <Button
+                                                    l:Uids.Uid="Settings_Subject_EditSave_Button"
+                                                    Click="EditSubjectSave_Button_Clicked"
+                                                    Style="{StaticResource AccentButtonStyle}"
+                                                    Tag="{x:Bind SubjectID}"/>
+                                            </StackPanel>
+                                        </controls:Case>
+                                    </controls:SwitchPresenter>
                                 </controls:SettingsCard>
                             </DataTemplate>
                         </controls:SettingsExpander.ItemTemplate>
@@ -111,18 +144,54 @@
                         <Button l:Uids.Uid="Settings_Tag_AddTag_Button" Click="AddTag_Button_Clicked"/>
                         <controls:SettingsExpander.ItemTemplate>
                             <DataTemplate x:DataType="vm:Tag">
-                                <controls:SettingsCard Header="{x:Bind TagName}">
-                                    <Button Style="{ThemeResource MoreButton}">
-                                        <FontIcon FontSize="{StaticResource MediumFontSize}" Glyph="&#xE712;"/>
-                                        <Button.Flyout>
-                                            <MenuFlyout>
-                                                <MenuFlyoutItem
-                                                    l:Uids.Uid="Settings_Tag_DeleteTag_Button"
-                                                    Click="DeleteTag_Button_Clicked"
+                                <controls:SettingsCard>
+                                    <controls:SettingsCard.Header>
+                                        <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">
+                                            <controls:Case Value="False">
+                                                <TextBlock Text="{x:Bind TagName}"/>
+                                            </controls:Case>
+                                            <controls:Case Value="True">
+                                                <TextBox
+                                                    Name="Settings_Tag_TextBox"
+                                                    Tag="{x:Bind TagID}"
+                                                    Text="{x:Bind TagName}"/>
+                                            </controls:Case>
+                                        </controls:SwitchPresenter>
+                                    </controls:SettingsCard.Header>
+                                    <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">
+                                        <controls:Case Value="False">
+                                            <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
+                                                <Button
+                                                    l:Uids.Uid="Settings_Tag_Edit_Button"
+                                                    Click="EditTag_Button_Clicked"
                                                     Tag="{x:Bind TagID}"/>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
+                                                <Button Style="{ThemeResource MoreButton}">
+                                                    <FontIcon FontSize="{StaticResource MediumFontSize}" Glyph="&#xE712;"/>
+                                                    <Button.Flyout>
+                                                        <MenuFlyout>
+                                                            <MenuFlyoutItem
+                                                                l:Uids.Uid="Settings_Tag_DeleteTag_Button"
+                                                                Click="DeleteTag_Button_Clicked"
+                                                                Tag="{x:Bind TagID}"/>
+                                                        </MenuFlyout>
+                                                    </Button.Flyout>
+                                                </Button>
+                                            </StackPanel>
+                                        </controls:Case>
+                                        <controls:Case Value="True">
+                                            <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
+                                                <Button
+                                                    l:Uids.Uid="Settings_Tag_EditCancel_Button"
+                                                    Click="EditTagCancel_Button_Clicked"
+                                                    Tag="{x:Bind TagID}"/>
+                                                <Button
+                                                    l:Uids.Uid="Settings_Tag_EditSave_Button"
+                                                    Click="EditTagSave_Button_Clicked"
+                                                    Style="{StaticResource AccentButtonStyle}"
+                                                    Tag="{x:Bind TagID}"/>
+                                            </StackPanel>
+                                        </controls:Case>
+                                    </controls:SwitchPresenter>
                                 </controls:SettingsCard>
                             </DataTemplate>
                         </controls:SettingsExpander.ItemTemplate>

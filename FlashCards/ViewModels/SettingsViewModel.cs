@@ -1,11 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Reflection;
-using CommunityToolkit.Mvvm.ComponentModel;
-
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
 using FlashCards.DBModels;
 using FlashCards.Helpers;
-using FlashCards.Services;
+using Microsoft.UI.Composition.Interactions;
+using System.Collections.ObjectModel;
+using System.Reflection;
 using Windows.ApplicationModel;
 
 namespace FlashCards.ViewModels;
@@ -85,7 +84,7 @@ public partial class SettingsViewModel : ObservableRecipient
 
     internal void AddBox(int id, int number, DueAfterOptions dueAfter)
     {
-        Boxes.Add(new Box(id, number, (int)dueAfter ));
+        Boxes.Add(new Box(id, number, (int)dueAfter));
     }
 
     internal void DeleteBox(int id)
@@ -95,6 +94,7 @@ public partial class SettingsViewModel : ObservableRecipient
         {
             return;
         }
+
         int boxNumber = int.Parse(box.BoxName.Split(" ")[1]);
         Boxes.Remove(box);
     }
@@ -110,6 +110,32 @@ public partial class SettingsViewModel : ObservableRecipient
         Subjects.Add(new Subject(id, name));
     }
 
+    internal void EditSubject(int id, string name)
+    {
+        var subject = Subjects.FirstOrDefault(subject => subject.SubjectID == id);
+        if (subject is null)
+        {
+            return;
+        }
+
+        int index = Subjects.IndexOf(subject);
+        subject.SubjectName = name;
+        Subjects[index] = subject;
+    }
+
+    internal void SetSubjectEditingState(int id, bool editingState)
+    {
+        var subject = Subjects.FirstOrDefault(subject => subject.SubjectID == id);
+        if (subject is null)
+        {
+            return;
+        }
+
+        int index = Subjects.IndexOf(subject);
+        subject.EditingState = editingState;
+        Subjects[index] = subject;
+    }
+
     internal void DeleteSubject(int id)
     {
         var subject = Subjects.FirstOrDefault(subject => subject.SubjectID == id);
@@ -117,6 +143,7 @@ public partial class SettingsViewModel : ObservableRecipient
         {
             return;
         }
+
         Subjects.Remove(subject);
     }
 
@@ -131,6 +158,32 @@ public partial class SettingsViewModel : ObservableRecipient
         Tags.Add(new Tag(id, name));
     }
 
+    internal void EditTag(int id, string name)
+    {
+        var tag = Tags.FirstOrDefault(tag => tag.TagID == id);
+        if (tag is null)
+        {
+            return;
+        }
+
+        int index = Tags.IndexOf(tag);
+        tag.TagName = name;
+        Tags[index] = tag;
+    }
+
+    internal void SetTagEditingState(int id, bool editingState)
+    {
+        var tag = Tags.FirstOrDefault(tag => tag.TagID == id);
+        if (tag is null)
+        {
+            return;
+        }
+
+        int index = Tags.IndexOf(tag);
+        tag.EditingState = editingState;
+        Tags[index] = tag;
+    }
+
     internal void DeleteTag(int id)
     {
         var tag = Tags.FirstOrDefault(tag => tag.TagID == id);
@@ -138,6 +191,7 @@ public partial class SettingsViewModel : ObservableRecipient
         {
             return;
         }
+
         Tags.Remove(tag);
     }
 }
@@ -153,11 +207,13 @@ public class Subject(int subjectID, string subjectName)
 {
     public int SubjectID { get; set; } = subjectID;
     public string SubjectName { get; set; } = subjectName;
+    public bool EditingState { get; set; } = false;
 }
 
 public class Tag(int tagID, string tagName)
 {
     public int TagID { get; set; } = tagID;
     public string TagName { get; set; } = tagName;
+    public bool EditingState { get; set; } = false;
 }
 
