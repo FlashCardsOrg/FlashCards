@@ -93,7 +93,7 @@
                                                 <TextBlock Text="{x:Bind SubjectName}"/>
                                             </controls:Case>
                                             <controls:Case Value="True">
-                                                <TextBox Tag="{x:Bind SubjectID}" Text="{x:Bind SubjectName}"/>
+                                                <TextBox x:Name="Settings_Subject_TextBox" Text="{x:Bind SubjectName}"/>
                                             </controls:Case>
                                         </controls:SwitchPresenter>
                                     </controls:SettingsCard.Header>
@@ -151,10 +151,7 @@
                                                 <TextBlock Text="{x:Bind TagName}"/>
                                             </controls:Case>
                                             <controls:Case Value="True">
-                                                <TextBox
-                                                    Name="Settings_Tag_TextBox"
-                                                    Tag="{x:Bind TagID}"
-                                                    Text="{x:Bind TagName}"/>
+                                                <TextBox Name="Settings_Tag_TextBox" Text="{x:Bind TagName}"/>
                                             </controls:Case>
                                         </controls:SwitchPresenter>
                                     </controls:SettingsCard.Header>
