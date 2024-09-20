@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
+using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
 
 namespace FlashCards.ViewModels;
@@ -24,6 +25,18 @@ public partial class CreateViewModel : ObservableRecipient
     [ObservableProperty]
     private List<int?> _selectedTagIDs;
 
+    [ObservableProperty]
+    private Layouts _frontLayout;
+
+    [ObservableProperty]
+    private Layouts _backLayout;
+
+    [ObservableProperty]
+    private bool _frontShowBulletPointsIndividually;
+
+    [ObservableProperty]
+    private bool _backShowBulletPointsIndividually;
+
     public CreateViewModel(IDatabaseService databaseService, ICreateSettingsService createSettingsService)
     {
         _databaseService = databaseService;
@@ -33,6 +46,10 @@ public partial class CreateViewModel : ObservableRecipient
         _selectedSemester = _createSettingsService.SelectedSemester;
         _tags = GetTags();
         _selectedTagIDs = _createSettingsService.SelectedTagIDs;
+        _frontLayout = Layouts.Text;
+        _backLayout = Layouts.Text;
+        _frontShowBulletPointsIndividually = false;
+        _backShowBulletPointsIndividually = false;
     }
 
     private ObservableCollection<Subject> GetSubjects()
@@ -46,4 +63,21 @@ public partial class CreateViewModel : ObservableRecipient
         ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)).OrderBy(tag => tag.TagName));
         return tags;
     }
+}
+
+public enum FlashCardSides
+{
+    Front,
+    Back
+}
+
+public enum Layouts
+{
+   Text,
+   File,
+   Text_Text,
+   File_File,
+   Text_File,
+   File_Text,
+   Text_File_File
 }

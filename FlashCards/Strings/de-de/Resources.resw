@@ -322,4 +322,52 @@
   <data name="None" xml:space="preserve">
     <value>Keiner</value>
   </data>
+  <data name="Create_Layout_MenuFlyoutItem_Text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_Text_File.Text" xml:space="preserve">
+    <value>Text - Datei</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_Text_Text.Text" xml:space="preserve">
+    <value>Text - Text</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_File_Text.Text" xml:space="preserve">
+    <value>Datei - Text</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_File_File.Text" xml:space="preserve">
+    <value>Datei - Datei</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_Text_File_File.Text" xml:space="preserve">
+    <value>Text - Datei - Datei</value>
+  </data>
+  <data name="Create_Layout_MenuFlyoutItem_File.Text" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Layout_Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Layout_File" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="Layout_File_File" xml:space="preserve">
+    <value>Datei - Datei</value>
+  </data>
+  <data name="Layout_File_Text" xml:space="preserve">
+    <value>Datei - Text</value>
+  </data>
+  <data name="Layout_Text_File" xml:space="preserve">
+    <value>Text - Datei</value>
+  </data>
+  <data name="Layout_Text_File_File" xml:space="preserve">
+    <value>Text - Datei - Datei</value>
+  </data>
+  <data name="Layout_Text_Text" xml:space="preserve">
+    <value>Text - Text</value>
+  </data>
+  <data name="Create_ShowBulletPointsIndividually_CheckBox.Content" xml:space="preserve">
+    <value>Stichpunkte einzeln einblenden</value>
+  </data>
 </root>

@@ -196,4 +196,68 @@ public sealed partial class CreatePage : Page
 
         Create_EditTags_DropDownButton.Content = $"{tagsString}: {selectedTagsString}";
     }
+
+    private void EditLayout_DropDownButton_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not DropDownButton dropDownButton)
+        {
+            return;
+        }
+
+        string layoutString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Layout");
+        string layout = "";
+
+        switch (dropDownButton.Name.Split("_")[1])
+        {
+            case "Front":
+                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.FrontLayout}");
+                break;
+            case "Back":
+                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.BackLayout}");
+                break;
+        }
+
+        dropDownButton.Content = $"{layoutString}: {layout}";
+    }
+
+    private void EditLayout_MenuFlyoutItem_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuFlyoutItem menuFlyoutItem)
+        {
+            return;
+        }
+
+        string layoutString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Layout");
+        string layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{menuFlyoutItem.Tag}");
+
+        switch (menuFlyoutItem.Name.Split("_")[1])
+        {
+            case "Front":
+                ViewModel.FrontLayout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                Create_Front_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
+                break;
+            case "Back":
+                ViewModel.BackLayout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                Create_Back_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
+                break;
+        }
+    }
+
+    private void ShowBulletPointsIndividually_CheckBox_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkBox)
+        {
+            return;
+        }
+
+        switch (checkBox.Name.Split("_")[1])
+        {
+            case "Front":
+                ViewModel.FrontShowBulletPointsIndividually = checkBox.IsChecked!.Value;
+                break;
+            case "Back":
+                ViewModel.BackShowBulletPointsIndividually = checkBox.IsChecked!.Value;
+                break;
+        }
+    }
 }
