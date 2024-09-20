@@ -3,7 +3,7 @@
 public class FlashCard
 {
     public int Id { get; set; }
-    public DateOnly LastReviewDate { get; set; }
+    public DateOnly? LastReviewDate { get; set; }
     public int Semester { get; set; }
 
     // Foreign Keys
