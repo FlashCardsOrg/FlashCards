@@ -156,7 +156,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        if(!_editSubject_TextBoxes.ContainsKey(id))
+        if (!_editSubject_TextBoxes.ContainsKey(id))
         {
             _editSubject_TextBoxes[id] = textBox;
         }
