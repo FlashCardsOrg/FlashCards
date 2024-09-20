@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
+using Microsoft.UI.Text;
 using System.Collections.ObjectModel;
 
 namespace FlashCards.ViewModels;
@@ -36,6 +37,15 @@ public partial class CreateViewModel : ObservableRecipient
     [ObservableProperty]
     private bool _backShowBulletPointsIndividually;
 
+    [ObservableProperty]
+    private bool _isFrontRichEditBoxEmpty;
+
+    [ObservableProperty]
+    private bool _isBackRichEditBoxEmpty;
+
+    [ObservableProperty]
+    private bool _canSaveFlashCard;
+
     public CreateViewModel(IDatabaseService databaseService, ICreateSettingsService createSettingsService)
     {
         _databaseService = databaseService;
@@ -49,6 +59,9 @@ public partial class CreateViewModel : ObservableRecipient
         _backLayout = Layouts.Text;
         _frontShowBulletPointsIndividually = false;
         _backShowBulletPointsIndividually = false;
+        _isFrontRichEditBoxEmpty = false;
+        _isBackRichEditBoxEmpty = false;
+        _canSaveFlashCard = IsAllRequiredContentSet();
     }
 
     private ObservableCollection<Subject> GetSubjects()
@@ -61,6 +74,23 @@ public partial class CreateViewModel : ObservableRecipient
     {
         ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)).OrderBy(tag => tag.TagName));
         return tags;
+    }
+
+    private bool IsAllRequiredContentSet()
+    {
+        bool subjectExists = _databaseService.GetSubject(SelectedSubjectID) is not null;
+
+        if (!subjectExists || SelectedSemester <= 0 | IsFrontRichEditBoxEmpty | IsBackRichEditBoxEmpty)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void UpdateCanSaveFlashCard()
+    {
+        CanSaveFlashCard = IsAllRequiredContentSet();
     }
 }
 

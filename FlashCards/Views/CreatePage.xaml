@@ -99,7 +99,11 @@
 
             <controls:SwitchPresenter TargetType="vm:FlashCardSides" Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
                 <controls:Case Value="Front">
-                    <RichEditBox Height="1050" Margin="0,12">
+                    <RichEditBox
+                        x:Name="Create_Front_RichEditBox"
+                        Height="1050"
+                        Margin="0,12"
+                        TextChanged="RichEditBox_TextChanged">
                         <RichEditBox.Resources>
                             <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
                             <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
@@ -108,7 +112,11 @@
                 </controls:Case>
 
                 <controls:Case Value="Back">
-                    <RichEditBox Height="1050" Margin="0,12">
+                    <RichEditBox
+                        x:Name="Create_Back_RichEditBox"
+                        Height="1050"
+                        Margin="0,12"
+                        TextChanged="RichEditBox_TextChanged">
                         <RichEditBox.Resources>
                             <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
                             <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
@@ -173,6 +181,8 @@
 
                         <Button
                             l:Uids.Uid="Create_SaveFlashCard_Button"
+                            Click="SaveFlashCard_Button_Clicked"
+                            IsEnabled="{x:Bind ViewModel.CanSaveFlashCard, Mode=OneWay}"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>
@@ -233,6 +243,8 @@
 
                         <Button
                             l:Uids.Uid="Create_SaveFlashCard_Button"
+                            Click="SaveFlashCard_Button_Clicked"
+                            IsEnabled="{x:Bind ViewModel.CanSaveFlashCard, Mode=OneWay}"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>

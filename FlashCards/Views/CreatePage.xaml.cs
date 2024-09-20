@@ -1,5 +1,6 @@
 ﻿using FlashCards.Contracts.Services;
 using FlashCards.ViewModels;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -16,6 +17,23 @@ public sealed partial class CreatePage : Page
     {
         ViewModel = App.GetService<CreateViewModel>();
         InitializeComponent();
+        Loaded += CreatePage_Loaded;
+    }
+
+    private void CreatePage_Loaded(object sender, RoutedEventArgs e)
+    {
+        InitializeRichEditBoxContent();
+    }
+
+    private void InitializeRichEditBoxContent()
+    {
+        Create_Front_RichEditBox.Document.GetText(TextGetOptions.NoHidden, out string frontText);
+        ViewModel.IsFrontRichEditBoxEmpty = string.IsNullOrWhiteSpace(frontText);
+
+        Create_Back_RichEditBox.Document.GetText(TextGetOptions.NoHidden, out string backText);
+        ViewModel.IsBackRichEditBoxEmpty = string.IsNullOrWhiteSpace(backText);
+
+        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditSubject_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -65,6 +83,8 @@ public sealed partial class CreatePage : Page
         createSettingsService.SetSubjectAsync((int)menuFlyoutItem.Tag);
         string subjectString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Subject");
         Create_EditSubject_DropDownButton.Content = $"{subjectString}: {menuFlyoutItem.Text}";
+
+        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditSemester_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -112,6 +132,8 @@ public sealed partial class CreatePage : Page
         createSettingsService.SetSemesterAsync((int)menuFlyoutItem.Tag);
         string semesterString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Semester");
         Create_EditSemester_DropDownButton.Content = $"{semesterString}: {menuFlyoutItem.Tag}";
+
+        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditTags_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -184,6 +206,7 @@ public sealed partial class CreatePage : Page
             IDatabaseService databaseService = App.GetService<IDatabaseService>();
             List<string> selectedTags = databaseService.GetTags()
                                                        .Where(tag => selectedTagIds.Contains(tag.Id))
+                                                       .OrderBy(tag => tag.Name)
                                                        .Select(tag => tag.Name)
                                                        .Take(3)
                                                        .ToList();
@@ -259,5 +282,32 @@ public sealed partial class CreatePage : Page
                 ViewModel.BackShowBulletPointsIndividually = checkBox.IsChecked!.Value;
                 break;
         }
+    }
+
+    private void RichEditBox_TextChanged(object sender, RoutedEventArgs e)
+    {
+        if (sender is not RichEditBox richEditBox)
+        {
+            return;
+        }
+
+        richEditBox.Document.GetText(TextGetOptions.NoHidden, out string text);
+
+        switch (richEditBox.Name.Split("_")[1])
+        {
+            case "Front":
+                ViewModel.IsFrontRichEditBoxEmpty = string.IsNullOrWhiteSpace(text);
+                break;
+            case "Back":
+                ViewModel.IsBackRichEditBoxEmpty = string.IsNullOrWhiteSpace(text);
+                break;
+        }
+
+        ViewModel.UpdateCanSaveFlashCard();
+    }
+
+    private void SaveFlashCard_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException("SaveFlashCard functionality is not implemented yet.");
     }
 }
