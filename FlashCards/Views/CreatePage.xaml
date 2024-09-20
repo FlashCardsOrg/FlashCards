@@ -99,11 +99,21 @@
 
             <controls:SwitchPresenter TargetType="vm:FlashCardSides" Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
                 <controls:Case Value="Front">
-                    <RichEditBox Height="1050" Margin="0,12"/>
+                    <RichEditBox Height="1050" Margin="0,12">
+                        <RichEditBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                        </RichEditBox.Resources>
+                    </RichEditBox>
                 </controls:Case>
 
                 <controls:Case Value="Back">
-                    <RichEditBox Height="1050" Margin="0,12"/>
+                    <RichEditBox Height="1050" Margin="0,12">
+                        <RichEditBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                        </RichEditBox.Resources>
+                    </RichEditBox>
                 </controls:Case>
             </controls:SwitchPresenter>
 
