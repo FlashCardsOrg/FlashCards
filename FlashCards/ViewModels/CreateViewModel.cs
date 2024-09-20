@@ -37,13 +37,13 @@ public partial class CreateViewModel : ObservableRecipient
 
     private ObservableCollection<Subject> GetSubjects()
     {
-        ObservableCollection<Subject> subjects = new(_databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)));
+        ObservableCollection<Subject> subjects = new(_databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)).OrderBy(subject => subject.SubjectName));
         return subjects;
     }
 
     private ObservableCollection<Tag> GetTags()
     {
-        ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)));
+        ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)).OrderBy(tag => tag.TagName));
         return tags;
     }
 }
