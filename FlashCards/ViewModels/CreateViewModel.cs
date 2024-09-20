@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
-using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
 
 namespace FlashCards.ViewModels;
