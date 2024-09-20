@@ -1,5 +1,4 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.DBModels;
 using FlashCards.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,6 +7,9 @@ namespace FlashCards.Views;
 
 public sealed partial class SettingsPage : Page
 {
+    private readonly Dictionary<int, TextBox> _editSubject_TextBoxes = [];
+    private readonly Dictionary<int, TextBox> _editTag_TextBoxes = [];
+
     public SettingsViewModel ViewModel
     {
         get;
@@ -60,7 +62,7 @@ public sealed partial class SettingsPage : Page
         Settings_Box_Expander.IsExpanded = true;
 
         int number = ViewModel.Boxes.Count + 1;
-        DueAfterOptions dueAfter = DueAfterOptions.OneDay;
+        DBModels.DueAfterOptions dueAfter = DBModels.DueAfterOptions.OneDay;
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         int id = databaseService.AddBox(number, dueAfter);
         ViewModel.AddBox(id, number, dueAfter);
@@ -83,7 +85,7 @@ public sealed partial class SettingsPage : Page
         if (sender is ComboBox comboBox && comboBox.SelectedIndex is int selectedIndex && comboBox.Tag is int boxId)
         {
             var databaseService = App.GetService<IDatabaseService>();
-            var dueAfter = (DueAfterOptions)selectedIndex;
+            var dueAfter = (DBModels.DueAfterOptions)selectedIndex;
             databaseService.EditBox(boxId, dueAfter);
         }
     }
@@ -128,8 +130,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        // TODO: Get Name from TextBox
-        string name = "New Subject"; 
+        string name = _editSubject_TextBoxes[id].Text;
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.EditSubject(id, name);
         ViewModel.EditSubject(id, name);
@@ -146,6 +147,21 @@ public sealed partial class SettingsPage : Page
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.DeleteSubject(id);
         ViewModel.DeleteSubject(id);
+    }
+
+    private void EditSubject_TextBox_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not TextBox textBox || textBox.Tag is not int id)
+        {
+            return;
+        }
+
+        if(!_editSubject_TextBoxes.ContainsKey(id))
+        {
+            _editSubject_TextBoxes[id] = textBox;
+        }
+        textBox.Focus(FocusState.Programmatic);
+        textBox.SelectionLength = textBox.Text.Length;
     }
 
     private void AddTag_Button_Clicked(object sender, RoutedEventArgs e)
@@ -188,7 +204,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        string name = "New Tag";
+        string name = _editTag_TextBoxes[id].Text;
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.EditTag(id, name);
         ViewModel.EditTag(id, name);
@@ -205,5 +221,19 @@ public sealed partial class SettingsPage : Page
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.DeleteTag(id);
         ViewModel.DeleteTag(id);
+    }
+    private void EditTag_TextBox_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not TextBox textBox || textBox.Tag is not int id)
+        {
+            return;
+        }
+
+        if (!_editTag_TextBoxes.ContainsKey(id))
+        {
+            _editTag_TextBoxes[id] = textBox;
+        }
+        textBox.Focus(FocusState.Programmatic);
+        textBox.SelectionLength = textBox.Text.Length;
     }
 }

@@ -108,6 +108,7 @@ public partial class SettingsViewModel : ObservableRecipient
     internal void AddSubject(int id, string name)
     {
         Subjects.Add(new Subject(id, name));
+        SetSubjectEditingState(id, true);
     }
 
     internal void EditSubject(int id, string name)
@@ -156,6 +157,7 @@ public partial class SettingsViewModel : ObservableRecipient
     internal void AddTag(int id, string name)
     {
         Tags.Add(new Tag(id, name));
+        SetTagEditingState(id, true);
     }
 
     internal void EditTag(int id, string name)
