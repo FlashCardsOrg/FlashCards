@@ -79,13 +79,7 @@ public partial class CreateViewModel : ObservableRecipient
     private bool IsAllRequiredContentSet()
     {
         bool subjectExists = _databaseService.GetSubject(SelectedSubjectID) is not null;
-
-        if (!subjectExists || SelectedSemester <= 0 | IsFrontRichEditBoxEmpty | IsBackRichEditBoxEmpty)
-        {
-            return false;
-        }
-
-        return true;
+        return subjectExists && SelectedSemester > 0 && !IsFrontRichEditBoxEmpty && !IsBackRichEditBoxEmpty;
     }
 
     public void UpdateCanSaveFlashCard()
