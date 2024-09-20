@@ -87,20 +87,3 @@ public partial class CreateViewModel : ObservableRecipient
         CanSaveFlashCard = IsAllRequiredContentSet();
     }
 }
-
-public enum FlashCardSides
-{
-    Front,
-    Back
-}
-
-public enum Layouts
-{
-   Text,
-   File,
-   Text_Text,
-   File_File,
-   Text_File,
-   File_Text,
-   Text_File_File
-}
