@@ -2,7 +2,6 @@
 using FlashCards.Contracts.Services;
 using FlashCards.DBModels;
 using FlashCards.Helpers;
-using Microsoft.UI.Composition.Interactions;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using Windows.ApplicationModel;
