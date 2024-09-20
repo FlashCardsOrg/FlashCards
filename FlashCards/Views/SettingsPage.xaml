@@ -33,7 +33,7 @@
                         ItemsSource="{x:Bind ViewModel.Boxes}">
                         <Button l:Uids.Uid="Settings_Box_AddBox_Button" Click="AddBox_Button_Clicked"/>
                         <controls:SettingsExpander.ItemTemplate>
-                            <DataTemplate x:DataType="vm:Box">
+                            <DataTemplate x:DataType="vm:VMBox">
                                 <controls:SettingsCard Header="{x:Bind BoxName}">
                                     <StackPanel Orientation="Horizontal" Spacing="{StaticResource UIControlSpacing}">
                                         <TextBlock VerticalAlignment="Center" l:Uids.Uid="Settings_Box_SettingsCard_Due"/>
@@ -85,7 +85,7 @@
                         ItemsSource="{x:Bind ViewModel.Subjects}">
                         <Button l:Uids.Uid="Settings_Subject_AddSubject_Button" Click="AddSubject_Button_Clicked"/>
                         <controls:SettingsExpander.ItemTemplate>
-                            <DataTemplate x:DataType="vm:Subject">
+                            <DataTemplate x:DataType="vm:VMSubject">
                                 <controls:SettingsCard>
                                     <controls:SettingsCard.Header>
                                         <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">
@@ -147,7 +147,7 @@
                         ItemsSource="{x:Bind ViewModel.Tags}">
                         <Button l:Uids.Uid="Settings_Tag_AddTag_Button" Click="AddTag_Button_Clicked"/>
                         <controls:SettingsExpander.ItemTemplate>
-                            <DataTemplate x:DataType="vm:Tag">
+                            <DataTemplate x:DataType="vm:VMTag">
                                 <controls:SettingsCard>
                                     <controls:SettingsCard.Header>
                                         <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind EditingState}">

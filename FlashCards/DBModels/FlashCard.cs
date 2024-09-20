@@ -13,6 +13,6 @@ public class FlashCard
     public int SubjectId { get; set; }
     public Subject Subject { get; set; } = null!;
 
-    // Navigation property for many-to-many relationship with Tag
+    // Navigation property for many-to-many relationship with VMTag
     public ICollection<Tag> Tags { get; set; } = null!;
 }

@@ -60,7 +60,7 @@ public sealed partial class CreatePage : Page
         }
 
         Create_EditSubject_MenuFlyout.Items.Clear();
-        foreach (Subject subject in ViewModel.Subjects)
+        foreach (VMSubject subject in ViewModel.Subjects)
         {
             MenuFlyoutItem menuFlyoutItem = new()
             {
@@ -156,7 +156,7 @@ public sealed partial class CreatePage : Page
         Create_EditTags_MenuFlyout.Items.Clear();
         List<int?> selectedTagIDs = ViewModel.SelectedTagIDs;
 
-        foreach (Tag tag in ViewModel.Tags)
+        foreach (VMTag tag in ViewModel.Tags)
         {
             ToggleMenuFlyoutItem toggleMenuFlyoutItem = new()
             {
@@ -309,5 +309,8 @@ public sealed partial class CreatePage : Page
     private void SaveFlashCard_Button_Clicked(object sender, RoutedEventArgs e)
     {
         throw new NotImplementedException("SaveFlashCard functionality is not implemented yet.");
+        // Save to DB
+        // Create JSON
+        // Create content files
     }
 }

@@ -29,13 +29,13 @@ public partial class SettingsViewModel : ObservableRecipient
     private string _selectedDemotionTag;
 
     [ObservableProperty]
-    private ObservableCollection<Box> _boxes;
+    private ObservableCollection<VMBox> _boxes;
 
     [ObservableProperty]
-    private ObservableCollection<Subject> _subjects;
+    private ObservableCollection<VMSubject> _subjects;
 
     [ObservableProperty]
-    private ObservableCollection<Tag> _tags;
+    private ObservableCollection<VMTag> _tags;
 
     public SettingsViewModel(IThemeSelectorService themeSelectorService, IDemotionSettingsService demotionSettingsService, IDatabaseService databaseService)
     {
@@ -75,15 +75,15 @@ public partial class SettingsViewModel : ObservableRecipient
         return WinUI3Localizer.Localizer.Get().GetCurrentLanguage();
     }
 
-    private ObservableCollection<Box> GetBoxes()
+    private ObservableCollection<VMBox> GetBoxes()
     {
-        ObservableCollection<Box> boxes = new(_databaseService.GetBoxes().Select(box => new Box(box.Id, box.Number, (int)box.DueAfter)));
+        ObservableCollection<VMBox> boxes = new(_databaseService.GetBoxes().Select(box => new VMBox(box.Id, box.Number, (int)box.DueAfter)));
         return boxes;
     }
 
     internal void AddBox(int id, int number, DueAfterOptions dueAfter)
     {
-        Boxes.Add(new Box(id, number, (int)dueAfter));
+        Boxes.Add(new VMBox(id, number, (int)dueAfter));
     }
 
     internal void DeleteBox(int id)
@@ -98,15 +98,15 @@ public partial class SettingsViewModel : ObservableRecipient
         Boxes.Remove(box);
     }
 
-    private ObservableCollection<Subject> GetSubjects()
+    private ObservableCollection<VMSubject> GetSubjects()
     {
-        ObservableCollection<Subject> subjects = new(_databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)));
+        ObservableCollection<VMSubject> subjects = new(_databaseService.GetSubjects().Select(subject => new VMSubject(subject.Id, subject.Name)));
         return subjects;
     }
 
     internal void AddSubject(int id, string name)
     {
-        Subjects.Add(new Subject(id, name));
+        Subjects.Add(new VMSubject(id, name));
         SetSubjectEditingState(id, true);
     }
 
@@ -147,15 +147,15 @@ public partial class SettingsViewModel : ObservableRecipient
         Subjects.Remove(subject);
     }
 
-    private ObservableCollection<Tag> GetTags()
+    private ObservableCollection<VMTag> GetTags()
     {
-        ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)));
+        ObservableCollection<VMTag> tags = new(_databaseService.GetTags().Select(tag => new VMTag(tag.Id, tag.Name)));
         return tags;
     }
 
     internal void AddTag(int id, string name)
     {
-        Tags.Add(new Tag(id, name));
+        Tags.Add(new VMTag(id, name));
         SetTagEditingState(id, true);
     }
 

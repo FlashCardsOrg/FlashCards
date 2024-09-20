@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FlashCards.Contracts.Services;
-using Microsoft.UI.Text;
 using System.Collections.ObjectModel;
 
 namespace FlashCards.ViewModels;
@@ -11,7 +10,7 @@ public partial class CreateViewModel : ObservableRecipient
     private readonly ICreateSettingsService _createSettingsService;
 
     [ObservableProperty]
-    private ObservableCollection<Subject> _subjects;
+    private ObservableCollection<VMSubject> _subjects;
 
     [ObservableProperty]
     private int _selectedSubjectID;
@@ -20,7 +19,7 @@ public partial class CreateViewModel : ObservableRecipient
     private int _selectedSemester;
 
     [ObservableProperty]
-    private ObservableCollection<Tag> _tags;
+    private ObservableCollection<VMTag> _tags;
 
     [ObservableProperty]
     private List<int?> _selectedTagIDs;
@@ -64,15 +63,15 @@ public partial class CreateViewModel : ObservableRecipient
         _canSaveFlashCard = IsAllRequiredContentSet();
     }
 
-    private ObservableCollection<Subject> GetSubjects()
+    private ObservableCollection<VMSubject> GetSubjects()
     {
-        ObservableCollection<Subject> subjects = new(_databaseService.GetSubjects().Select(subject => new Subject(subject.Id, subject.Name)).OrderBy(subject => subject.SubjectName));
+        ObservableCollection<VMSubject> subjects = new(_databaseService.GetSubjects().Select(subject => new VMSubject(subject.Id, subject.Name)).OrderBy(subject => subject.SubjectName));
         return subjects;
     }
 
-    private ObservableCollection<Tag> GetTags()
+    private ObservableCollection<VMTag> GetTags()
     {
-        ObservableCollection<Tag> tags = new(_databaseService.GetTags().Select(tag => new Tag(tag.Id, tag.Name)).OrderBy(tag => tag.TagName));
+        ObservableCollection<VMTag> tags = new(_databaseService.GetTags().Select(tag => new VMTag(tag.Id, tag.Name)).OrderBy(tag => tag.TagName));
         return tags;
     }
 

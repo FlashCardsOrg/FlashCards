@@ -1,20 +1,20 @@
 ﻿namespace FlashCards.ViewModels;
 
-public class Box(int boxID, int number, int selectedIndex)
+public class VMBox(int boxID, int number, int selectedIndex)
 {
     public int BoxID { get; set; } = boxID;
     public string BoxName { get; set; } = $"{WinUI3Localizer.Localizer.Get().GetLocalizedString("Box")} {number}";
     public int SelectedIndex { get; set; } = selectedIndex;
 }
 
-public class Subject(int subjectID, string subjectName)
+public class VMSubject(int subjectID, string subjectName)
 {
     public int SubjectID { get; set; } = subjectID;
     public string SubjectName { get; set; } = subjectName;
     public bool EditingState { get; set; } = false;
 }
 
-public class Tag(int tagID, string tagName)
+public class VMTag(int tagID, string tagName)
 {
     public int TagID { get; set; } = tagID;
     public string TagName { get; set; } = tagName;
