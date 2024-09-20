@@ -370,4 +370,7 @@
   <data name="Create_ShowBulletPointsIndividually_CheckBox.Content" xml:space="preserve">
     <value>Stichpunkte einzeln einblenden</value>
   </data>
+  <data name="Create_SaveFlashCard_Button.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
 </root>

@@ -162,7 +162,7 @@
                             RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
                         <Button
-                            Content="Speichern"
+                            l:Uids.Uid="Create_SaveFlashCard_Button"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>
@@ -222,7 +222,7 @@
                             RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
                         <Button
-                            Content="Speichern"
+                            l:Uids.Uid="Create_SaveFlashCard_Button"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>

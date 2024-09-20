@@ -370,4 +370,7 @@
   <data name="Create_ShowBulletPointsIndividually_CheckBox.Content" xml:space="preserve">
     <value>Show bullet points individually</value>
   </data>
+  <data name="Create_SaveFlashCard_Button.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>
