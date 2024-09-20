@@ -310,4 +310,16 @@
   <data name="Settings_Tag_EditSave_Button.Content" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Kurs</value>
+  </data>
+  <data name="Semester" xml:space="preserve">
+    <value>Semester</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Keiner</value>
+  </data>
 </root>

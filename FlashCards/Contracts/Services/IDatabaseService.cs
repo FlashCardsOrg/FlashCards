@@ -10,6 +10,7 @@ public interface IDatabaseService
     void DeleteBox(int id);
 
     List<Subject> GetSubjects();
+    Subject? GetSubject(int id);
     int AddSubject(string name);
     void EditSubject(int id, string name);
     void DeleteSubject(int id);

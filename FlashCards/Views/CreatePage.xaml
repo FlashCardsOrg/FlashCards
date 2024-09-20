@@ -22,33 +22,30 @@
                     Orientation="Horizontal"
                     RelativePanel.AlignLeftWithPanel="True"
                     Spacing="{StaticResource UIControlSpacing}">
-                    <DropDownButton Content="Subject: Math">
+                    <DropDownButton
+                        x:Name="Create_EditSubject_DropDownButton"
+                        Click="EditSubject_DropDownButton_Clicked"
+                        Loaded="EditSubject_DropDownButton_Loaded">
                         <DropDownButton.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="Math"/>
-                                <MenuFlyoutItem Text="German"/>
-                                <MenuFlyoutItem Text="English"/>
-                            </MenuFlyout>
+                            <MenuFlyout x:Name="Create_EditSubject_MenuFlyout" Placement="Bottom"/>
                         </DropDownButton.Flyout>
                     </DropDownButton>
 
-                    <DropDownButton Content="Semester: 1">
+                    <DropDownButton
+                        x:Name="Create_EditSemester_DropDownButton"
+                        Click="EditSemester_DropDownButton_Clicked"
+                        Loaded="EditSemester_DropDownButton_Loaded">
                         <DropDownButton.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="1. Semester"/>
-                                <MenuFlyoutItem Text="2. Semester"/>
-                                <MenuFlyoutItem Text="3. Semester"/>
-                            </MenuFlyout>
+                            <MenuFlyout x:Name="Create_EditSemester_MenuFlyout" Placement="Bottom"/>
                         </DropDownButton.Flyout>
                     </DropDownButton>
 
-                    <DropDownButton Content="Tags auswählen">
+                    <DropDownButton
+                        x:Name="Create_EditTags_DropDownButton"
+                        Click="EditTags_DropDownButton_Clicked"
+                        Loaded="EditTags_DropDownButton_Loaded">
                         <DropDownButton.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="Mein Tag 1"/>
-                                <MenuFlyoutItem Text="Mein Tag 2"/>
-                                <MenuFlyoutItem Text="Mein Tag 3"/>
-                            </MenuFlyout>
+                            <MenuFlyout x:Name="Create_EditTags_MenuFlyout" Placement="Bottom"/>
                         </DropDownButton.Flyout>
                     </DropDownButton>
                 </StackPanel>

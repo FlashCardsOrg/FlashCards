@@ -65,6 +65,7 @@ public partial class App : Application
             services.AddSingleton<IDemotionSettingsService, DemotionSettingsService>();
             services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
+            services.AddSingleton<ICreateSettingsService, CreateSettingsService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();

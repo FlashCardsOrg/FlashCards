@@ -7,18 +7,32 @@ namespace FlashCards.ViewModels;
 public partial class CreateViewModel : ObservableRecipient
 {
     private readonly IDatabaseService _databaseService;
+    private readonly ICreateSettingsService _createSettingsService;
 
     [ObservableProperty]
     private ObservableCollection<Subject> _subjects;
 
     [ObservableProperty]
+    private int _selectedSubjectID;
+
+    [ObservableProperty]
+    private int _selectedSemester;
+
+    [ObservableProperty]
     private ObservableCollection<Tag> _tags;
 
-    public CreateViewModel(IDatabaseService databaseService)
+    [ObservableProperty]
+    private List<int?> _selectedTagIDs;
+
+    public CreateViewModel(IDatabaseService databaseService, ICreateSettingsService createSettingsService)
     {
         _databaseService = databaseService;
+        _createSettingsService = createSettingsService;
         _subjects = GetSubjects();
+        _selectedSubjectID = _createSettingsService.SelectedSubjectID;
+        _selectedSemester = _createSettingsService.SelectedSemester;
         _tags = GetTags();
+        _selectedTagIDs = _createSettingsService.SelectedTagIDs;
     }
 
     private ObservableCollection<Subject> GetSubjects()

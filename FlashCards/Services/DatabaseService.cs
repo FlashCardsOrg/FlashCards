@@ -83,6 +83,12 @@ public class DatabaseService : IDatabaseService
         return [.. context.Subjects];
     }
 
+    public Subject? GetSubject(int id)
+    {
+        using FlashCardsContext context = new();
+        return context.Subjects.Find(id);
+    }
+
     public int AddSubject(string name)
     {
         using FlashCardsContext context = new();

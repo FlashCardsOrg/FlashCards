@@ -14,15 +14,17 @@ public class ActivationService : IActivationService
     private readonly ILocalizationService _localizationService;
     private readonly IThemeSelectorService _themeSelectorService;
     private readonly IDemotionSettingsService _demotionSettingsService;
+    private readonly ICreateSettingsService _createSettingsService;
     private UIElement? _shell = null;
 
-    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService, ILocalizationService localizationService, IDemotionSettingsService demotionSettingsService)
+    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService, ILocalizationService localizationService, IDemotionSettingsService demotionSettingsService, ICreateSettingsService createSettingsService)
     {
         _defaultHandler = defaultHandler;
         _activationHandlers = activationHandlers;
         _localizationService = localizationService;
         _themeSelectorService = themeSelectorService;
         _demotionSettingsService = demotionSettingsService;
+        _createSettingsService = createSettingsService;
     }
 
     public async Task ActivateAsync(object activationArgs)
@@ -67,6 +69,7 @@ public class ActivationService : IActivationService
         await _localizationService.InitializeAsync().ConfigureAwait(false);
         await _themeSelectorService.InitializeAsync().ConfigureAwait(false);
         await _demotionSettingsService.InitializeAsync().ConfigureAwait(false);
+        await _createSettingsService.InitializeAsync().ConfigureAwait(false);
         await Task.CompletedTask;
     }
 
