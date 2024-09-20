@@ -6,6 +6,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:Key="ButtonStyleTextBlockBorder" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="ContentArea">
         <StackPanel>
             <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Front"/>
@@ -13,20 +23,30 @@
                 Margin="0,20,0,0"
                 Orientation="Horizontal"
                 Spacing="{StaticResource UIControlSpacing}">
-                <Button Content="Box: 1"/>
+                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                    <TextBlock Text="Box: 1"/>
+                </Border>
 
-                <Button Content="Subject: Anatomy"/>
+                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                    <TextBlock Text="Subject: Anatomy"/>
+                </Border>
 
-                <Button Content="Semester: 1. Semester"/>
+                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                    <TextBlock Text="Semester: 1. Semester"/>
+                </Border>
 
-                <Button Content="Tags: Tag 1, Tag 2, Tag 3, ..."/>
+                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                    <TextBlock Text="Tags: Tag 1, Tag 2, Tag 3, ..."/>
+                </Border>
             </StackPanel>
 
-            <RichTextBlock Height="1050" Margin="0,12">
-                <Paragraph>
-                    Flash Card Content
-                </Paragraph>
-            </RichTextBlock>
+            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
+                <RichTextBlock Height="1050">
+                    <Paragraph>
+                        Flash Card Content
+                    </Paragraph>
+                </RichTextBlock>
+            </Border>
 
             <RelativePanel>
                 <StackPanel
