@@ -17,52 +17,65 @@
     </Page.Resources>
 
     <Grid x:Name="ContentArea">
-        <StackPanel>
-            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Front"/>
-            <StackPanel
-                Margin="0,20,0,0"
-                Orientation="Horizontal"
-                Spacing="{StaticResource UIControlSpacing}">
-                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                    <TextBlock Text="Box: 1"/>
-                </Border>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                    <TextBlock Text="Subject: Anatomy"/>
-                </Border>
+        <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource SubtitleTextBlockStyle}"
+            Text="Front"/>
 
-                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                    <TextBlock Text="Semester: 1. Semester"/>
-                </Border>
-
-                <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                    <TextBlock Text="Tags: Tag 1, Tag 2, Tag 3, ..."/>
-                </Border>
-            </StackPanel>
-
-            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
-                <RichTextBlock Height="1050">
-                    <Paragraph>
-                        Flash Card Content
-                    </Paragraph>
-                </RichTextBlock>
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,20,0,0"
+            Orientation="Horizontal"
+            Spacing="{StaticResource UIControlSpacing}">
+            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                <TextBlock Text="Box: 1"/>
             </Border>
 
-            <RelativePanel>
-                <StackPanel
-                    Orientation="Horizontal"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    Spacing="{StaticResource UIControlSpacing}">
-                    <Button Content="Next bullet point"/>
+            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                <TextBlock Text="Subject: Anatomy"/>
+            </Border>
 
-                    <Button Content="Flip"/>
-                </StackPanel>
+            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                <TextBlock Text="Semester: 1. Semester"/>
+            </Border>
 
-                <Button
-                    Content="Skip"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Style="{StaticResource AccentButtonStyle}"/>
-            </RelativePanel>
+            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                <TextBlock Text="Tags: Tag 1, Tag 2, Tag 3, ..."/>
+            </Border>
         </StackPanel>
+
+        <Border
+            Grid.Row="2"
+            Margin="0,12"
+            Style="{StaticResource ButtonStyleTextBlockBorder}">
+            <RichTextBlock Height="1050">
+                <Paragraph>
+                    Flash Card Content
+                </Paragraph>
+            </RichTextBlock>
+        </Border>
+
+        <RelativePanel Grid.Row="3" Margin="0,0,0,20">
+            <StackPanel
+                Orientation="Horizontal"
+                RelativePanel.AlignLeftWithPanel="True"
+                Spacing="{StaticResource UIControlSpacing}">
+                <Button Content="Next bullet point"/>
+
+                <Button Content="Flip"/>
+            </StackPanel>
+
+            <Button
+                Content="Skip"
+                RelativePanel.AlignRightWithPanel="True"
+                Style="{StaticResource AccentButtonStyle}"/>
+        </RelativePanel>
     </Grid>
 </Page>

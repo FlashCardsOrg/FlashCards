@@ -10,246 +10,259 @@
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        <StackPanel>
-            <SelectorBar x:Name="Create_FrontBack_SelectorBar" Padding="0">
-                <SelectorBarItem
-                    x:Name="Create_SelectorBarItem_Front"
-                    l:Uids.Uid="Create_SelectorBar_Front"
-                    IsSelected="True"
-                    Style="{StaticResource SubtitleSelectorBarItemStyle}"
-                    Tag="Front"/>
-                <SelectorBarItem
-                    x:Name="Create_SelectorBarItem_Back"
-                    l:Uids.Uid="Create_SelectorBar_Back"
-                    Style="{StaticResource SubtitleSelectorBarItemStyle}"
-                    Tag="Back"/>
-            </SelectorBar>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <RelativePanel Margin="0,20,0,0">
-                <StackPanel
-                    Orientation="Horizontal"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    Spacing="{StaticResource UIControlSpacing}">
+        <SelectorBar
+            x:Name="Create_FrontBack_SelectorBar"
+            Grid.Row="0"
+            Padding="0">
+            <SelectorBarItem
+                x:Name="Create_SelectorBarItem_Front"
+                l:Uids.Uid="Create_SelectorBar_Front"
+                IsSelected="True"
+                Style="{StaticResource SubtitleSelectorBarItemStyle}"
+                Tag="Front"/>
+            <SelectorBarItem
+                x:Name="Create_SelectorBarItem_Back"
+                l:Uids.Uid="Create_SelectorBar_Back"
+                Style="{StaticResource SubtitleSelectorBarItemStyle}"
+                Tag="Back"/>
+        </SelectorBar>
+
+        <RelativePanel Grid.Row="1" Margin="0,20,0,0">
+            <StackPanel
+                Orientation="Horizontal"
+                RelativePanel.AlignLeftWithPanel="True"
+                Spacing="{StaticResource UIControlSpacing}">
+                <DropDownButton
+                    x:Name="Create_EditSubject_DropDownButton"
+                    Click="EditSubject_DropDownButton_Clicked"
+                    Loaded="EditSubject_DropDownButton_Loaded">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout x:Name="Create_EditSubject_MenuFlyout" Placement="Bottom"/>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <DropDownButton
+                    x:Name="Create_EditSemester_DropDownButton"
+                    Click="EditSemester_DropDownButton_Clicked"
+                    Loaded="EditSemester_DropDownButton_Loaded">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout x:Name="Create_EditSemester_MenuFlyout" Placement="Bottom"/>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <DropDownButton
+                    x:Name="Create_EditTags_DropDownButton"
+                    Click="EditTags_DropDownButton_Clicked"
+                    Loaded="EditTags_DropDownButton_Loaded">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout x:Name="Create_EditTags_MenuFlyout" Placement="Bottom"/>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                RelativePanel.AlignRightWithPanel="True"
+                Spacing="{StaticResource UIControlSpacing}">
+                <ComboBox SelectedIndex="0">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Calibri"/>
+                        <ComboBoxItem Content="Arial"/>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <ComboBox SelectedIndex="1">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="14"/>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <ToggleButton>
+                    <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
+                </ToggleButton>
+
+                <ToggleButton>
+                    <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
+                </ToggleButton>
+
+                <ToggleButton>
+                    <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
+                </ToggleButton>
+
+                <ComboBox SelectedIndex="0">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Black"/>
+                        <ComboBoxItem Content="White"/>
+                    </ComboBox.Items>
+                </ComboBox>
+            </StackPanel>
+        </RelativePanel>
+
+        <controls:SwitchPresenter
+            Grid.Row="2"
+            TargetType="vm:FlashCardSides"
+            Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
+            <controls:Case Value="Front">
+                <RichEditBox
+                    x:Name="Create_Front_RichEditBox"
+                    Margin="0,12"
+                    TextChanged="RichEditBox_TextChanged">
+                    <RichEditBox.Resources>
+                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                    </RichEditBox.Resources>
+                </RichEditBox>
+            </controls:Case>
+
+            <controls:Case Value="Back">
+                <RichEditBox
+                    x:Name="Create_Back_RichEditBox"
+                    Margin="0,12"
+                    TextChanged="RichEditBox_TextChanged">
+                    <RichEditBox.Resources>
+                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                    </RichEditBox.Resources>
+                </RichEditBox>
+            </controls:Case>
+        </controls:SwitchPresenter>
+
+        <controls:SwitchPresenter
+            Grid.Row="3"
+            Margin="0,0,0,20"
+            TargetType="vm:FlashCardSides"
+            Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
+            <controls:Case Value="Front">
+                <RelativePanel>
                     <DropDownButton
-                        x:Name="Create_EditSubject_DropDownButton"
-                        Click="EditSubject_DropDownButton_Clicked"
-                        Loaded="EditSubject_DropDownButton_Loaded">
+                        x:Name="Create_Front_Layout_DropDownButton"
+                        Loaded="EditLayout_DropDownButton_Loaded"
+                        RelativePanel.AlignLeftWithPanel="True">
                         <DropDownButton.Flyout>
-                            <MenuFlyout x:Name="Create_EditSubject_MenuFlyout" Placement="Bottom"/>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_Text_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_File_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File_File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_Text_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_File_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File_Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Front_Layout_MenuFlyoutItem_Text_File_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_File_File"/>
+                            </MenuFlyout>
                         </DropDownButton.Flyout>
                     </DropDownButton>
 
+                    <CheckBox
+                        x:Name="Create_Front_ShowBulletPointsIndividually_CheckBox"
+                        l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
+                        IsChecked="{x:Bind ViewModel.FlashCard.Front.ShowBulletPointsIndividually, Mode=TwoWay}"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+                    <Button
+                        l:Uids.Uid="Create_SaveFlashCard_Button"
+                        Click="SaveFlashCard_Button_Clicked"
+                        IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
+                        RelativePanel.AlignRightWithPanel="True"
+                        Style="{StaticResource AccentButtonStyle}"/>
+                </RelativePanel>
+            </controls:Case>
+
+            <controls:Case Value="Back">
+                <RelativePanel>
                     <DropDownButton
-                        x:Name="Create_EditSemester_DropDownButton"
-                        Click="EditSemester_DropDownButton_Clicked"
-                        Loaded="EditSemester_DropDownButton_Loaded">
+                        x:Name="Create_Back_Layout_DropDownButton"
+                        Loaded="EditLayout_DropDownButton_Loaded"
+                        RelativePanel.AlignLeftWithPanel="True">
                         <DropDownButton.Flyout>
-                            <MenuFlyout x:Name="Create_EditSemester_MenuFlyout" Placement="Bottom"/>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_Text_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_File_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File_File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_Text_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_File"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_File_Text"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_Text"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="File_Text"/>
+                                <MenuFlyoutItem
+                                    x:Name="Create_Back_Layout_MenuFlyoutItem_Text_File_File"
+                                    l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File_File"
+                                    Click="EditLayout_MenuFlyoutItem_Clicked"
+                                    Tag="Text_File_File"/>
+                            </MenuFlyout>
                         </DropDownButton.Flyout>
                     </DropDownButton>
 
-                    <DropDownButton
-                        x:Name="Create_EditTags_DropDownButton"
-                        Click="EditTags_DropDownButton_Clicked"
-                        Loaded="EditTags_DropDownButton_Loaded">
-                        <DropDownButton.Flyout>
-                            <MenuFlyout x:Name="Create_EditTags_MenuFlyout" Placement="Bottom"/>
-                        </DropDownButton.Flyout>
-                    </DropDownButton>
-                </StackPanel>
+                    <CheckBox
+                        x:Name="Create_Back_ShowBulletPointsIndividually_CheckBox"
+                        l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
+                        IsChecked="{x:Bind ViewModel.FlashCard.Back.ShowBulletPointsIndividually, Mode=TwoWay}"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
-                <StackPanel
-                    Orientation="Horizontal"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Spacing="{StaticResource UIControlSpacing}">
-                    <ComboBox SelectedIndex="0">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="Calibri"/>
-                            <ComboBoxItem Content="Arial"/>
-                        </ComboBox.Items>
-                    </ComboBox>
-
-                    <ComboBox SelectedIndex="1">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="10"/>
-                            <ComboBoxItem Content="14"/>
-                        </ComboBox.Items>
-                    </ComboBox>
-
-                    <ToggleButton>
-                        <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
-                    </ToggleButton>
-
-                    <ToggleButton>
-                        <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
-                    </ToggleButton>
-
-                    <ToggleButton>
-                        <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
-                    </ToggleButton>
-
-                    <ComboBox SelectedIndex="0">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="Black"/>
-                            <ComboBoxItem Content="White"/>
-                        </ComboBox.Items>
-                    </ComboBox>
-                </StackPanel>
-            </RelativePanel>
-
-            <controls:SwitchPresenter TargetType="vm:FlashCardSides" Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
-                <controls:Case Value="Front">
-                    <RichEditBox
-                        x:Name="Create_Front_RichEditBox"
-                        Height="1050"
-                        Margin="0,12"
-                        TextChanged="RichEditBox_TextChanged">
-                        <RichEditBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
-                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
-                        </RichEditBox.Resources>
-                    </RichEditBox>
-                </controls:Case>
-
-                <controls:Case Value="Back">
-                    <RichEditBox
-                        x:Name="Create_Back_RichEditBox"
-                        Height="1050"
-                        Margin="0,12"
-                        TextChanged="RichEditBox_TextChanged">
-                        <RichEditBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
-                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
-                        </RichEditBox.Resources>
-                    </RichEditBox>
-                </controls:Case>
-            </controls:SwitchPresenter>
-
-            <controls:SwitchPresenter TargetType="vm:FlashCardSides" Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
-                <controls:Case Value="Front">
-                    <RelativePanel>
-                        <DropDownButton
-                            x:Name="Create_Front_Layout_DropDownButton"
-                            Loaded="EditLayout_DropDownButton_Loaded"
-                            RelativePanel.AlignLeftWithPanel="True">
-                            <DropDownButton.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_Text_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_File_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File_File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_Text_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_File_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File_Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Front_Layout_MenuFlyoutItem_Text_File_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_File_File"/>
-                                </MenuFlyout>
-                            </DropDownButton.Flyout>
-                        </DropDownButton>
-
-                        <CheckBox
-                            x:Name="Create_Front_ShowBulletPointsIndividually_CheckBox"
-                            l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
-                            IsChecked="{x:Bind ViewModel.FlashCard.Front.ShowBulletPointsIndividually, Mode=TwoWay}"
-                            RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-
-                        <Button
-                            l:Uids.Uid="Create_SaveFlashCard_Button"
-                            Click="SaveFlashCard_Button_Clicked"
-                            IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
-                            RelativePanel.AlignRightWithPanel="True"
-                            Style="{StaticResource AccentButtonStyle}"/>
-                    </RelativePanel>
-                </controls:Case>
-
-                <controls:Case Value="Back">
-                    <RelativePanel>
-                        <DropDownButton
-                            x:Name="Create_Back_Layout_DropDownButton"
-                            Loaded="EditLayout_DropDownButton_Loaded"
-                            RelativePanel.AlignLeftWithPanel="True">
-                            <DropDownButton.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_Text_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_File_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File_File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_Text_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_File"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_File_Text"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_File_Text"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="File_Text"/>
-                                    <MenuFlyoutItem
-                                        x:Name="Create_Back_Layout_MenuFlyoutItem_Text_File_File"
-                                        l:Uids.Uid="Create_Layout_MenuFlyoutItem_Text_File_File"
-                                        Click="EditLayout_MenuFlyoutItem_Clicked"
-                                        Tag="Text_File_File"/>
-                                </MenuFlyout>
-                            </DropDownButton.Flyout>
-                        </DropDownButton>
-
-                        <CheckBox
-                            x:Name="Create_Back_ShowBulletPointsIndividually_CheckBox"
-                            l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
-                            IsChecked="{x:Bind ViewModel.FlashCard.Back.ShowBulletPointsIndividually, Mode=TwoWay}"
-                            RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-
-                        <Button
-                            l:Uids.Uid="Create_SaveFlashCard_Button"
-                            Click="SaveFlashCard_Button_Clicked"
-                            IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
-                            RelativePanel.AlignRightWithPanel="True"
-                            Style="{StaticResource AccentButtonStyle}"/>
-                    </RelativePanel>
-                </controls:Case>
-            </controls:SwitchPresenter>
-        </StackPanel>
+                    <Button
+                        l:Uids.Uid="Create_SaveFlashCard_Button"
+                        Click="SaveFlashCard_Button_Clicked"
+                        IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
+                        RelativePanel.AlignRightWithPanel="True"
+                        Style="{StaticResource AccentButtonStyle}"/>
+                </RelativePanel>
+            </controls:Case>
+        </controls:SwitchPresenter>
     </Grid>
 </Page>
