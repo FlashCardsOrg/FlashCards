@@ -12,6 +12,12 @@ public class DatabaseService : IDatabaseService
         return [.. context.Boxes.OrderBy(box => box.Number)];
     }
 
+    public int GetBoxID(int number)
+    {
+        using FlashCardsContext context = new();
+        return context.Boxes.FirstOrDefault(box => box.Number == number)!.Id;
+    }
+
     public int AddBox(int number, DueAfterOptions dueAfter)
     {
         using FlashCardsContext context = new();
@@ -163,5 +169,56 @@ public class DatabaseService : IDatabaseService
 
         context.Tags.Remove(tag);
         context.SaveChanges();
+    }
+
+    public List<int> GetDueFlashCardIDs()
+    {
+        using FlashCardsContext context = new();
+        DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+        return [.. context.FlashCards
+            .AsEnumerable()
+            .Where(flashCard => flashCard.LastReviewDate == null || flashCard.LastReviewDate.Value.AddDays(GetDaysFromDueAfter(flashCard.Box.DueAfter)) <= today)
+            .Select(flashCard => flashCard.Id)
+            .OrderBy(ID => Guid.NewGuid())];
+    }
+
+    private static int GetDaysFromDueAfter(DueAfterOptions dueAfter)
+    {
+        return dueAfter switch
+        {
+            DueAfterOptions.OneDay => 1,
+            DueAfterOptions.TwoDays => 2,
+            DueAfterOptions.ThreeDays => 3,
+            DueAfterOptions.FourDays => 4,
+            DueAfterOptions.FiveDays => 5,
+            DueAfterOptions.SixDays => 6,
+            DueAfterOptions.OneWeek => 7,
+            DueAfterOptions.TwoWeeks => 14,
+            DueAfterOptions.ThreeWeeks => 21,
+            DueAfterOptions.FourWeeks => 28,
+            DueAfterOptions.OneMonth => 30,
+            DueAfterOptions.TwoMonths => 60,
+            DueAfterOptions.ThreeMonths => 90,
+            DueAfterOptions.SixMonths => 180,
+            DueAfterOptions.OneYear => 365,
+            DueAfterOptions.TwoYears => 730,
+            DueAfterOptions.ThreeYears => 1095,
+            DueAfterOptions.Never => int.MaxValue, // Never due
+            _ => throw new ArgumentOutOfRangeException(nameof(dueAfter), dueAfter, null)
+        };
+    }
+
+    public FlashCard? GetFlashCard(int id)
+    {
+        using FlashCardsContext context = new();
+        return context.FlashCards.Find(id);
+    }
+
+    public int AddFlashCard(FlashCard flashCard)
+    {
+        using FlashCardsContext context = new();
+        context.FlashCards.Add(flashCard);
+        context.SaveChanges();
+        return flashCard.Id;
     }
 }

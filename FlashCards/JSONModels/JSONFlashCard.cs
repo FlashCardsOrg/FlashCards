@@ -7,10 +7,10 @@ public class JSONFlashCard
     public FlashCardSide Front { get; set; }
     public FlashCardSide Back { get; set; }
 
-    public JSONFlashCard()
+    public JSONFlashCard(Layouts frontLayout, bool frontShowBulletPointsIndividually, Layouts backLayout, bool backShowBulletPointsIndividually)
     {
-        Front = new FlashCardSide();
-        Back = new FlashCardSide();
+        Front = new FlashCardSide { Layout = frontLayout, ShowBulletPointsIndividually = frontShowBulletPointsIndividually };
+        Back = new FlashCardSide { Layout = backLayout, ShowBulletPointsIndividually = backShowBulletPointsIndividually };
     }
 }
 

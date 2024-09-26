@@ -1,5 +1,8 @@
 ﻿using FlashCards.Contracts.Services;
+using FlashCards.Core.Contracts.Services;
+using FlashCards.Models;
 using FlashCards.ViewModels;
+using Microsoft.Extensions.Options;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -77,6 +80,9 @@ public sealed partial class SettingsPage : Page
 
         IDatabaseService databaseService = App.GetService<IDatabaseService>();
         databaseService.DeleteBox(id);
+
+        // TODO: Move card files to another box folder, delete box folder
+
         ViewModel.DeleteBox(id);
     }
 

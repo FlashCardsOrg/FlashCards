@@ -64,14 +64,14 @@ namespace FlashCards.Migrations
                     b.Property<int>("Semester")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int>("SubjectID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BoxId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectID");
 
                     b.ToTable("FlashCards");
                 });
@@ -131,7 +131,7 @@ namespace FlashCards.Migrations
 
                     b.HasOne("FlashCards.DBModels.Subject", "Subject")
                         .WithMany("FlashCards")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -12,7 +12,7 @@ public class CreateSettingsService : ICreateSettingsService
 
     public int SelectedSubjectID { get; set; } = 0;
     public int SelectedSemester { get; set; } = DefaultSemester;
-    public List<int?> SelectedTagIDs { get; set; } = [];
+    public List<int> SelectedTagIDs { get; set; } = [];
 
     private readonly ILocalSettingsService _localSettingsService;
 
@@ -67,19 +67,19 @@ public class CreateSettingsService : ICreateSettingsService
         await _localSettingsService.SaveSettingAsync(Semester_SettingsKey, selectedSemester);
     }
 
-    public async Task SetTagsAsync(List<int?> selectedTagIDs)
+    public async Task SetTagsAsync(List<int> selectedTagIDs)
     {
         SelectedTagIDs = selectedTagIDs;
         await SaveTagsInSettingsAsync(SelectedTagIDs);
     }
 
-    private async Task<List<int?>> LoadTagsFromSettingsAsync()
+    private async Task<List<int>> LoadTagsFromSettingsAsync()
     {
-        var selectedTagIDs = await _localSettingsService.ReadSettingAsync<List<int?>>(TagIDs_SettingsKey) ?? [];
+        var selectedTagIDs = await _localSettingsService.ReadSettingAsync<List<int>>(TagIDs_SettingsKey) ?? [];
         return selectedTagIDs;
     }
 
-    private async Task SaveTagsInSettingsAsync(List<int?> selectedTagIDs)
+    private async Task SaveTagsInSettingsAsync(List<int> selectedTagIDs)
     {
         await _localSettingsService.SaveSettingAsync(TagIDs_SettingsKey, selectedTagIDs);
     }

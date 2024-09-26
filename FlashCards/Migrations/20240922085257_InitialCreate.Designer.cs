@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(FlashCardsContext))]
-    [Migration("20240920133905_NullableLastReviewDate")]
-    partial class NullableLastReviewDate
+    [Migration("20240922085257_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,14 +67,14 @@ namespace FlashCards.Migrations
                     b.Property<int>("Semester")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int>("SubjectID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BoxId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectID");
 
                     b.ToTable("FlashCards");
                 });
@@ -134,7 +134,7 @@ namespace FlashCards.Migrations
 
                     b.HasOne("FlashCards.DBModels.Subject", "Subject")
                         .WithMany("FlashCards")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -66,6 +66,8 @@ public partial class App : Application
             services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
             services.AddSingleton<ICreateSettingsService, CreateSettingsService>();
+            services.AddSingleton<IJSONService, JSONService>();
+            services.AddSingleton<IStorageService, StorageService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();

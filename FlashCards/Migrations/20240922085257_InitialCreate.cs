@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -56,7 +57,7 @@ namespace FlashCards.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LastReviewDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    LastReviewDate = table.Column<DateOnly>(type: "TEXT", nullable: true),
                     Semester = table.Column<int>(type: "INTEGER", nullable: false),
                     BoxId = table.Column<int>(type: "INTEGER", nullable: false),
                     SubjectId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -110,7 +111,7 @@ namespace FlashCards.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_FlashCards_SubjectId",
                 table: "FlashCards",
-                column: "SubjectId");
+                column: "SubjectID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FlashCardTag_TagsId",

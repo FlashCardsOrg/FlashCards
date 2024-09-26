@@ -176,13 +176,13 @@
                         <CheckBox
                             x:Name="Create_Front_ShowBulletPointsIndividually_CheckBox"
                             l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
-                            Click="ShowBulletPointsIndividually_CheckBox_Clicked"
+                            IsChecked="{x:Bind ViewModel.FlashCard.Front.ShowBulletPointsIndividually, Mode=TwoWay}"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
                         <Button
                             l:Uids.Uid="Create_SaveFlashCard_Button"
                             Click="SaveFlashCard_Button_Clicked"
-                            IsEnabled="{x:Bind ViewModel.CanSaveFlashCard, Mode=OneWay}"
+                            IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>
@@ -238,13 +238,13 @@
                         <CheckBox
                             x:Name="Create_Back_ShowBulletPointsIndividually_CheckBox"
                             l:Uids.Uid="Create_ShowBulletPointsIndividually_CheckBox"
-                            Click="ShowBulletPointsIndividually_CheckBox_Clicked"
+                            IsChecked="{x:Bind ViewModel.FlashCard.Back.ShowBulletPointsIndividually, Mode=TwoWay}"
                             RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
                         <Button
                             l:Uids.Uid="Create_SaveFlashCard_Button"
                             Click="SaveFlashCard_Button_Clicked"
-                            IsEnabled="{x:Bind ViewModel.CanSaveFlashCard, Mode=OneWay}"
+                            IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
                             RelativePanel.AlignRightWithPanel="True"
                             Style="{StaticResource AccentButtonStyle}"/>
                     </RelativePanel>

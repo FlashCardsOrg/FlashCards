@@ -1,39 +1,22 @@
 ﻿using FlashCards.Contracts.Services;
+using FlashCards.Services;
 using FlashCards.ViewModels;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
 namespace FlashCards.Views;
 
 public sealed partial class CreatePage : Page
 {
-    public CreateViewModel ViewModel
-    {
-        get;
-    }
+    private readonly ICreateSettingsService _createSettingsService = App.GetService<ICreateSettingsService>();
+    private readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+    private readonly IStorageService _storageService = App.GetService<IStorageService>();
+    public CreateViewModel ViewModel { get; }
 
     public CreatePage()
     {
         ViewModel = App.GetService<CreateViewModel>();
         InitializeComponent();
-        Loaded += CreatePage_Loaded;
-    }
-
-    private void CreatePage_Loaded(object sender, RoutedEventArgs e)
-    {
-        InitializeRichEditBoxContent();
-    }
-
-    private void InitializeRichEditBoxContent()
-    {
-        Create_Front_RichEditBox.Document.GetText(TextGetOptions.NoHidden, out string frontText);
-        ViewModel.IsFrontRichEditBoxEmpty = string.IsNullOrWhiteSpace(frontText);
-
-        Create_Back_RichEditBox.Document.GetText(TextGetOptions.NoHidden, out string backText);
-        ViewModel.IsBackRichEditBoxEmpty = string.IsNullOrWhiteSpace(backText);
-
-        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditSubject_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -43,10 +26,8 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        ICreateSettingsService createSettingsService = App.GetService<ICreateSettingsService>();
-        int selectedSubjectID = createSettingsService.SelectedSubjectID;
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        var selectedSubject = databaseService.GetSubject(selectedSubjectID);
+        int selectedSubjectID = ViewModel.FlashCard.SubjectID;
+        var selectedSubject = _databaseService.GetSubject(selectedSubjectID);
         string subjectString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Subject");
         string noneString = WinUI3Localizer.Localizer.Get().GetLocalizedString("None");
         Create_EditSubject_DropDownButton.Content = $"{subjectString}: {selectedSubject?.Name ?? noneString}";
@@ -79,12 +60,10 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        ICreateSettingsService createSettingsService = App.GetService<ICreateSettingsService>();
-        createSettingsService.SetSubjectAsync((int)menuFlyoutItem.Tag);
+        _createSettingsService.SetSubjectAsync((int)menuFlyoutItem.Tag);
+        ViewModel.FlashCard.SubjectID = (int)menuFlyoutItem.Tag;
         string subjectString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Subject");
         Create_EditSubject_DropDownButton.Content = $"{subjectString}: {menuFlyoutItem.Text}";
-
-        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditSemester_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -94,8 +73,7 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        ICreateSettingsService createSettingsService = App.GetService<ICreateSettingsService>();
-        int selectedSemester = createSettingsService.SelectedSemester;
+        int selectedSemester = ViewModel.FlashCard.Semester;
         string semesterString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Semester");
         Create_EditSemester_DropDownButton.Content = $"{semesterString}: {selectedSemester}";
     }
@@ -128,12 +106,10 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        ICreateSettingsService createSettingsService = App.GetService<ICreateSettingsService>();
-        createSettingsService.SetSemesterAsync((int)menuFlyoutItem.Tag);
+        _createSettingsService.SetSemesterAsync((int)menuFlyoutItem.Tag);
+        ViewModel.FlashCard.Semester = (int)menuFlyoutItem.Tag;
         string semesterString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Semester");
         Create_EditSemester_DropDownButton.Content = $"{semesterString}: {menuFlyoutItem.Tag}";
-
-        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void EditTags_DropDownButton_Loaded(object sender, RoutedEventArgs e)
@@ -154,15 +130,13 @@ public sealed partial class CreatePage : Page
         }
 
         Create_EditTags_MenuFlyout.Items.Clear();
-        List<int?> selectedTagIDs = ViewModel.SelectedTagIDs;
-
         foreach (VMTag tag in ViewModel.Tags)
         {
             ToggleMenuFlyoutItem toggleMenuFlyoutItem = new()
             {
                 Text = tag.TagName,
                 Tag = tag.TagID,
-                IsChecked = selectedTagIDs.Contains(tag.TagID)
+                IsChecked = ViewModel.FlashCard.TagIDs.Contains(tag.TagID)
             };
             toggleMenuFlyoutItem.Click += EditTags_MenuFlyoutItem_Clicked;
             Create_EditTags_MenuFlyout.Items.Add(toggleMenuFlyoutItem);
@@ -178,40 +152,36 @@ public sealed partial class CreatePage : Page
 
         if (toggleMenuFlyoutItem.IsChecked)
         {
-            ViewModel.SelectedTagIDs.Add((int)toggleMenuFlyoutItem.Tag);
+            ViewModel.FlashCard.TagIDs.Add((int)toggleMenuFlyoutItem.Tag);
         }
         else
         {
-            ViewModel.SelectedTagIDs.Remove((int)toggleMenuFlyoutItem.Tag);
+            ViewModel.FlashCard.TagIDs.Remove((int)toggleMenuFlyoutItem.Tag);
         }
 
-        ICreateSettingsService createSettingsService = App.GetService<ICreateSettingsService>();
-        createSettingsService.SetTagsAsync(ViewModel.SelectedTagIDs);
-
+        _createSettingsService.SetTagsAsync(ViewModel.FlashCard.TagIDs);
         Update_EditTags_DropDownButton_Content();
     }
 
     private void Update_EditTags_DropDownButton_Content()
     {
-        List<int?> selectedTagIds = ViewModel.SelectedTagIDs;
         string selectedTagsString;
         string tagsString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Tags");
 
-        if (selectedTagIds.Count == 0)
+        if (ViewModel.FlashCard.TagIDs.Count == 0)
         {
             selectedTagsString = WinUI3Localizer.Localizer.Get().GetLocalizedString("None");
         }
         else
         {
-            IDatabaseService databaseService = App.GetService<IDatabaseService>();
-            List<string> selectedTags = databaseService.GetTags()
-                                                       .Where(tag => selectedTagIds.Contains(tag.Id))
-                                                       .OrderBy(tag => tag.Name)
-                                                       .Select(tag => tag.Name)
-                                                       .Take(3)
-                                                       .ToList();
+            List<string> selectedTags = _databaseService.GetTags()
+                                                        .Where(tag => ViewModel.FlashCard.TagIDs.Contains(tag.Id))
+                                                        .OrderBy(tag => tag.Name)
+                                                        .Select(tag => tag.Name)
+                                                        .Take(3)
+                                                        .ToList();
             selectedTagsString = string.Join(", ", selectedTags);
-            if (selectedTags.Count == 3 && databaseService.GetTags().Count(tag => selectedTagIds.Contains(tag.Id)) > 3)
+            if (selectedTags.Count == 3 && _databaseService.GetTags().Count(tag => ViewModel.FlashCard.TagIDs.Contains(tag.Id)) > 3)
             {
                 selectedTagsString += ", ...";
             }
@@ -233,10 +203,10 @@ public sealed partial class CreatePage : Page
         switch (dropDownButton.Name.Split("_")[1])
         {
             case "Front":
-                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.FrontLayout}");
+                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.FlashCard.Front.Layout}");
                 break;
             case "Back":
-                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.BackLayout}");
+                layout = WinUI3Localizer.Localizer.Get().GetLocalizedString($"Layout_{ViewModel.FlashCard.Back.Layout}");
                 break;
         }
 
@@ -256,30 +226,12 @@ public sealed partial class CreatePage : Page
         switch (menuFlyoutItem.Name.Split("_")[1])
         {
             case "Front":
-                ViewModel.FrontLayout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                ViewModel.FlashCard.Front.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
                 Create_Front_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
                 break;
             case "Back":
-                ViewModel.BackLayout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                ViewModel.FlashCard.Back.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
                 Create_Back_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
-                break;
-        }
-    }
-
-    private void ShowBulletPointsIndividually_CheckBox_Clicked(object sender, RoutedEventArgs e)
-    {
-        if (sender is not CheckBox checkBox)
-        {
-            return;
-        }
-
-        switch (checkBox.Name.Split("_")[1])
-        {
-            case "Front":
-                ViewModel.FrontShowBulletPointsIndividually = checkBox.IsChecked!.Value;
-                break;
-            case "Back":
-                ViewModel.BackShowBulletPointsIndividually = checkBox.IsChecked!.Value;
                 break;
         }
     }
@@ -291,26 +243,27 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        richEditBox.Document.GetText(TextGetOptions.NoHidden, out string text);
+        richEditBox.Document.GetText(TextGetOptions.FormatRtf, out string text);
 
         switch (richEditBox.Name.Split("_")[1])
         {
+            // TODO: Implement other layout types
             case "Front":
-                ViewModel.IsFrontRichEditBoxEmpty = string.IsNullOrWhiteSpace(text);
+                ViewModel.FlashCard.Front.Content1 = text;
                 break;
             case "Back":
-                ViewModel.IsBackRichEditBoxEmpty = string.IsNullOrWhiteSpace(text);
+                ViewModel.FlashCard.Back.Content1 = text;
                 break;
         }
-
-        ViewModel.UpdateCanSaveFlashCard();
     }
 
     private void SaveFlashCard_Button_Clicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException("SaveFlashCard functionality is not implemented yet.");
-        // Save to DB
-        // Create JSON
-        // Create content files
+        _storageService.AddFlashCard(ViewModel.FlashCard);
+
+        // TODO: Implement other layout types
+        Create_Front_RichEditBox.Document.SetText(TextSetOptions.None, null);
+        Create_Back_RichEditBox.Document.SetText(TextSetOptions.None, null);
+        ViewModel.FlashCard = new();
     }
 }
