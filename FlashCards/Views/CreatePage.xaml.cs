@@ -1,5 +1,4 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Services;
 using FlashCards.ViewModels;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -26,8 +25,7 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        int selectedSubjectID = ViewModel.FlashCard.SubjectID;
-        var selectedSubject = _databaseService.GetSubject(selectedSubjectID);
+        var selectedSubject = _databaseService.GetSubject(ViewModel.FlashCard.SubjectID);
         string subjectString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Subject");
         string noneString = WinUI3Localizer.Localizer.Get().GetLocalizedString("None");
         Create_EditSubject_DropDownButton.Content = $"{subjectString}: {selectedSubject?.Name ?? noneString}";
@@ -73,9 +71,8 @@ public sealed partial class CreatePage : Page
             return;
         }
 
-        int selectedSemester = ViewModel.FlashCard.Semester;
         string semesterString = WinUI3Localizer.Localizer.Get().GetLocalizedString("Semester");
-        Create_EditSemester_DropDownButton.Content = $"{semesterString}: {selectedSemester}";
+        Create_EditSemester_DropDownButton.Content = $"{semesterString}: {ViewModel.FlashCard.Semester}";
     }
 
     private void EditSemester_DropDownButton_Clicked(object sender, RoutedEventArgs e)
@@ -257,13 +254,14 @@ public sealed partial class CreatePage : Page
         }
     }
 
-    private void SaveFlashCard_Button_Clicked(object sender, RoutedEventArgs e)
+    private async void SaveFlashCard_Button_Clicked(object sender, RoutedEventArgs e)
     {
-        _storageService.AddFlashCard(ViewModel.FlashCard);
+        await _storageService.AddFlashCardAsync(ViewModel.FlashCard);
 
         // TODO: Implement other layout types
         Create_Front_RichEditBox.Document.SetText(TextSetOptions.None, null);
         Create_Back_RichEditBox.Document.SetText(TextSetOptions.None, null);
+        Create_FrontBack_SelectorBar.SelectedItem = Create_SelectorBarItem_Front;
         ViewModel.FlashCard = new();
     }
 }

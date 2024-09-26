@@ -1,5 +1,4 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Core.Contracts.Services;
 using FlashCards.JSONModels;
 using System.Text.Json;
 
@@ -35,4 +34,15 @@ public class JSONService : IJSONService
         return flashCardFolder;
     }
 
+    public async Task<JSONFlashCard> GetFlashCardAsync(int boxNumber, int flashCardID)
+    {
+        string boxFolder = Path.Combine(_boxesFolder, $"Box-{boxNumber}");
+        string flashCardFolder = Path.Combine(boxFolder, $"FlashCard-{flashCardID}");
+        string flashCardFile = Path.Combine(flashCardFolder, $"FlashCard-{flashCardID}.json");
+
+        using FileStream openStream = File.OpenRead(flashCardFile);
+
+        JSONFlashCard flashCard = (await JsonSerializer.DeserializeAsync<JSONFlashCard>(openStream))!;
+        return flashCard;
+    }
 }

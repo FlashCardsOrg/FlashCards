@@ -1,8 +1,6 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Core.Contracts.Services;
-using FlashCards.Models;
+using FlashCards.DBModels;
 using FlashCards.ViewModels;
-using Microsoft.Extensions.Options;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -10,6 +8,11 @@ namespace FlashCards.Views;
 
 public sealed partial class SettingsPage : Page
 {
+    private readonly ILocalizationService _localizationService = App.GetService<ILocalizationService>();
+    private readonly IThemeSelectorService _themeSelectorService = App.GetService<IThemeSelectorService>();
+    private readonly IDemotionSettingsService _demotionSettingsService = App.GetService<IDemotionSettingsService>();
+    private readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+
     private readonly Dictionary<int, TextBox> _editSubject_TextBoxes = [];
     private readonly Dictionary<int, TextBox> _editTag_TextBoxes = [];
 
@@ -31,8 +34,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        ILocalizationService localizationService = App.GetService<ILocalizationService>();
-        localizationService.SetLanguageAsync(selectedLanguageTag);
+        _localizationService.SetLanguageAsync(selectedLanguageTag);
     }
 
     private void Theme_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,8 +47,7 @@ public sealed partial class SettingsPage : Page
         {
             return;
         }
-        IThemeSelectorService themeSelectorService = App.GetService<IThemeSelectorService>();
-        themeSelectorService.SetThemeAsync(selectedTheme);
+        _themeSelectorService.SetThemeAsync(selectedTheme);
     }
 
     private void Demotion_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,8 +57,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        IDemotionSettingsService demotionSettingsService = App.GetService<IDemotionSettingsService>();
-        demotionSettingsService.SetDemotionAsync(selectedDemotionTag);
+        _demotionSettingsService.SetDemotionAsync(selectedDemotionTag);
     }
 
     private void AddBox_Button_Clicked(object sender, RoutedEventArgs e)
@@ -65,9 +65,8 @@ public sealed partial class SettingsPage : Page
         Settings_Box_Expander.IsExpanded = true;
 
         int number = ViewModel.Boxes.Count + 1;
-        DBModels.DueAfterOptions dueAfter = DBModels.DueAfterOptions.OneDay;
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        int id = databaseService.AddBox(number, dueAfter);
+        DueAfterOptions dueAfter = DueAfterOptions.OneDay;
+        int id = _databaseService.AddBox(number, dueAfter);
         ViewModel.AddBox(id, number, dueAfter);
     }
 
@@ -78,8 +77,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        databaseService.DeleteBox(id);
+        _databaseService.DeleteBox(id);
 
         // TODO: Move card files to another box folder, delete box folder
 
@@ -90,9 +88,8 @@ public sealed partial class SettingsPage : Page
     {
         if (sender is ComboBox comboBox && comboBox.SelectedIndex is int selectedIndex && comboBox.Tag is int boxId)
         {
-            var databaseService = App.GetService<IDatabaseService>();
-            var dueAfter = (DBModels.DueAfterOptions)selectedIndex;
-            databaseService.EditBox(boxId, dueAfter);
+            DueAfterOptions dueAfter = (DueAfterOptions)selectedIndex;
+            _databaseService.EditBox(boxId, dueAfter);
         }
     }
 
@@ -101,8 +98,7 @@ public sealed partial class SettingsPage : Page
         Settings_Subject_Expander.IsExpanded = true;
 
         string name = "New Subject";
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        int id = databaseService.AddSubject(name);
+        int id = _databaseService.AddSubject(name);
         ViewModel.AddSubject(id, name);
     }
 
@@ -137,8 +133,7 @@ public sealed partial class SettingsPage : Page
         }
 
         string name = _editSubject_TextBoxes[id].Text;
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        databaseService.EditSubject(id, name);
+        _databaseService.EditSubject(id, name);
         ViewModel.EditSubject(id, name);
         ViewModel.SetSubjectEditingState(id, false);
     }
@@ -150,8 +145,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        databaseService.DeleteSubject(id);
+        _databaseService.DeleteSubject(id);
         ViewModel.DeleteSubject(id);
     }
 
@@ -175,8 +169,7 @@ public sealed partial class SettingsPage : Page
         Settings_Tag_Expander.IsExpanded = true;
 
         string name = "New Tag";
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        int id = databaseService.AddTag(name);
+        int id = _databaseService.AddTag(name);
         ViewModel.AddTag(id, name);
     }
 
@@ -211,8 +204,7 @@ public sealed partial class SettingsPage : Page
         }
 
         string name = _editTag_TextBoxes[id].Text;
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        databaseService.EditTag(id, name);
+        _databaseService.EditTag(id, name);
         ViewModel.EditTag(id, name);
         ViewModel.SetTagEditingState(id, false);
     }
@@ -224,8 +216,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        IDatabaseService databaseService = App.GetService<IDatabaseService>();
-        databaseService.DeleteTag(id);
+        _databaseService.DeleteTag(id);
         ViewModel.DeleteTag(id);
     }
     private void EditTag_TextBox_Loaded(object sender, RoutedEventArgs e)

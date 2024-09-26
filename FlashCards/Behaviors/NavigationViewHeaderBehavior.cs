@@ -9,6 +9,8 @@ namespace FlashCards.Behaviors;
 
 public class NavigationViewHeaderBehavior : Behavior<NavigationView>
 {
+    private readonly INavigationService _navigationService = App.GetService<INavigationService>();
+
     private static NavigationViewHeaderBehavior? _current;
 
     private Page? _currentPage;
@@ -52,8 +54,7 @@ public class NavigationViewHeaderBehavior : Behavior<NavigationView>
     {
         base.OnAttached();
 
-        var navigationService = App.GetService<INavigationService>();
-        navigationService.Navigated += OnNavigated;
+        _navigationService.Navigated += OnNavigated;
 
         _current = this;
     }
@@ -62,8 +63,7 @@ public class NavigationViewHeaderBehavior : Behavior<NavigationView>
     {
         base.OnDetaching();
 
-        var navigationService = App.GetService<INavigationService>();
-        navigationService.Navigated -= OnNavigated;
+        _navigationService.Navigated -= OnNavigated;
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e)

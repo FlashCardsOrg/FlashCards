@@ -373,4 +373,19 @@
   <data name="Create_SaveFlashCard_Button.Content" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="Study_NextBulletPoint_Button.Content" xml:space="preserve">
+    <value>Nächster Stichpunkt</value>
+  </data>
+  <data name="Study_Skip_Button.Content" xml:space="preserve">
+    <value>Überspringen</value>
+  </data>
+  <data name="Study_Flip_Button.Content" xml:space="preserve">
+    <value>Umdrehen</value>
+  </data>
+  <data name="Front" xml:space="preserve">
+    <value>Vorderseite</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Rückseite</value>
+  </data>
 </root>

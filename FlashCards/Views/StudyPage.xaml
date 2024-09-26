@@ -2,8 +2,11 @@
     x:Class="FlashCards.Views.StudyPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:l="using:WinUI3Localizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FlashCards.ViewModels"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -17,65 +20,102 @@
     </Page.Resources>
 
     <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind ViewModel.StudyingState, Mode=OneWay}">
+            <controls:Case Value="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="0"
-            Style="{StaticResource SubtitleTextBlockStyle}"
-            Text="Front"/>
+                    <TextBlock
+                        x:Name="Study_FlashCardSides_TextBlock"
+                        Grid.Row="0"
+                        Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-        <StackPanel
-            Grid.Row="1"
-            Margin="0,20,0,0"
-            Orientation="Horizontal"
-            Spacing="{StaticResource UIControlSpacing}">
-            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                <TextBlock Text="Box: 1"/>
-            </Border>
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,20,0,0"
+                        Orientation="Horizontal"
+                        Spacing="{StaticResource UIControlSpacing}">
+                        <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                            <TextBlock x:Name="Study_Box_TextBlock"/>
+                        </Border>
 
-            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                <TextBlock Text="Subject: Anatomy"/>
-            </Border>
+                        <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                            <TextBlock x:Name="Study_Subject_TextBlock"/>
+                        </Border>
 
-            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                <TextBlock Text="Semester: 1. Semester"/>
-            </Border>
+                        <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                            <TextBlock x:Name="Study_Semester_TextBlock"/>
+                        </Border>
 
-            <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
-                <TextBlock Text="Tags: Tag 1, Tag 2, Tag 3, ..."/>
-            </Border>
-        </StackPanel>
+                        <Border Style="{StaticResource ButtonStyleTextBlockBorder}">
+                            <TextBlock x:Name="Study_Tags_TextBlock"/>
+                        </Border>
+                    </StackPanel>
 
-        <Border
-            Grid.Row="2"
-            Margin="0,12"
-            Style="{StaticResource ButtonStyleTextBlockBorder}">
-            <RichTextBlock Height="1050">
-                <Paragraph>
-                    Flash Card Content
-                </Paragraph>
-            </RichTextBlock>
-        </Border>
+                    <controls:SwitchPresenter
+                        Grid.Row="2"
+                        TargetType="vm:FlashCardSides"
+                        Value="{x:Bind ViewModel.FlashCard.CurrentSide}">
+                        <controls:Case Value="Front">
+                            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
+                                <RichTextBlock x:Name="Study_Front_RichTextBlock"/>
+                            </Border>
+                        </controls:Case>
 
-        <RelativePanel Grid.Row="3" Margin="0,0,0,20">
-            <StackPanel
-                Orientation="Horizontal"
-                RelativePanel.AlignLeftWithPanel="True"
-                Spacing="{StaticResource UIControlSpacing}">
-                <Button Content="Next bullet point"/>
+                        <controls:Case Value="Back">
+                            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
+                                <RichTextBlock x:Name="Study_Back_RichTextBlock"/>
+                            </Border>
+                        </controls:Case>
+                    </controls:SwitchPresenter>
 
-                <Button Content="Flip"/>
-            </StackPanel>
+                    <RelativePanel Grid.Row="3" Margin="0,0,0,20">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            Spacing="{StaticResource UIControlSpacing}">
+                            <Button
+                                x:Name="Study_NextBulletPoint_Button"
+                                l:Uids.Uid="Study_NextBulletPoint_Button"
+                                Click="NextBulletPoint_Button_Clicked"/>
 
-            <Button
-                Content="Skip"
-                RelativePanel.AlignRightWithPanel="True"
-                Style="{StaticResource AccentButtonStyle}"/>
-        </RelativePanel>
+                            <Button l:Uids.Uid="Study_Flip_Button" Click="Flip_Button_Clicked"/>
+                        </StackPanel>
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            RelativePanel.AlignRightWithPanel="True"
+                            Spacing="{StaticResource UIControlSpacing}">
+                            <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind ViewModel.FlashCard.WasFlipped, Mode=OneWay}">
+                                <controls:Case Value="False">
+                                    <Button
+                                        l:Uids.Uid="Study_Skip_Button"
+                                        Click="Skip_Button_Clicked"
+                                        RelativePanel.AlignRightWithPanel="True"
+                                        Style="{StaticResource AccentButtonStyle}"/>
+                                </controls:Case>
+
+                                <controls:Case Value="True">
+                                    <controls:Segmented>
+                                        <controls:SegmentedItem>Wrong</controls:SegmentedItem>
+                                        <controls:SegmentedItem>Skip</controls:SegmentedItem>
+                                        <controls:SegmentedItem>Right</controls:SegmentedItem>
+                                    </controls:Segmented>
+                                </controls:Case>
+                            </controls:SwitchPresenter>
+                        </StackPanel>
+                    </RelativePanel>
+                </Grid>
+            </controls:Case>
+
+            <controls:Case Value="False">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="No Cards Left"/>
+            </controls:Case>
+        </controls:SwitchPresenter>
     </Grid>
 </Page>

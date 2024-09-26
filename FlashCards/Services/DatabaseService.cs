@@ -1,6 +1,7 @@
 ﻿using FlashCards.Contracts.Services;
 using FlashCards.Data;
 using FlashCards.DBModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlashCards.Services;
 
@@ -211,7 +212,11 @@ public class DatabaseService : IDatabaseService
     public FlashCard? GetFlashCard(int id)
     {
         using FlashCardsContext context = new();
-        return context.FlashCards.Find(id);
+
+        return context.FlashCards
+            .Include(flashCard => flashCard.Box)
+            .Include(flashCard => flashCard.Subject)
+            .FirstOrDefault(flashCard => flashCard.Id == id);
     }
 
     public int AddFlashCard(FlashCard flashCard)
