@@ -388,4 +388,10 @@
   <data name="Back" xml:space="preserve">
     <value>Rückseite</value>
   </data>
+  <data name="Shell_Study_Due.Content" xml:space="preserve">
+    <value>Fällige Karten</value>
+  </data>
+  <data name="Shell_Study_Filtered.Content" xml:space="preserve">
+    <value>Gefiltert</value>
+  </data>
 </root>

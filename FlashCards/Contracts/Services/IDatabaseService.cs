@@ -8,7 +8,7 @@ public interface IDatabaseService
     int GetBoxID(int number);
     int AddBox(int number, DueAfterOptions dueAfter);
     void EditBox(int id, DueAfterOptions dueAfter);
-    void DeleteBox(int id);
+    int? DeleteBox(int id);
 
     List<Subject> GetSubjects();
     Subject? GetSubject(int id);

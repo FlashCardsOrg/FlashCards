@@ -12,6 +12,7 @@ public sealed partial class SettingsPage : Page
     private readonly IThemeSelectorService _themeSelectorService = App.GetService<IThemeSelectorService>();
     private readonly IDemotionSettingsService _demotionSettingsService = App.GetService<IDemotionSettingsService>();
     private readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+    private readonly IStorageService _storageService = App.GetService<IStorageService>();
 
     private readonly Dictionary<int, TextBox> _editSubject_TextBoxes = [];
     private readonly Dictionary<int, TextBox> _editTag_TextBoxes = [];
@@ -76,11 +77,8 @@ public sealed partial class SettingsPage : Page
         {
             return;
         }
-
-        _databaseService.DeleteBox(id);
-
-        // TODO: Move card files to another box folder, delete box folder
-
+        // TODO: Disbale Delete Button if last box
+        _storageService.DeleteBox(id);
         ViewModel.DeleteBox(id);
     }
 
@@ -145,6 +143,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
+        // TODO: Dont allow delete if subject has flashcards
         _databaseService.DeleteSubject(id);
         ViewModel.DeleteSubject(id);
     }

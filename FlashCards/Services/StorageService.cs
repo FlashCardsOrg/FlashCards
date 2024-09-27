@@ -1,7 +1,10 @@
 ﻿using FlashCards.Contracts.Services;
+using FlashCards.Data;
 using FlashCards.DBModels;
 using FlashCards.JSONModels;
 using FlashCards.ViewModels;
+using System.IO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FlashCards.Services;
 
@@ -134,5 +137,76 @@ public class StorageService(IDatabaseService databaseService, IJSONService JSONS
         {
             return filePath;
         }
+    }
+
+    public async Task DeleteBox(int id)
+    {
+        int? boxNumber = _databaseService.DeleteBox(id);
+        if (boxNumber is null)
+        {
+            return;
+        }
+
+        string boxFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder, $"Box-{boxNumber}");
+        await MoveCardsOnDelete(boxNumber.Value);
+        Directory.Delete(boxFolder, true);
+        await FixBoxNumbers(boxNumber.Value);
+    }
+
+    private async Task MoveCardsOnDelete(int boxNumber)
+    {
+        int targetBoxNumber = boxNumber == 1 ? 2 : boxNumber - 1;
+        await MoveCards(boxNumber, targetBoxNumber);
+    }
+
+    private async Task MoveCards(int fromBoxNumber, int toBoxNumber)
+    {
+        await Task.Run(() =>
+        {
+            string boxesFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder);
+            string fromBoxFolder = Path.Combine(boxesFolder, $"Box-{fromBoxNumber}");
+            string toBoxFolder = Path.Combine(boxesFolder, $"Box-{toBoxNumber}");
+
+            if (!Directory.Exists(fromBoxFolder))
+            {
+                return;
+            }
+
+            if (!Directory.Exists(toBoxFolder))
+            {
+                Directory.CreateDirectory(toBoxFolder);
+            }
+
+            string[] flashCardFolders = Directory.GetFileSystemEntries(fromBoxFolder);
+            foreach (string flashCardFolder in flashCardFolders)
+            {
+                string directoryName = Path.GetFileName(flashCardFolder);
+                string destDirectory = Path.Combine(toBoxFolder, directoryName);
+                Directory.Move(flashCardFolder, destDirectory);
+            }
+        });
+    }
+
+    private async Task FixBoxNumbers(int boxNumber)
+    {
+        await Task.Run(() =>
+        {
+            string boxesFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder);
+            if (!Directory.Exists(boxesFolder))
+            {
+                return;
+            }
+            string[] boxFolders = Directory.GetDirectories(boxesFolder);
+            foreach (string boxFolder in boxFolders)
+            {
+                string directoryName = Path.GetFileName(boxFolder);
+                int currentBoxNumber = int.Parse(directoryName.Replace("Box-", ""));
+                if (currentBoxNumber > boxNumber)
+                {
+                    string newBoxFolder = Path.Combine(boxesFolder, $"Box-{currentBoxNumber - 1}");
+                    Directory.Move(boxFolder, newBoxFolder);
+                }
+            }
+        });
     }
 }

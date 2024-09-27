@@ -41,19 +41,20 @@ public class DatabaseService : IDatabaseService
         context.SaveChanges();
     }
 
-    public void DeleteBox(int id)
+    public int? DeleteBox(int id)
     {
         using FlashCardsContext context = new();
         var box = context.Boxes.Find(id);
         if (box is null)
         {
-            return;
+            return null;
         }
 
         MoveCardsOnDelete(box.Number);
         FixBoxNumbers(box.Number);
         context.Boxes.Remove(box);
         context.SaveChanges();
+        return box.Number;
     }
 
     private static void MoveCardsOnDelete(int boxNumber)
@@ -65,7 +66,7 @@ public class DatabaseService : IDatabaseService
     private static void MoveCards(int fromBoxNumber, int toBoxNumber)
     {
         using FlashCardsContext context = new();
-        var flashCards = context.FlashCards.Where(card => card.Box.Number == fromBoxNumber);
+        var flashCards = context.FlashCards.Include(flashCard => flashCard.Box).Where(flashCard => flashCard.Box.Number == fromBoxNumber);
         foreach (var flashCard in flashCards)
         {
             flashCard.Box.Number = toBoxNumber;
