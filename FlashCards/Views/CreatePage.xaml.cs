@@ -241,15 +241,15 @@ public sealed partial class CreatePage : Page
         }
 
         richEditBox.Document.GetText(TextGetOptions.FormatRtf, out string text);
+        VMFlashCard.VMFlashCardSide flashCardSide = richEditBox.Name.Contains("Front") ? ViewModel.FlashCard.Front : ViewModel.FlashCard.Back;
 
-        switch (richEditBox.Name.Split("_")[1])
+        switch (int.Parse(richEditBox.Name.Split("_").Last()))
         {
-            // TODO: Implement other layout types
-            case "Front":
-                ViewModel.FlashCard.Front.Content1 = text;
+            case 1:
+                flashCardSide.Content1 = text;
                 break;
-            case "Back":
-                ViewModel.FlashCard.Back.Content1 = text;
+            case 2:
+                flashCardSide.Content2 = text;
                 break;
         }
     }
