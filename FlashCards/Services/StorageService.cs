@@ -1,10 +1,7 @@
 ﻿using FlashCards.Contracts.Services;
-using FlashCards.Data;
 using FlashCards.DBModels;
 using FlashCards.JSONModels;
 using FlashCards.ViewModels;
-using System.IO;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FlashCards.Services;
 
