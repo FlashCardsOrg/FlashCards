@@ -33,5 +33,6 @@
 
     <x:Double x:Key="SettingsCardSpacing">4</x:Double>
     <x:Double x:Key="UIControlSpacing">8</x:Double>
+    <x:Double x:Key="ContentSpacing">12</x:Double>
 
 </ResourceDictionary>
