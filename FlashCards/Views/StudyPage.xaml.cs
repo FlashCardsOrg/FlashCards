@@ -1,8 +1,11 @@
-﻿using FlashCards.Contracts.Services;
+﻿using CommunityToolkit.WinUI.Controls;
+using FlashCards.Contracts.Services;
 using FlashCards.ViewModels;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FlashCards.Views;
 
@@ -96,10 +99,69 @@ public sealed partial class StudyPage : Page
         switch (ViewModel.FlashCard.CurrentSide)
         {
             case FlashCardSides.Front:
-                Study_Content_RichEditBox.Document.SetText(Microsoft.UI.Text.TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                switch (ViewModel.FlashCard.Front.Layout)
+                {
+                    case Layouts.Text:
+                        Study_Front_RichEditBox_Text_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                        break;
+                    case Layouts.File:
+                        // Set File Content
+                        break;
+                    case Layouts.Text_Text:
+                        Study_Front_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                        Study_Front_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content2);
+                        break;
+                    case Layouts.File_File:
+                        // Set File Content
+                        // Set File Content
+                        break;
+                    case Layouts.Text_File:
+                        Study_Front_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                        // Set File Content
+                        break;
+                    case Layouts.File_Text:
+                        // Set File Content
+                        Study_Front_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                        break;
+                    case Layouts.Text_File_File:
+                        Study_Front_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
+                        // Set File Content
+                        // Set File Content
+                        break;
+                }
                 break;
+
             case FlashCardSides.Back:
-                Study_Content_RichEditBox.Document.SetText(Microsoft.UI.Text.TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                switch (ViewModel.FlashCard.Back.Layout)
+                {
+                    case Layouts.Text:
+                        Study_Back_RichEditBox_Text_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                        break;
+                    case Layouts.File:
+                        // Set File Content
+                        break;
+                    case Layouts.Text_Text:
+                        Study_Back_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                        Study_Back_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content2);
+                        break;
+                    case Layouts.File_File:
+                        // Set File Content
+                        // Set File Content
+                        break;
+                    case Layouts.Text_File:
+                        Study_Back_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                        // Set File Content
+                        break;
+                    case Layouts.File_Text:
+                        // Set File Content
+                        Study_Back_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                        break;
+                    case Layouts.Text_File_File:
+                        Study_Back_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
+                        // Set File Content
+                        // Set File Content
+                        break;
+                }
                 break;
         }
     }

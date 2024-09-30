@@ -17,12 +17,13 @@ public class VMFlashCard
 
     // TODO: Fix WasFlipped
     public bool WasFlipped = false;
+    // TODO: Fix CurrentSide
     public FlashCardSides CurrentSide = FlashCardSides.Front;
 
     public VMFlashCardSide Front = new();
     public VMFlashCardSide Back = new();
 
-    // TODO: Fix CanBeSaved and set inital value to flase
+    // TODO: Fix CanBeSaved
     public void UpdateCanBeSaved()
     {
         CanBeSaved = Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null;
@@ -30,6 +31,7 @@ public class VMFlashCard
 
     public class VMFlashCardSide
     {
+        // TODO: Fix Layout
         public Layouts Layout { get; set; } = Layouts.Text;
         public bool ShowBulletPointsIndividually { get; set; } = false;
         public string? Content1 { get; set; } = "Test";
