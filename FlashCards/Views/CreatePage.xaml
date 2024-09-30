@@ -9,6 +9,15 @@
     xmlns:vm="using:FlashCards.ViewModels"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:Key="PlaceHolderBoarder" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource ControlFillColorDefault}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
+            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -108,25 +117,184 @@
 
         <controls:SwitchPresenter
             Grid.Row="2"
+            Margin="0,12"
             TargetType="vm:FlashCardSides"
             Value="{Binding SelectedItem.Tag, ElementName=Create_FrontBack_SelectorBar}">
             <controls:Case Value="Front">
-                <RichEditBox
-                    x:Name="Create_Front_RichEditBox"
-                    Margin="0,12"
-                    TextChanged="RichEditBox_TextChanged">
-                    <RichEditBox.Resources>
-                        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
-                        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
-                    </RichEditBox.Resources>
-                </RichEditBox>
+                <controls:SwitchPresenter TargetType="vm:Layouts" Value="{x:Bind ViewModel.FlashCard.Front.Layout, Mode=OneWay}">
+                    <controls:Case Value="Text">
+                        <RichEditBox x:Name="Create_Front_RichEditBox_Text_1" TextChanged="RichEditBox_TextChanged">
+                            <RichEditBox.Resources>
+                                <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                            </RichEditBox.Resources>
+                        </RichEditBox>
+                    </controls:Case>
+
+                    <controls:Case Value="File">
+                        <Border Style="{StaticResource PlaceHolderBoarder}">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="File 1"
+                                TextAlignment="Center"/>
+                        </Border>
+                    </controls:Case>
+
+                    <controls:Case Value="Text_Text">
+                        <Grid ColumnSpacing="{StaticResource ContentSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <RichEditBox
+                                x:Name="Create_Front_RichEditBox_Text_Text_1"
+                                Grid.Column="0"
+                                TextChanged="RichEditBox_TextChanged">
+                                <RichEditBox.Resources>
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                </RichEditBox.Resources>
+                            </RichEditBox>
+
+                            <RichEditBox
+                                x:Name="Create_Front_RichEditBox_Text_Text_2"
+                                Grid.Column="1"
+                                TextChanged="RichEditBox_TextChanged">
+                                <RichEditBox.Resources>
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                </RichEditBox.Resources>
+                            </RichEditBox>
+                        </Grid>
+                    </controls:Case>
+
+                    <controls:Case Value="File_File">
+                        <Grid ColumnSpacing="{StaticResource ContentSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 1"
+                                    TextAlignment="Center"/>
+                            </Border>
+
+                            <Border Grid.Column="1" Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 2"
+                                    TextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </controls:Case>
+
+                    <controls:Case Value="Text_File">
+                        <Grid ColumnSpacing="{StaticResource ContentSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <RichEditBox
+                                x:Name="Create_Front_RichEditBox_Text_File_1"
+                                Grid.Column="0"
+                                TextChanged="RichEditBox_TextChanged">
+                                <RichEditBox.Resources>
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                </RichEditBox.Resources>
+                            </RichEditBox>
+
+                            <Border Grid.Column="1" Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 2"
+                                    TextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </controls:Case>
+
+                    <controls:Case Value="File_Text">
+                        <Grid ColumnSpacing="{StaticResource ContentSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 1"
+                                    TextAlignment="Center"/>
+                            </Border>
+
+                            <RichEditBox
+                                x:Name="Create_Front_RichEditBox_File_Text_2"
+                                Grid.Column="1"
+                                TextChanged="RichEditBox_TextChanged">
+                                <RichEditBox.Resources>
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                </RichEditBox.Resources>
+                            </RichEditBox>
+                        </Grid>
+                    </controls:Case>
+
+                    <controls:Case Value="Text_File_File">
+                        <Grid ColumnSpacing="{StaticResource ContentSpacing}" RowSpacing="{StaticResource ContentSpacing}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <RichEditBox
+                                x:Name="Create_Front_RichEditBox_Text_File_File_1"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                TextChanged="RichEditBox_TextChanged">
+                                <RichEditBox.Resources>
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                </RichEditBox.Resources>
+                            </RichEditBox>
+
+                            <Border
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 2"
+                                    TextAlignment="Center"/>
+                            </Border>
+
+
+                            <Border
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource PlaceHolderBoarder}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="File 3"
+                                    TextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </controls:Case>
+                </controls:SwitchPresenter>
             </controls:Case>
 
             <controls:Case Value="Back">
-                <RichEditBox
-                    x:Name="Create_Back_RichEditBox"
-                    Margin="0,12"
-                    TextChanged="RichEditBox_TextChanged">
+                <RichEditBox x:Name="Create_Back_RichEditBox" TextChanged="RichEditBox_TextChanged">
                     <RichEditBox.Resources>
                         <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
                         <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>

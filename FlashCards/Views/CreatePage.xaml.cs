@@ -259,7 +259,7 @@ public sealed partial class CreatePage : Page
         await _storageService.AddFlashCardAsync(ViewModel.FlashCard);
 
         // TODO: Implement other layout types
-        Create_Front_RichEditBox.Document.SetText(TextSetOptions.None, null);
+        Create_Front_RichEditBox_Text_1.Document.SetText(TextSetOptions.None, null);
         Create_Back_RichEditBox.Document.SetText(TextSetOptions.None, null);
         Create_FrontBack_SelectorBar.SelectedItem = Create_SelectorBarItem_Front;
         ViewModel.FlashCard = new();
