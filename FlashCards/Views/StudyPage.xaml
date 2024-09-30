@@ -14,7 +14,12 @@
             <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
             <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
-            <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+            <Setter Property="Padding" Value="{ThemeResource ButtonPadding}"/>
+            <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
+        </Style>
+        <Style x:Key="ButtonStyleRichEditBoxBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
             <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
         </Style>
     </Page.Resources>
@@ -57,22 +62,20 @@
                         </Border>
                     </StackPanel>
 
-                    <controls:SwitchPresenter
+                    <Border
                         Grid.Row="2"
-                        TargetType="vm:FlashCardSides"
-                        Value="{x:Bind ViewModel.FlashCard.CurrentSide}">
-                        <controls:Case Value="Front">
-                            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
-                                <RichTextBlock x:Name="Study_Front_RichTextBlock"/>
-                            </Border>
-                        </controls:Case>
-
-                        <controls:Case Value="Back">
-                            <Border Margin="0,12" Style="{StaticResource ButtonStyleTextBlockBorder}">
-                                <RichTextBlock x:Name="Study_Back_RichTextBlock"/>
-                            </Border>
-                        </controls:Case>
-                    </controls:SwitchPresenter>
+                        Margin="0,12"
+                        Style="{StaticResource ButtonStyleRichEditBoxBorder}">
+                        <!--  TODO: Make RichEditBox IsReadOnly="True"  -->
+                        <RichEditBox x:Name="Study_Content_RichEditBox">
+                            <RichEditBox.Resources>
+                                <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorDefault}"/>
+                                <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorDefault}"/>
+                                <Thickness x:Key="TextControlBorderThemeThickness">0</Thickness>
+                                <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
+                            </RichEditBox.Resources>
+                        </RichEditBox>
+                    </Border>
 
                     <RelativePanel Grid.Row="3" Margin="0,0,0,20">
                         <StackPanel

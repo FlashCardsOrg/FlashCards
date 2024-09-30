@@ -35,7 +35,7 @@ public sealed partial class StudyPage : Page
         Update_Subject_TextBlock();
         Update_Semester_TextBlock();
         Update_Tags_TextBlock();
-        Update_Content_RichTextBlock();
+        Update_Content_RichEditBox();
         Update_NextBulletPoint_Button();
     }
 
@@ -91,18 +91,15 @@ public sealed partial class StudyPage : Page
         Study_Tags_TextBlock.Text = $"{tagsString}: {selectedTagsString}";
     }
 
-    private void Update_Content_RichTextBlock()
+    private void Update_Content_RichEditBox()
     {
-        // TODO: Fix the RichTextBlock Content
         switch (ViewModel.FlashCard.CurrentSide)
         {
             case FlashCardSides.Front:
-                Study_Front_RichTextBlock.Blocks.Clear();
-                Study_Front_RichTextBlock.Blocks.Add(new Paragraph());
+                Study_Content_RichEditBox.Document.SetText(Microsoft.UI.Text.TextSetOptions.FormatRtf, ViewModel.FlashCard.Front.Content1);
                 break;
             case FlashCardSides.Back:
-                Study_Back_RichTextBlock.Blocks.Clear();
-                Study_Back_RichTextBlock.Blocks.Add(new Paragraph());
+                Study_Content_RichEditBox.Document.SetText(Microsoft.UI.Text.TextSetOptions.FormatRtf, ViewModel.FlashCard.Back.Content1);
                 break;
         }
     }
