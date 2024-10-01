@@ -505,7 +505,7 @@
             </controls:Case>
 
             <controls:Case Value="False">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="No Cards Left"/>
+                <TextBlock l:Uids.Uid="Study_NoCardsLeft_TextBlock" Style="{StaticResource SubtitleTextBlockStyle}"/>
             </controls:Case>
         </controls:SwitchPresenter>
     </Grid>
