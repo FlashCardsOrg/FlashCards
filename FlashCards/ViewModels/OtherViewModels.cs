@@ -1,42 +1,73 @@
-﻿using FlashCards.Contracts.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FlashCards.Contracts.Services;
 
 namespace FlashCards.ViewModels;
 
-public class VMFlashCard
+public partial class VMFlashCard : ObservableRecipient
 {
     private static readonly ICreateSettingsService _createSettingsService = App.GetService<ICreateSettingsService>();
     private readonly IDatabaseService _dbService = App.GetService<IDatabaseService>();
 
-    public int Id { get; set; }
-    public int BoxNumber { get; set; } = 1; public int Semester { get; set; } = _createSettingsService.SelectedSemester;
-    public DateOnly? LastReviewDate { get; set; } = null;
-    public int SubjectID = _createSettingsService.SelectedSubjectID;
-    public List<int> TagIDs { get; set; } = _createSettingsService.SelectedTagIDs;
+    [ObservableProperty]
+    private int _id;
 
-    public bool CanBeSaved = true;
+    [ObservableProperty]
+    private int _boxNumber = 1;
 
-    // TODO: Fix WasFlipped
-    public bool WasFlipped = false;
-    // TODO: Fix CurrentSide
-    public FlashCardSides CurrentSide = FlashCardSides.Front;
+    [ObservableProperty]
+    private int _semester = _createSettingsService.SelectedSemester;
 
-    public VMFlashCardSide Front = new();
-    public VMFlashCardSide Back = new();
+    [ObservableProperty]
+    private DateOnly? _lastReviewDate = null;
 
-    // TODO: Fix CanBeSaved
-    public void UpdateCanBeSaved()
+    [ObservableProperty]
+    private int _subjectID = _createSettingsService.SelectedSubjectID;
+
+    [ObservableProperty]
+    private List<int> _tagIDs = _createSettingsService.SelectedTagIDs;
+
+    [ObservableProperty]
+    private bool _canBeSaved;
+
+    [ObservableProperty]
+    private bool _wasFlipped = false;
+
+    [ObservableProperty]
+    private FlashCardSides _currentSide = FlashCardSides.Front;
+
+    [ObservableProperty]
+    private VMFlashCardSide _front = new();
+
+    [ObservableProperty]
+    private VMFlashCardSide _back = new();
+
+    public VMFlashCard()
     {
-        CanBeSaved = Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null;
+        // TODO: Fix CanBeSaved: _canBeSaved = GetCanBeSaved();
+        _canBeSaved = true;
     }
 
-    public class VMFlashCardSide
+    private bool GetCanBeSaved()
     {
-        // TODO: Fix Layout
-        public Layouts Layout { get; set; } = Layouts.Text;
-        public bool ShowBulletPointsIndividually { get; set; } = false;
-        public string? Content1 { get; set; } = "Test";
-        public string? Content2 { get; set; } = "Test";
-        public string? Content3 { get; set; }
+        return (Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null && Front.IsComplete() && Back.IsComplete());
+    }
+
+    public partial class VMFlashCardSide : ObservableRecipient
+    {
+        [ObservableProperty]
+        private Layouts _layout = Layouts.Text;
+
+        [ObservableProperty]
+        private bool _showBulletPointsIndividually = false;
+
+        [ObservableProperty]
+        private string? _content1;
+
+        [ObservableProperty]
+        private string? _content2;
+
+        [ObservableProperty]
+        private string? _content3;
 
         public bool IsComplete()
         {

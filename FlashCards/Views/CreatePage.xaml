@@ -587,10 +587,10 @@
                         IsChecked="{x:Bind ViewModel.FlashCard.Back.ShowBulletPointsIndividually, Mode=TwoWay}"
                         RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
-                    <!--  IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"  -->
                     <Button
                         l:Uids.Uid="Create_SaveFlashCard_Button"
                         Click="SaveFlashCard_Button_Clicked"
+                        IsEnabled="{x:Bind ViewModel.FlashCard.CanBeSaved, Mode=OneWay}"
                         RelativePanel.AlignRightWithPanel="True"
                         Style="{StaticResource AccentButtonStyle}"/>
                 </RelativePanel>
