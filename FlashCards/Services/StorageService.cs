@@ -146,7 +146,10 @@ public class StorageService(IDatabaseService databaseService, IJSONService JSONS
 
         string boxFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder, $"Box-{boxNumber}");
         await MoveCardsOnDeleteAsync(boxNumber.Value);
-        Directory.Delete(boxFolder, true);
+        if (Directory.Exists(boxFolder))
+        {
+            Directory.Delete(boxFolder, true);
+        }            
         await FixBoxNumbersAsync(boxNumber.Value);
     }
 
