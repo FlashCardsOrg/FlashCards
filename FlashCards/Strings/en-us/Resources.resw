@@ -394,4 +394,10 @@
   <data name="Shell_Study_Filtered.Content" xml:space="preserve">
     <value>Filtered</value>
   </data>
+  <data name="Study_Wrong_Button.Content" xml:space="preserve">
+    <value>Wrong</value>
+  </data>
+  <data name="Study_Correct_Button.Content" xml:space="preserve">
+    <value>Correct</value>
+  </data>
 </root>

@@ -6,6 +6,7 @@ public interface IDatabaseService
 {
     List<Box> GetBoxes();
     int GetBoxID(int number);
+    int GetBoxNumberByFlashCardID(int flashCardID);
     int AddBox(int number, DueAfterOptions dueAfter);
     void EditBox(int id, DueAfterOptions dueAfter);
     int? DeleteBox(int id);
@@ -24,4 +25,6 @@ public interface IDatabaseService
     List<int> GetDueFlashCardIDs();
     FlashCard? GetFlashCard(int id);
     int AddFlashCard(FlashCard flashCard);
+    int FlashCardCorrect(int id);
+    int FlashCardWrong(int id);
 }

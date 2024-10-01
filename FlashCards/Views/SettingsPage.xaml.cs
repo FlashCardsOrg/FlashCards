@@ -78,7 +78,7 @@ public sealed partial class SettingsPage : Page
             return;
         }
         // TODO: Disbale Delete Button if last box
-        _storageService.DeleteBox(id);
+        _storageService.DeleteBoxAsync(id);
         ViewModel.DeleteBox(id);
     }
 
