@@ -224,10 +224,12 @@ public sealed partial class CreatePage : Page
         {
             case "Front":
                 ViewModel.FlashCard.Front.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                ViewModel.FlashCard.Front.ResetContent();
                 Create_Front_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
                 break;
             case "Back":
                 ViewModel.FlashCard.Back.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
+                ViewModel.FlashCard.Back.ResetContent();
                 Create_Back_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
                 break;
         }

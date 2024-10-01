@@ -79,6 +79,11 @@ public partial class VMFlashCard : ObservableRecipient
                 _ => false,
             };
         }
+
+        public void ResetContent()
+        {
+            Content1 = Content2 = Content3 = null;
+        }
     }
 }
 
