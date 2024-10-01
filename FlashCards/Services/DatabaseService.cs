@@ -217,6 +217,7 @@ public class DatabaseService : IDatabaseService
         return context.FlashCards
             .Include(flashCard => flashCard.Box)
             .Include(flashCard => flashCard.Subject)
+            .Include(flashCard => flashCard.Tags)
             .FirstOrDefault(flashCard => flashCard.Id == id);
     }
 
@@ -224,6 +225,7 @@ public class DatabaseService : IDatabaseService
     {
         using FlashCardsContext context = new();
         context.FlashCards.Add(flashCard);
+        context.Tags.AttachRange(flashCard.Tags);
         context.SaveChanges();
         return flashCard.Id;
     }
