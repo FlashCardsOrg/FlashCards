@@ -71,14 +71,14 @@ public sealed partial class SettingsPage : Page
         ViewModel.AddBox(id, number, dueAfter);
     }
 
-    private void DeleteBox_Button_Clicked(object sender, RoutedEventArgs e)
+    private async void DeleteBox_Button_Clicked(object sender, RoutedEventArgs e)
     {
         if ((sender as MenuFlyoutItem)?.Tag is not int id)
         {
             return;
         }
         // TODO: Disbale Delete Button if last box
-        _storageService.DeleteBoxAsync(id);
+        await _storageService.DeleteBoxAsync(id);
         ViewModel.DeleteBox(id);
     }
 
