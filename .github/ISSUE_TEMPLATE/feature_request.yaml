@@ -1,0 +1,52 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "Feature Request: "
+assignees: D4rk-S0ul
+
+body:
+
+    # Description
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe the Feature Request
+      description: Please enter a clear and concise description description of the feature you want to request.
+
+    # Use Case
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Use Case
+      description: Please enter your use case for the requestfeature.
+
+    # Screenshots
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots here to help explain your idea.
+
+    # FlashCards Version
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: FlashCards Version
+      description: Which version of FlashCards are you using? To see your FlashCards version, open the FlashCards App and access it from Settings -> About -> FlashCards - Version.
+      placeholder: "e.g. 1.0.3"
+
+  # Windows Build
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Windows Build
+      description: Which version of Windows are you using? To see your Windows version, open the Windows Settings and access it from System -> About -> Windows specifications -> OS build.
+      placeholder: "e.g. 22631.4169"
+
+    # Additional Context
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Please enter any other applicable info here.
