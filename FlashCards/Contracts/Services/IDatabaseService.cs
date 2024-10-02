@@ -16,6 +16,7 @@ public interface IDatabaseService
     int AddSubject(string name);
     void EditSubject(int id, string name);
     void DeleteSubject(int id);
+    bool HasFlashCards(int id);
 
     List<Tag> GetTags();
     int AddTag(string name);

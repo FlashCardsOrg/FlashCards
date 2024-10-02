@@ -109,11 +109,21 @@ public class VMBox(int boxID, int number, int selectedIndex)
     public int SelectedIndex { get; set; } = selectedIndex;
 }
 
-public class VMSubject(int subjectID, string subjectName)
+public partial class VMSubject(int subjectID, string subjectName) : ObservableRecipient
 {
-    public int SubjectID { get; set; } = subjectID;
-    public string SubjectName { get; set; } = subjectName;
-    public bool EditingState { get; set; } = false;
+    private static readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+
+    [ObservableProperty]
+    private int _subjectID = subjectID;
+
+    [ObservableProperty]
+    private string _subjectName = subjectName;
+
+    [ObservableProperty]
+    private bool _editingState = false;
+
+    [ObservableProperty]
+    private bool _canBeDeleted = _databaseService.HasFlashCards(subjectID);
 }
 
 public class VMTag(int tagID, string tagName)

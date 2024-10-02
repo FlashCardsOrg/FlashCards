@@ -143,7 +143,6 @@ public sealed partial class SettingsPage : Page
             return;
         }
 
-        // TODO: Dont allow delete if subject has flashcards
         _databaseService.DeleteSubject(id);
         ViewModel.DeleteSubject(id);
     }

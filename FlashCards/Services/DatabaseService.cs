@@ -135,6 +135,12 @@ public class DatabaseService : IDatabaseService
         context.SaveChanges();
     }
 
+    public bool HasFlashCards(int id)
+    {
+        using FlashCardsContext context = new();
+        return context.FlashCards.Any(flashCard => flashCard.SubjectId == id);
+    }
+
     public List<Tag> GetTags()
     {
         using FlashCardsContext context = new();
