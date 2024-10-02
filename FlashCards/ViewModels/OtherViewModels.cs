@@ -45,11 +45,6 @@ public partial class VMFlashCard : ObservableRecipient
     [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private VMFlashCardSide _back = new();
 
-    public VMFlashCard()
-    {
-        _canBeSaved = GetCanBeSaved();
-    }
-
     private bool GetCanBeSaved()
     {
         return (Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null && Front.IsComplete && Back.IsComplete);
