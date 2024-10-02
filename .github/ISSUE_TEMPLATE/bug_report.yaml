@@ -1,64 +1,64 @@
 name: Bug Report
-description: File a bug report.
-title: "[Bug]: "
-labels: ["bug", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
-assignees:
-  - octocat
+description: Create a report to help us improve
+title: "Bug: "
+assignees: D4rk-S0ul
+type: Bug
+
 body:
-  - type: markdown
+
+    # Description
+  - type: textarea
+    validations:
+      required: true
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
+      label: Describe the Bug
+      description: Please enter a clear and concise description description of the bug.
+
+    # Steps to Reproduce
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide any required setup and steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+
+    # Expected Behavior
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: Please provide a description of what you expected to happen.
+
+    # Screenshots
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots here to help explain your problem.
+
+    # FlashCards Version
   - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
     validations:
       required: true
-  - type: dropdown
-    id: version
     attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-      default: 0
+      label: FlashCards Version
+      description: Which version of FlashCards are you using? To see your FlashCards version, open the FlashCards App and access it from Settings -> About -> FlashCards - Version.
+      placeholder: "e.g. 1.0.3"
+
+  # Windows Build
+  - type: input
     validations:
       required: true
-  - type: dropdown
-    id: browsers
     attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+      label: Windows Build
+      description: Which version of Windows are you using? To see your Windows version, open the Windows Settings and access it from System -> About -> Windows specifications -> OS build.
+      placeholder: "e.g. 22631.4169"
+
+    # Additional Context
   - type: textarea
-    id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Additional Context
+      description: Please enter any other applicable info here.
