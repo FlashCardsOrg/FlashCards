@@ -26,8 +26,7 @@ public partial class VMFlashCard : ObservableRecipient
     [ObservableProperty]
     private List<int> _tagIDs = _createSettingsService.SelectedTagIDs;
 
-    [ObservableProperty]
-    private bool _canBeSaved;
+    public bool CanBeSaved => GetCanBeSaved();
 
     [ObservableProperty]
     private bool _wasFlipped = false;
@@ -36,15 +35,16 @@ public partial class VMFlashCard : ObservableRecipient
     private FlashCardSides _currentSide = FlashCardSides.Front;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private VMFlashCardSide _front = new();
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private VMFlashCardSide _back = new();
 
     public VMFlashCard()
     {
-        // TODO: Fix CanBeSaved: _canBeSaved = GetCanBeSaved();
-        _canBeSaved = true;
+        _canBeSaved = GetCanBeSaved();
     }
 
     private bool GetCanBeSaved()
@@ -55,21 +55,29 @@ public partial class VMFlashCard : ObservableRecipient
     public partial class VMFlashCardSide : ObservableRecipient
     {
         [ObservableProperty]
+        //[NotifyPropertyChangedFor(nameof(IsComplete))]
         private Layouts _layout = Layouts.Text;
 
         [ObservableProperty]
         private bool _showBulletPointsIndividually = false;
 
         [ObservableProperty]
+        //[NotifyPropertyChangedFor(nameof(IsComplete))]
         private string? _content1;
 
         [ObservableProperty]
+        //[NotifyPropertyChangedFor(nameof(IsComplete))]
         private string? _content2;
 
         [ObservableProperty]
+        //[NotifyPropertyChangedFor(nameof(IsComplete))]
         private string? _content3;
 
-        public bool IsComplete()
+        // TODO: Fix IsComplete
+        //public bool IsComplete => GetIsComplete();
+        public bool IsComplete = true;
+
+        private bool GetIsComplete()
         {
             return Layout switch
             {
