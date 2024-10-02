@@ -121,8 +121,7 @@
     <value>Karteikarten</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>Karteikarten App Beschreibung</value>
-    <comment>TODO</comment>
+    <value>Steigere deinen Lernfortschritt mit Karteikarten, entwickelt, um dir durch Spaced Repetition beim Lernen zu helfen. Wiederhole automatisch fällige Karten und organisiere deine Karteikarten nach Semestern, Kursen und Tags. Passe deine Lerneinheiten individuell an mit eigenen Fächern und Wiederholungsintervallen – alles auf einer übersichtlichen Windows 11-Oberfläche.</value>
   </data>
   <data name="Shell_Study.Content" xml:space="preserve">
     <value>Abfragen</value>
@@ -182,7 +181,7 @@
     <value>Entscheide was mit Karten passiert, die nicht gewusst wurden</value>
   </data>
   <data name="Settings_Demotion_Card.Header" xml:space="preserve">
-    <value>Karte Falsch</value>
+    <value>Falsche Antwort</value>
   </data>
   <data name="Settings_Demotion_First.Content" xml:space="preserve">
     <value>Erstes Fach</value>
@@ -393,5 +392,14 @@
   </data>
   <data name="Shell_Study_Filtered.Content" xml:space="preserve">
     <value>Gefiltert</value>
+  </data>
+  <data name="Study_Wrong_Button.Content" xml:space="preserve">
+    <value>Flasch</value>
+  </data>
+  <data name="Study_Correct_Button.Content" xml:space="preserve">
+    <value>Richtig</value>
+  </data>
+  <data name="Study_NoCardsLeft_TextBlock.Text" xml:space="preserve">
+    <value>Keine Karteikarten Übrig</value>
   </data>
 </root>

@@ -1,17 +1,15 @@
-﻿using CommunityToolkit.WinUI.Controls;
-using FlashCards.Contracts.Services;
+﻿using FlashCards.Contracts.Services;
 using FlashCards.ViewModels;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Documents;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FlashCards.Views;
 
 public sealed partial class StudyPage : Page
 {
     private readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+    private readonly IStorageService _storageService = App.GetService<IStorageService>();
 
     public StudyViewModel ViewModel
     {
@@ -203,6 +201,20 @@ public sealed partial class StudyPage : Page
 
     private async void Skip_Button_Clicked(object sender, RoutedEventArgs e)
     {
+        await ViewModel.GetNextFlashCardAsync();
+        UpdatePageContent();
+    }
+
+    private async void Correct_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        await _storageService.FlashCardCorrectAsync(ViewModel.FlashCard.Id);
+        await ViewModel.GetNextFlashCardAsync();
+        UpdatePageContent();
+    }
+
+    private async void Wrong_Button_Clicked(object sender, RoutedEventArgs e)
+    {
+        await _storageService.FlashCardWrongAsync(ViewModel.FlashCard.Id);
         await ViewModel.GetNextFlashCardAsync();
         UpdatePageContent();
     }

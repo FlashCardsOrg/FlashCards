@@ -12,15 +12,18 @@ public partial class VMFlashCard : ObservableRecipient
     private int _id;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private int _boxNumber = 1;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private int _semester = _createSettingsService.SelectedSemester;
 
     [ObservableProperty]
     private DateOnly? _lastReviewDate = null;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanBeSaved))]
     private int _subjectID = _createSettingsService.SelectedSubjectID;
 
     [ObservableProperty]
@@ -49,7 +52,7 @@ public partial class VMFlashCard : ObservableRecipient
 
     private bool GetCanBeSaved()
     {
-        return (Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null && Front.IsComplete() && Back.IsComplete());
+        return (Semester > 0 && BoxNumber > 0 && _dbService.GetSubject(SubjectID) is not null && Front.IsComplete && Back.IsComplete);
     }
 
     public partial class VMFlashCardSide : ObservableRecipient
@@ -102,11 +105,21 @@ public class VMBox(int boxID, int number, int selectedIndex)
     public int SelectedIndex { get; set; } = selectedIndex;
 }
 
-public class VMSubject(int subjectID, string subjectName)
+public partial class VMSubject(int subjectID, string subjectName) : ObservableRecipient
 {
-    public int SubjectID { get; set; } = subjectID;
-    public string SubjectName { get; set; } = subjectName;
-    public bool EditingState { get; set; } = false;
+    private static readonly IDatabaseService _databaseService = App.GetService<IDatabaseService>();
+
+    [ObservableProperty]
+    private int _subjectID = subjectID;
+
+    [ObservableProperty]
+    private string _subjectName = subjectName;
+
+    [ObservableProperty]
+    private bool _editingState = false;
+
+    [ObservableProperty]
+    private bool _canBeDeleted = _databaseService.HasFlashCards(subjectID);
 }
 
 public class VMTag(int tagID, string tagName)

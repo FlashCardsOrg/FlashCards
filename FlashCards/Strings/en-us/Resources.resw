@@ -120,10 +120,6 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Flash Cards</value>
   </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>Flash Cards App Description</value>
-    <comment>TODO</comment>
-  </data>
   <data name="Shell_Study.Content" xml:space="preserve">
     <value>Study</value>
   </data>
@@ -393,5 +389,17 @@
   </data>
   <data name="Shell_Study_Filtered.Content" xml:space="preserve">
     <value>Filtered</value>
+  </data>
+  <data name="Study_Wrong_Button.Content" xml:space="preserve">
+    <value>Wrong</value>
+  </data>
+  <data name="Study_Correct_Button.Content" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Boost your learning with Flash Cards, designed to help you retain knowledge through spaced repetition. Automatically review due cards and organize your flashcards by semesters, subjects, and tags. Customize your study sessions with personalized boxes and review intervals, all within a clean Windows 11 interface.</value>
+  </data>
+  <data name="Study_NoCardsLeft_TextBlock.Text" xml:space="preserve">
+    <value>No Cards Left</value>
   </data>
 </root>

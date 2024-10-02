@@ -136,7 +136,7 @@ public class StorageService(IDatabaseService databaseService, IJSONService JSONS
         }
     }
 
-    public async Task DeleteBox(int id)
+    public async Task DeleteBoxAsync(int id)
     {
         int? boxNumber = _databaseService.DeleteBox(id);
         if (boxNumber is null)
@@ -145,46 +145,49 @@ public class StorageService(IDatabaseService databaseService, IJSONService JSONS
         }
 
         string boxFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder, $"Box-{boxNumber}");
-        await MoveCardsOnDelete(boxNumber.Value);
-        Directory.Delete(boxFolder, true);
-        await FixBoxNumbers(boxNumber.Value);
+        await MoveCardsOnDeleteAsync(boxNumber.Value);
+        if (Directory.Exists(boxFolder))
+        {
+            Directory.Delete(boxFolder, true);
+        }            
+        await FixBoxNumbersAsync(boxNumber.Value);
     }
 
-    private async Task MoveCardsOnDelete(int boxNumber)
+    private async Task MoveCardsOnDeleteAsync(int fromBoxNumber)
     {
-        int targetBoxNumber = boxNumber == 1 ? 2 : boxNumber - 1;
-        await MoveCards(boxNumber, targetBoxNumber);
+        int toBoxNumber = fromBoxNumber == 1 ? 2 : fromBoxNumber - 1;
+        string boxesFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder);
+        string fromBoxFolder = Path.Combine(boxesFolder, $"Box-{fromBoxNumber}");
+        string toBoxFolder = Path.Combine(boxesFolder, $"Box-{toBoxNumber}");
+
+        if (!Directory.Exists(fromBoxFolder))
+        {
+            return;
+        }
+
+        if (!Directory.Exists(toBoxFolder))
+        {
+            Directory.CreateDirectory(toBoxFolder);
+        }
+
+        string[] flashCardFolders = Directory.GetFileSystemEntries(fromBoxFolder);
+        foreach (string flashCardFolder in flashCardFolders)
+        {
+            await MoveCardAsync(flashCardFolder, toBoxFolder);
+        }
     }
 
-    private async Task MoveCards(int fromBoxNumber, int toBoxNumber)
+    private async Task MoveCardAsync(string flashCardFolder, string toBoxFolder)
     {
         await Task.Run(() =>
         {
-            string boxesFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder);
-            string fromBoxFolder = Path.Combine(boxesFolder, $"Box-{fromBoxNumber}");
-            string toBoxFolder = Path.Combine(boxesFolder, $"Box-{toBoxNumber}");
-
-            if (!Directory.Exists(fromBoxFolder))
-            {
-                return;
-            }
-
-            if (!Directory.Exists(toBoxFolder))
-            {
-                Directory.CreateDirectory(toBoxFolder);
-            }
-
-            string[] flashCardFolders = Directory.GetFileSystemEntries(fromBoxFolder);
-            foreach (string flashCardFolder in flashCardFolders)
-            {
-                string directoryName = Path.GetFileName(flashCardFolder);
-                string destDirectory = Path.Combine(toBoxFolder, directoryName);
-                Directory.Move(flashCardFolder, destDirectory);
-            }
+            string directoryName = Path.GetFileName(flashCardFolder);
+            string destDirectory = Path.Combine(toBoxFolder, directoryName);
+            Directory.Move(flashCardFolder, destDirectory);
         });
     }
 
-    private async Task FixBoxNumbers(int boxNumber)
+    private async Task FixBoxNumbersAsync(int boxNumber)
     {
         await Task.Run(() =>
         {
@@ -205,5 +208,44 @@ public class StorageService(IDatabaseService databaseService, IJSONService JSONS
                 }
             }
         });
+    }
+
+    public async Task FlashCardCorrectAsync(int id)
+    {
+        int fromBoxNumber = _databaseService.GetBoxNumberByFlashCardID(id);
+        int toBoxNumber = _databaseService.FlashCardCorrect(id);
+
+        await MoveFlashCardAfterReviewAsync(id, fromBoxNumber, toBoxNumber);
+    }
+
+    public async Task FlashCardWrongAsync(int id)
+    {
+        int fromBoxNumber = _databaseService.GetBoxNumberByFlashCardID(id);
+        int toBoxNumber = _databaseService.FlashCardWrong(id);
+
+        await MoveFlashCardAfterReviewAsync(id, fromBoxNumber, toBoxNumber);
+    }
+
+    private async Task MoveFlashCardAfterReviewAsync(int flashCardID, int fromBoxNumber, int toBoxNumber)
+    {
+        if (fromBoxNumber == toBoxNumber)
+        {
+            return;
+        }
+
+        string boxesFolder = Path.Combine(_localApplicationData, _defaultBoxesFolder);
+        string flashCardFolder = Path.Combine(boxesFolder, $"Box-{fromBoxNumber}", $"FlashCard-{flashCardID}");
+        string toBoxFolder = Path.Combine(boxesFolder, $"Box-{toBoxNumber}");
+
+        if (!Directory.Exists(flashCardFolder))
+        {
+            return;
+        }
+        if (!Directory.Exists(toBoxFolder))
+        {
+            Directory.CreateDirectory(toBoxFolder);
+        }
+
+        await MoveCardAsync(flashCardFolder, toBoxFolder);
     }
 }
