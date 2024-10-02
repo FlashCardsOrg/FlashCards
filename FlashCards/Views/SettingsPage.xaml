@@ -115,6 +115,7 @@
                                                             <MenuFlyoutItem
                                                                 l:Uids.Uid="Settings_Subject_DeleteSubject_Button"
                                                                 Click="DeleteSubject_Button_Clicked"
+                                                                IsEnabled="{x:Bind CanBeDeleted}"
                                                                 Tag="{x:Bind SubjectID}"/>
                                                         </MenuFlyout>
                                                     </Button.Flyout>

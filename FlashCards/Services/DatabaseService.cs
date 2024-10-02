@@ -7,6 +7,8 @@ namespace FlashCards.Services;
 
 public class DatabaseService : IDatabaseService
 {
+    private readonly IDemotionSettingsService _demotionSettingsService = App.GetService<IDemotionSettingsService>();
+
     public List<Box> GetBoxes()
     {
         using FlashCardsContext context = new();
@@ -17,6 +19,12 @@ public class DatabaseService : IDatabaseService
     {
         using FlashCardsContext context = new();
         return context.Boxes.FirstOrDefault(box => box.Number == number)!.Id;
+    }
+
+    public int GetBoxNumberByFlashCardID(int flashCardID)
+    {
+        using FlashCardsContext context = new();
+        return context.FlashCards.Include(flashCard => flashCard.Box).First(flashCard => flashCard.Id == flashCardID).Box.Number;
     }
 
     public int AddBox(int number, DueAfterOptions dueAfter)
@@ -57,15 +65,10 @@ public class DatabaseService : IDatabaseService
         return box.Number;
     }
 
-    private static void MoveCardsOnDelete(int boxNumber)
-    {
-        int targetBoxNumber = boxNumber == 1 ? 2 : boxNumber - 1;
-        MoveCards(boxNumber, targetBoxNumber);
-    }
-
-    private static void MoveCards(int fromBoxNumber, int toBoxNumber)
+    private static void MoveCardsOnDelete(int fromBoxNumber)
     {
         using FlashCardsContext context = new();
+        int toBoxNumber = fromBoxNumber == 1 ? 2 : fromBoxNumber - 1;
         var flashCards = context.FlashCards.Include(flashCard => flashCard.Box).Where(flashCard => flashCard.Box.Number == fromBoxNumber);
         foreach (var flashCard in flashCards)
         {
@@ -132,6 +135,12 @@ public class DatabaseService : IDatabaseService
         context.SaveChanges();
     }
 
+    public bool HasFlashCards(int id)
+    {
+        using FlashCardsContext context = new();
+        return context.FlashCards.Any(flashCard => flashCard.SubjectId == id);
+    }
+
     public List<Tag> GetTags()
     {
         using FlashCardsContext context = new();
@@ -178,6 +187,7 @@ public class DatabaseService : IDatabaseService
         using FlashCardsContext context = new();
         DateOnly today = DateOnly.FromDateTime(DateTime.Today);
         return [.. context.FlashCards
+            .Include(flashCard => flashCard.Box)
             .AsEnumerable()
             .Where(flashCard => flashCard.LastReviewDate == null || flashCard.LastReviewDate.Value.AddDays(GetDaysFromDueAfter(flashCard.Box.DueAfter)) <= today)
             .Select(flashCard => flashCard.Id)
@@ -228,5 +238,64 @@ public class DatabaseService : IDatabaseService
         context.Tags.AttachRange(flashCard.Tags);
         context.SaveChanges();
         return flashCard.Id;
+    }
+
+    public int FlashCardCorrect(int id) 
+    { 
+        using FlashCardsContext context = new();
+        var flashCard = context.FlashCards.Include(flashCard => flashCard.Box).FirstOrDefault(flashCard => flashCard.Id == id);
+
+        if (flashCard is null)
+        {
+            return 0;
+        }
+
+        flashCard.LastReviewDate = DateOnly.FromDateTime(DateTime.Today);
+
+        if (flashCard.Box.Number < context.Boxes.Count())
+        {
+            flashCard.Box.Number++;
+        }
+        context.SaveChanges();
+        return flashCard.Box.Number;
+    }
+
+    public int FlashCardWrong(int id)
+    {
+        using FlashCardsContext context = new();
+        var flashCard = context.FlashCards.Include(flashCard => flashCard.Box).FirstOrDefault(flashCard => flashCard.Id == id);
+
+        if (flashCard is null)
+        {
+            return 0;
+        }
+
+        flashCard.LastReviewDate = DateOnly.FromDateTime(DateTime.Today);
+
+        switch (_demotionSettingsService.SelectedDemotionTag)
+        {
+            case "First":
+                flashCard.Box.Number = 1;
+                break;
+            case "One":
+                if (flashCard.Box.Number > 1)
+                {
+                    flashCard.Box.Number--;
+                }
+                break;
+            case "Two":
+                if (flashCard.Box.Number > 1)
+                {
+                    flashCard.Box.Number -= 1;
+                }
+                if (flashCard.Box.Number > 1)
+                {
+                    flashCard.Box.Number -= 1;
+                }
+                break;
+        }
+        
+        context.SaveChanges();
+        return flashCard.Box.Number;
     }
 }

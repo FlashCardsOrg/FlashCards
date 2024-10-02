@@ -225,11 +225,13 @@ public sealed partial class CreatePage : Page
             case "Front":
                 ViewModel.FlashCard.Front.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
                 ViewModel.FlashCard.Front.ResetContent();
+                ResetRichEditBoxTexts(FlashCardSides.Front);
                 Create_Front_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
                 break;
             case "Back":
                 ViewModel.FlashCard.Back.Layout = (Layouts)Enum.Parse(typeof(Layouts), (string)menuFlyoutItem.Tag);
                 ViewModel.FlashCard.Back.ResetContent();
+                ResetRichEditBoxTexts(FlashCardSides.Back);
                 Create_Back_Layout_DropDownButton.Content = $"{layoutString}: {layout}";
                 break;
         }
@@ -270,20 +272,39 @@ public sealed partial class CreatePage : Page
         ViewModel.FlashCard = new();
     }
 
-    private void ResetRichEditBoxTexts()
+    private void ResetRichEditBoxTexts(FlashCardSides? flashCardSide = null)
     {
-        Create_Front_RichEditBox_Text_1.Document.SetText(TextSetOptions.None, null);
-        Create_Front_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.None, null);
-        Create_Front_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.None, null);
-        Create_Front_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.None, null);
-        Create_Front_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.None, null);
-        Create_Front_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.None, null);
+        void ResetFront()
+        {
+            Create_Front_RichEditBox_Text_1.Document.SetText(TextSetOptions.None, null);
+            Create_Front_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.None, null);
+            Create_Front_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.None, null);
+            Create_Front_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.None, null);
+            Create_Front_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.None, null);
+            Create_Front_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.None, null);
+        }
 
-        Create_Back_RichEditBox_Text_1.Document.SetText(TextSetOptions.None, null);
-        Create_Back_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.None, null);
-        Create_Back_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.None, null);
-        Create_Back_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.None, null);
-        Create_Back_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.None, null);
-        Create_Back_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.None, null);
+        void ResetBack()
+        {
+            Create_Back_RichEditBox_Text_1.Document.SetText(TextSetOptions.None, null);
+            Create_Back_RichEditBox_Text_Text_1.Document.SetText(TextSetOptions.None, null);
+            Create_Back_RichEditBox_Text_Text_2.Document.SetText(TextSetOptions.None, null);
+            Create_Back_RichEditBox_Text_File_1.Document.SetText(TextSetOptions.None, null);
+            Create_Back_RichEditBox_File_Text_2.Document.SetText(TextSetOptions.None, null);
+            Create_Back_RichEditBox_Text_File_File_1.Document.SetText(TextSetOptions.None, null);
+        }
+
+        switch (flashCardSide)
+        {
+            case FlashCardSides.Front:
+                ResetFront();
+                return;
+            case FlashCardSides.Back:
+                ResetBack();
+                return;
+        }
+
+        ResetFront();
+        ResetBack();
     }
 }

@@ -465,34 +465,47 @@
                             <Button l:Uids.Uid="Study_Flip_Button" Click="Flip_Button_Clicked"/>
                         </StackPanel>
 
-                        <StackPanel
-                            Orientation="Horizontal"
+                        <controls:SwitchPresenter
                             RelativePanel.AlignRightWithPanel="True"
-                            Spacing="{StaticResource UIControlSpacing}">
-                            <controls:SwitchPresenter TargetType="x:Boolean" Value="{x:Bind ViewModel.FlashCard.WasFlipped, Mode=OneWay}">
-                                <controls:Case Value="False">
+                            TargetType="x:Boolean"
+                            Value="{x:Bind ViewModel.FlashCard.WasFlipped, Mode=OneWay}">
+                            <controls:Case Value="False">
+                                <Button
+                                    l:Uids.Uid="Study_Skip_Button"
+                                    Click="Skip_Button_Clicked"
+                                    RelativePanel.AlignRightWithPanel="True"
+                                    Style="{StaticResource AccentButtonStyle}"/>
+                            </controls:Case>
+
+                            <controls:Case Value="True">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    RelativePanel.AlignRightWithPanel="True"
+                                    Spacing="{StaticResource UIControlSpacing}">
                                     <Button
+                                        x:Name="Study_Correct_Button"
+                                        l:Uids.Uid="Study_Correct_Button"
+                                        Click="Correct_Button_Clicked"/>
+
+                                    <Button
+                                        x:Name="Study_Skip_Button"
                                         l:Uids.Uid="Study_Skip_Button"
                                         Click="Skip_Button_Clicked"
-                                        RelativePanel.AlignRightWithPanel="True"
                                         Style="{StaticResource AccentButtonStyle}"/>
-                                </controls:Case>
 
-                                <controls:Case Value="True">
-                                    <controls:Segmented>
-                                        <controls:SegmentedItem>Wrong</controls:SegmentedItem>
-                                        <controls:SegmentedItem>Skip</controls:SegmentedItem>
-                                        <controls:SegmentedItem>Right</controls:SegmentedItem>
-                                    </controls:Segmented>
-                                </controls:Case>
-                            </controls:SwitchPresenter>
-                        </StackPanel>
+                                    <Button
+                                        x:Name="Study_Wrong_Button"
+                                        l:Uids.Uid="Study_Wrong_Button"
+                                        Click="Wrong_Button_Clicked"/>
+                                </StackPanel>
+                            </controls:Case>
+                        </controls:SwitchPresenter>
                     </RelativePanel>
                 </Grid>
             </controls:Case>
 
             <controls:Case Value="False">
-                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="No Cards Left"/>
+                <TextBlock l:Uids.Uid="Study_NoCardsLeft_TextBlock" Style="{StaticResource SubtitleTextBlockStyle}"/>
             </controls:Case>
         </controls:SwitchPresenter>
     </Grid>
