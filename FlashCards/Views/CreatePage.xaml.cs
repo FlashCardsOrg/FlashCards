@@ -3,6 +3,7 @@ using FlashCards.ViewModels;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 namespace FlashCards.Views;
 
 public sealed partial class CreatePage : Page
@@ -185,6 +186,132 @@ public sealed partial class CreatePage : Page
         }
 
         Create_EditTags_DropDownButton.Content = $"{tagsString}: {selectedTagsString}";
+    }
+
+    private void Bold_ToggleButton_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggleButton)
+        {
+            return;
+        }
+
+        List<ITextSelection> selectedTexts = [
+            Create_Front_RichEditBox_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_1.Document.Selection,
+            Create_Front_RichEditBox_File_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_File_1.Document.Selection,
+
+            Create_Back_RichEditBox_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_1.Document.Selection,
+            Create_Back_RichEditBox_File_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_File_1.Document.Selection
+        ];
+
+        foreach(ITextSelection selectedText in selectedTexts)
+        {
+            if (selectedText is not null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                switch (toggleButton.IsChecked)
+                {
+                    case true:
+                        charFormatting.Bold = FormatEffect.On;
+                        break;
+                    case false:
+                        charFormatting.Bold = FormatEffect.Off;
+                        break;
+                }
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
+    }
+
+    private void Italic_ToggleButton_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggleButton)
+        {
+            return;
+        }
+
+        List<ITextSelection> selectedTexts = [
+            Create_Front_RichEditBox_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_1.Document.Selection,
+            Create_Front_RichEditBox_File_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_File_1.Document.Selection,
+
+            Create_Back_RichEditBox_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_1.Document.Selection,
+            Create_Back_RichEditBox_File_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_File_1.Document.Selection
+        ];
+
+        foreach (ITextSelection selectedText in selectedTexts)
+        {
+            if (selectedText is not null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                switch (toggleButton.IsChecked)
+                {
+                    case true:
+                        charFormatting.Italic = FormatEffect.On;
+                        break;
+                    case false:
+                        charFormatting.Italic = FormatEffect.Off;
+                        break;
+                }
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
+    }
+
+    private void Underlined_ToggleButton_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggleButton)
+        {
+            return;
+        }
+
+        List<ITextSelection> selectedTexts = [
+            Create_Front_RichEditBox_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Front_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_1.Document.Selection,
+            Create_Front_RichEditBox_File_Text_2.Document.Selection,
+            Create_Front_RichEditBox_Text_File_File_1.Document.Selection,
+
+            Create_Back_RichEditBox_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_1.Document.Selection,
+            Create_Back_RichEditBox_Text_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_1.Document.Selection,
+            Create_Back_RichEditBox_File_Text_2.Document.Selection,
+            Create_Back_RichEditBox_Text_File_File_1.Document.Selection
+        ];
+
+        foreach (ITextSelection selectedText in selectedTexts)
+        {
+            if (selectedText is not null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                switch (toggleButton.IsChecked)
+                {
+                    case true:
+                        charFormatting.Underline = UnderlineType.Single;
+                        break;
+                    case false:
+                        charFormatting.Underline = UnderlineType.None;
+                        break;
+                }
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
     }
 
     private void EditLayout_DropDownButton_Loaded(object sender, RoutedEventArgs e)

@@ -94,16 +94,16 @@
                     </ComboBox.Items>
                 </ComboBox>
 
-                <ToggleButton>
+                <ToggleButton Click="Bold_ToggleButton_Clicked">
                     <FontIcon FontSize="18" Glyph="&#xE8DD;"/>
                 </ToggleButton>
 
-                <ToggleButton>
-                    <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
+                <ToggleButton Click="Italic_ToggleButton_Clicked">
+                    <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
                 </ToggleButton>
 
-                <ToggleButton>
-                    <FontIcon FontSize="18" Glyph="&#xE8DB;"/>
+                <ToggleButton Click="Underlined_ToggleButton_Clicked">
+                    <FontIcon FontSize="18" Glyph="&#xE8DC;"/>
                 </ToggleButton>
 
                 <ComboBox SelectedIndex="0">
