@@ -244,7 +244,7 @@
                 <StackPanel Spacing="{ThemeResource SettingsCardSpacing}">
                     <controls:SettingsCard l:Uids.Uid="Settings_About_Card" Header="{x:Bind ViewModel.VersionDescription, Mode=OneWay}">
                         <controls:SettingsCard.HeaderIcon>
-                            <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/WindowIcon.ico"/>
+                            <BitmapIcon ShowAsMonochrome="False" UriSource="/Assets/FlashCards.ico"/>
                         </controls:SettingsCard.HeaderIcon>
                     </controls:SettingsCard>
                 </StackPanel>

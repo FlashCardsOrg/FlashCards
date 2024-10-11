@@ -14,7 +14,7 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
 
-        AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        this.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/FlashCards.ico"));
         Content = null;
         Title = WinUI3Localizer.Localizer.Get().GetLocalizedString("AppDisplayName");
 
